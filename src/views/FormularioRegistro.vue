@@ -4,11 +4,7 @@
       <label for="razon_social" />Razon Social
       <input v-model="solicitud.razon_social" type="text" />
     </div>
-    <div>
-      <label for="">Giro</label>
-      <!-- <input type="text" v-model="solicitud.giro"> -->
-      <GirosList v-model="solicitud.giro"/>
-    </div>
+    <GirosList v-model="solicitud.giro" />
     <div>
       <label for="correo">Correo</label>
       <input type="text" v-model="correoParcial" />

@@ -1,16 +1,20 @@
 <template>
     Giros
-    <Vselect :option='giros'/>
+    <Dropdown 
+    v-model='selected' 
+    :options="giros" :filter="true" :showClear="true"
+    optionLabel="giro" optionValue="codigo" placeholder="Seleccione un giro">
+    </Dropdown>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import Vselect from 'vue-select';
+import Dropdown from 'primevue/dropdown';
 import {getGiros} from '@/services/GiroService';
 export default defineComponent({
-    components: {Vselect},
+    components: {Dropdown},
     setup() {
         let giros: any = ref({});
-        let selected = "";
+        let selected = ref();
         async function loadGiros(){
             giros.value = await getGiros().then(res => res);
         }
@@ -22,3 +26,11 @@ export default defineComponent({
     },
 })
 </script>
+<style lang="scss" scoped>
+    .p-dropdown {
+        width: 300px;
+    }
+
+   
+
+</style>
