@@ -1,15 +1,10 @@
 declare interface Solicitud {
     id: number,
-    razonSocial: String,
-    correo: String,
-    direccion: String,
-    ciudad: String,
-    estado: Estado,
+    razonSocial: string,
+    correo: string,
+    domicilio: string,
+    ciudad: string,
+    estado: string,
     
 }
 
-enum Estado {
-    APROBADO,
-    RECHAZADO,
-    PENDIENTE,
-}
