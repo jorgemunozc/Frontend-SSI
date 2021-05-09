@@ -4,11 +4,11 @@
       <label for="razon_social" />Razon Social
       <input v-model="solicitud.razon_social" type="text" />
     </div>
-    <GirosList v-model="solicitud.giro" />
+    <GirosDropdown v-model="solicitud.giro" />
     <div>
       <label for="correo">Correo</label>
       <input type="text" v-model="correoParcial" />
-      <DominiosList v-model="dominioCorreo" />
+      <DominiosDropdown v-model="dominioCorreo" />
     </div>
     <div>
       <label for="">Direccion</label>
@@ -25,20 +25,25 @@
     </div>
     <input type="submit" value="Registrar" />
   </form>
+
+  <div>
+    <span v-if="message">{{message}}</span>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import DominiosList from "@/components/DominiosList.vue";
-import GirosList from '@/components/GirosList.vue';
-import { createSolicitud } from "@/services/SolicitudService";
+import DominiosDropdown from "@/components/DominiosDropdown.vue";
+import GirosDropdown from '@/components/GirosDropdown.vue';
+import { crearSolicitud } from "@/services/SolicitudService";
+
 export default defineComponent({
   name: "FormularioRegistro",
   components: {
-    DominiosList,
-    GirosList,
+    DominiosDropdown,
+    GirosDropdown,
   },
-  data() {
+  setup() {
     let solicitud = ref({
       razon_social: "",
       correo: "",
@@ -47,25 +52,47 @@ export default defineComponent({
       estado: "PENDIENTE",
       giro: ""
     });
-    let dominioCorreo = ref("");
-    let correoParcial = ref("");
-    let message = "";
+    const dominioCorreo = ref("");
+    const correoParcial = ref("");
+    const message = ref("");
+    const mostrarMensaje = (msg) => {
+      message.value = msg;
+      setTimeout(() => {
+        message.value = '';
+      }, 2000);
+    }
     return {
       solicitud,
       dominioCorreo,
       correoParcial,
-      message
+      message,
+      mostrarMensaje,
     };
   },
+
   methods: {
     async register() {
       this.solicitud.correo = this.parseMail(this.correoParcial, this.dominioCorreo);
       console.log("Registrando formulario *beep beep*...");
       console.log(this.solicitud.correo);
-      await createSolicitud(this.solicitud).then(res => res)
-                            .catch(() => {
-                              return null;
-                            });
+      await crearSolicitud(this.solicitud)
+              .then(res => {
+                res
+              })
+              .catch((error) => {
+                const statusCode = error.response.status;
+                let msg = '';
+                switch (statusCode) {
+                  case 422:
+                    msg = 'Complete todos los campos.';
+                    break;
+                  case 500:
+                  default:
+                    msg = 'Error inesperado en el server.';
+                }
+                this.mostrarMensaje(`No se pudo procesar solicitud: ${msg}`);
+                return null;
+              });
       // if (solicitudCreada != null && solicitudCreada.id > 0) {
       //   this.$router.push()
       // }

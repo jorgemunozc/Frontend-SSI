@@ -1,5 +1,5 @@
-declare const enum Estado {
-    APROBADO = 'APROBADO',
+enum Estado {
+    APROBADO = "APROBADO",
     RECHAZADO = 'RECHAZADO',
     PENDIENTE = 'PENDIENTE'
 }

@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HelloWorld from "@/components/HelloWorld.vue";
 import Test from "@/views/TestView.vue";
+
+import Navbar from '@/components/Navbar.vue';
+import PanelDominios from '@/views/admin/PanelDominios.vue';
+import Footer from '@/components/Footer.vue';
 
 const router = createRouter({
 history: createWebHistory(),
@@ -20,9 +23,25 @@ routes: [
         component: () => import('@/views/FormularioRegistro.vue')
     },
     {
+        path: '/login',
+        component: () => import('@/views/Login.vue')
+    },
+    {
+        path: '/home',
+        component: () => import('@/views/Home.vue')
+    },
+    {
+        path: '/dashboard',
+        components: {
+            default: PanelDominios,
+            a: Navbar,
+            footer: Footer,
+        }
+    },
+    {
         path: '/ver-solicitudes',
-        component: () => import('@/views/admin/VerSolicitudes.vue')
-    }
+        component: () => import('@/components/Solicitudes/SolicitudesList.vue')
+    },
 ],
 });
 

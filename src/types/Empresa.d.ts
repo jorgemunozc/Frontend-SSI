@@ -1,10 +1,9 @@
 declare interface Empresa {
     rut: number,
     dv: number,
-    razonSocial: String,
-    domicilio: String,
-    ciudad: String,
-    telefono: String,
-    giro: String,
-    idGiro: number,
+    razon_social: string,
+    domicilio: string,
+    ciudad: string,
+    telefono: string?,
+    giro: string,
 }
