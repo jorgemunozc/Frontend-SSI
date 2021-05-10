@@ -27,8 +27,9 @@ routes: [
         component: () => import('@/views/Login.vue')
     },
     {
-        path: '/home',
-        component: () => import('@/views/Home.vue')
+        path: '/home/:rut',
+        component: () => import('@/views/Home.vue'),
+        props: true
     },
     {
         path: '/dashboard',
@@ -40,7 +41,7 @@ routes: [
     },
     {
         path: '/ver-solicitudes',
-        component: () => import('@/components/Solicitudes/SolicitudesList.vue')
+        component: () => import('@/components/solicitudes/SolicitudesList.vue')
     },
 ],
 });

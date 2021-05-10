@@ -1,5 +1,5 @@
 <template>
-  <h1>Pagina Principal</h1>
+  <h1>SSI</h1>
   <router-view></router-view>
 </template>
 

@@ -34,7 +34,7 @@ export default defineComponent({
       //Arreglo donde se mantendra las acciones ejecutadas exitosamente
       //en caso de necesitar hacer un rollback.
       const colaAcciones: Acciones[] = [];
-      const dataAcciones: {[key: number] : any} = [];
+      const dataAcciones: {[key: number] : number} = [];
 
       modificarSolicitud(props.solicitud.id, "APROBADO")
         .then(() => {

@@ -13,7 +13,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import SolicitudItem from "@/components/Solicitudes/SolicitudItem.vue";
+import SolicitudItem from "@/components/solicitudes/SolicitudItem.vue";
 import { listaSolicitudes } from "@/services/SolicitudService";
 
 export default defineComponent({
@@ -33,10 +33,14 @@ export default defineComponent({
       solicitudes.value.splice(index, 1);
     };
 
-    const displayMessage = (data: {
+    interface MessageData {
       type: string;
-      message: string | { [k: string]: string[] };
-    }) => {
+      message: string|{
+        [k: string]: string[];
+      };
+    }
+
+    const displayMessage = (data: MessageData) => {
       hasMessage.value = true;
       let displayTime = 2000;
       let msg = "";
