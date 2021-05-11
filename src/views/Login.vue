@@ -1,17 +1,26 @@
 <template>
-    <form @submit.prevent="login">
-        <div>
-            <label for="correo">Rut</label>
-            <input type="text" v-model="user">
+    <div class="ui text container">
+        <div class="column">
+            <h2 class="ui blue image header">Ingresar a Sistema</h2>
+            <form @submit.prevent="login" class="ui form large stacked segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon" />
+                        <input type="text" v-model="user">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"/>
+                        <input type="password" v-model="pass">
+                    </div>
+                </div>
+                <input class="ui fluid submit button blue" type="submit" value="Ingresar">
+            </form>
         </div>
-        <div>
-            <label for="pass">Contrasena</label>
-            <input type="password" v-model="pass">
-        </div>
-        <input type="submit" value="Ingresar">
-    </form>
+    <div class="ui message"><span>No tiene cuenta? Registrese <router-link to="registro">aqui</router-link></span></div>
+    </div>
 
-    <span>No tiene cuenta? Registrese <router-link to="registro">aqui</router-link></span>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';

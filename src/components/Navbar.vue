@@ -21,9 +21,5 @@ export default defineComponent({
             default: 'EMPRESA'
         }
     },
-
-    setup() {
-        
-    },
 })
 </script>

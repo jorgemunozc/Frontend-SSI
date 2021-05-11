@@ -7,6 +7,8 @@ import Dropdown from 'primevue/dropdown';
 
 import { initAxios } from '@/services/ApiService';
 
+import '../semantic/dist/semantic.min.css';
+
 const app = createApp(App);
 
 initAxios();

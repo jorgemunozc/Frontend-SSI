@@ -1,6 +1,8 @@
 <template>
-  <h1>SSI</h1>
-  <router-view></router-view>
+  <div>
+    <h1>SSI</h1>
+    <router-view></router-view>
+  </div>  
 </template>
 
 <script lang="ts">

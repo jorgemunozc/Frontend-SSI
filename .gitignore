@@ -24,3 +24,6 @@ pnpm-debug.log*
 
 # Local server config
 config.ts
+
+# Ignoring semantic files for now cause Im not modifying anything
+/semantic

@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="register">
+  <form @submit.prevent="register" class="ui form horizontal grid">
     <div>
       <label for="razon_social" />Razon Social
       <input v-model="solicitud.razon_social" type="text" />
