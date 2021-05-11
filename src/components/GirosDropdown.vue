@@ -2,8 +2,7 @@
     <Dropdown 
     v-model='selected' 
     :options="giros" :filter="true" :showClear="true"
-    optionLabel="giro" optionValue="giro" placeholder="Seleccione un giro">
-    </Dropdown>
+    optionLabel="giro" optionValue="giro" placeholder="Seleccione un giro" />
 </template>
 
 
@@ -31,3 +30,8 @@ export default defineComponent({
     }
 })
 </script>
+<style lang="scss" scoped>
+    .p-hidden-accessible {
+        display: flex;
+    }
+</style>
