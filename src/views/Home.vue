@@ -25,6 +25,7 @@ export default defineComponent({
             }
         )
         return {
+            rut,
         }
     }
 })

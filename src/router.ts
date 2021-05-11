@@ -28,8 +28,7 @@ routes: [
     },
     {
         path: '/home/:rut',
-        component: () => import('@/views/Home.vue'),
-        props: true
+        component: () => import('@/views/Home.vue')
     },
     {
         path: '/dashboard',
