@@ -1,16 +1,18 @@
 <template>
-    <h1>ADMIN</h1>
-    <router-view></router-view>
-    <router-view name="a"></router-view>
-    <router-view name="footer"></router-view>
+  <h1>ADMIN</h1>
+  <div>
+    <Navbar userType="ADMIN" />
+  </div>
+  <SolicitudList />
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
-
-
+import { defineComponent } from "vue";
+import Navbar from "@/components/Navbar.vue";
+import SolicitudList from '@/components/solicitudes/SolicitudesList.vue';
 export default defineComponent({
-    setup() {
-        
-    },
-})
+  components: {
+      Navbar,
+      SolicitudList,
+  }
+});
 </script>

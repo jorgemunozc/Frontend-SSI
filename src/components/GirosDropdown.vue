@@ -1,6 +1,6 @@
 <template>
     <Dropdown 
-    v-model='selected' 
+    v-model="selected"
     :options="giros" :filter="true" :showClear="true"
     optionLabel="giro" optionValue="giro" placeholder="Seleccione un giro" />
 </template>
@@ -30,8 +30,12 @@ export default defineComponent({
     }
 })
 </script>
+
 <style lang="scss" scoped>
-    .p-hidden-accessible {
-        display: flex;
+    .p-dropdown {
+        width: 100%;
+    }
+    .p-dropdown .p-dropdown-clear-icon {
+        color: rgb(214, 21, 21);
     }
 </style>

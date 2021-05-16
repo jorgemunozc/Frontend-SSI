@@ -1,13 +1,32 @@
 <template>
-  <SolicitudItem
-    :solicitud="solicitud"
-    v-for="(solicitud, index) in solicitudes"
-    :key="solicitud.id"
-    @itemChanged:approved="removeItem(index)"
-    @itemChanged:rejected="removeItem(index)"
-    @newMessage="displayMessage"
-  />
-  <div v-if="hasMessage" :class="{ error: hasError }">
+  <table class="ui very basic celled table">
+    <thead>
+      <tr>
+        <!-- <th><input type="checkbox" v-model="isChecked" @checked="checkAll"></th> -->
+        <th>Empresa</th>
+        <th>Giro</th>
+        <th>Correo</th>
+        <th class="three wide"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-if="typeof solicitudes == 'undefined' || solicitudes.length === 0">
+        <td>Sin solicitudes pendientes por procesar.</td>
+      </tr>
+      <tr  v-for="(solicitud, index) in solicitudes" :key="solicitud.id">
+        <!-- <td>
+          <input type="checkbox" v-model="selectedRows" :value="index">
+        </td> -->
+        <SolicitudItem
+          :solicitud="solicitud"
+          @itemChanged:approved="removeItem(index)"
+          @itemChanged:rejected="removeItem(index)"
+          @newMessage="displayMessage"
+        />
+      </tr>
+    </tbody>
+  </table>
+  <div v-if="hasMessage" :class="{ 'error': hasError }">
     {{ message }}
   </div>
 </template>
@@ -23,8 +42,11 @@ export default defineComponent({
   setup() {
     const solicitudes = ref();
     const message = ref("");
-    let hasError = ref(false);
-    let hasMessage = ref(false);
+    const hasError = ref(false);
+    const hasMessage = ref(false);
+    const selectedRows = ref([]);
+    // const isChecked = ref();
+
     const obtenerSolicitudes = async () => {
       solicitudes.value = await listaSolicitudes();
     };
@@ -55,13 +77,19 @@ export default defineComponent({
       message.value = msg;
       setTimeout(() => {
         hasError.value = false;
+        hasMessage.value = false;
+        message.value = "";
       }, displayTime);
     };
+
+    
     return {
       solicitudes,
       message,
       hasError,
       hasMessage,
+      selectedRows,
+      // isChecked,
       obtenerSolicitudes,
       removeItem,
       displayMessage,

@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1>SSI</h1>
+  <div class="ui container">
     <router-view></router-view>
   </div>  
 </template>

@@ -1,19 +1,21 @@
 <template>
-    <div>
-        <div>
-            Razon Social: {{ empresa.razon_social }}
-        </div>
-        <div>
-            Giro: {{ empresa.giro }}
-        </div>
-        <div>
-            Rut: {{ empresa.rut }} - {{ empresa.dv }}
-        </div>
-        <div>
-            Direccion: {{ empresa.domicilio }}
-        </div>
-        <div>
-            Ciudad: {{ empresa.ciudad }}
+    <div class="ui centered grid">
+        <div class="ui grid">
+            <div class="row">
+                Razon Social: {{ empresa.razon_social }}
+            </div>
+            <div class="row">
+                Giro: {{ empresa.giro }}
+            </div>
+            <div class="row">
+                Rut: {{ empresa.rut }} - {{ empresa.dv }}
+            </div>
+            <div class="row">
+                Direccion: {{ empresa.domicilio }}
+            </div>
+            <div class="row">
+                Ciudad: {{ empresa.ciudad }}
+            </div>
         </div>
     </div>
 </template>
@@ -23,11 +25,11 @@ import { defineComponent, ref } from 'vue';
 import { obtenerEmpresa } from "@/services/EmpresaService";
 
 export default defineComponent({
-    props: ['rut'],
+    name: 'InfoBasica',
     setup(props) {
         const empresa = ref({} as Empresa);
         const cargarDatos = () => {
-            obtenerEmpresa(props.rut)
+            obtenerEmpresa()
                 .then((data) => empresa.value = data)
                 .catch((err) => {
                     console.log(err.response);

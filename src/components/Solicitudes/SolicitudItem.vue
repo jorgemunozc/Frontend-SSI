@@ -1,10 +1,21 @@
 <template>
-  <li>
+  <td>
     <div>{{ solicitud.razon_social }}</div>
+  </td>
+  <td>
     <div>{{ solicitud.giro }}</div>
-    <button @click="aceptarSolicitud">Aceptar</button>
-    <button @click="rechazarSolicitud">Rechazar</button>
-  </li>
+  </td>
+  <td>
+    <div>{{ solicitud.correo }}</div>
+  </td>
+  <td>
+    <button class="tiny ui dark teal button" @click="aceptarSolicitud">
+      Aceptar
+    </button>
+    <button class="tiny ui red button" @click="rechazarSolicitud">
+      Rechazar
+    </button>
+  </td>
 </template>
 
 <script lang="ts">
@@ -34,7 +45,7 @@ export default defineComponent({
       //Arreglo donde se mantendra las acciones ejecutadas exitosamente
       //en caso de necesitar hacer un rollback.
       const colaAcciones: Acciones[] = [];
-      const dataAcciones: {[key: number] : number} = [];
+      const dataAcciones: { [key: number]: number } = [];
 
       modificarSolicitud(props.solicitud.id, "APROBADO")
         .then(() => {
@@ -54,24 +65,23 @@ export default defineComponent({
         })
         .then(() => emit("itemChanged:approved"))
         .catch((err) => {
-            /** Revisamos la cola de acciones para determinar
-             * cuantas acciones hay que revertir
-             */
-            for (const accion of colaAcciones) {
-                switch (accion) {
-                    case Acciones.APROBAR_SOLICITUD:
-                        console.log('rolling back solicitud...')
-                        modificarSolicitud(props.solicitud.id, Estado.PENDIENTE);
-                        break;
-                    case Acciones.CREAR_EMPRESA:
-                        eliminarEmpresa(dataAcciones[Acciones.CREAR_EMPRESA]);
-                        break
-                    default:
-                }
+          /** Revisamos la cola de acciones para determinar
+           * cuantas acciones hay que revertir
+           */
+          for (const accion of colaAcciones) {
+            switch (accion) {
+              case Acciones.APROBAR_SOLICITUD:
+                console.log("rolling back solicitud...");
+                modificarSolicitud(props.solicitud.id, Estado.PENDIENTE);
+                break;
+              case Acciones.CREAR_EMPRESA:
+                eliminarEmpresa(dataAcciones[Acciones.CREAR_EMPRESA]);
+                break;
+              default:
             }
-            console.log(err.response.data.errors);
-            sendMessage('error', err.response.data.errors);
-            
+          }
+          console.log(err.response.data.errors);
+          sendMessage("error", err.response.data.errors);
         });
     };
     const rechazarSolicitud = () => {
@@ -80,12 +90,12 @@ export default defineComponent({
       });
     };
 
-    const sendMessage = function(type: string, msg: string) {
-      if (type === 'error') {
-        emit('newMessage', {type: 'error', message: msg});
+    const sendMessage = function (type: string, msg: string) {
+      if (type === "error") {
+        emit("newMessage", { type: "error", message: msg });
         return;
       }
-      emit('newMessage', {type: 'info', message: msg});
+      emit("newMessage", { type: "info", message: msg });
       return;
     };
     return {

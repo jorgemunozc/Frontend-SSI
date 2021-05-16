@@ -1,7 +1,7 @@
 import { post } from '@/services/ApiService';
 import axios from 'axios';
 import { SERVER_HOST } from '../config';
-
+import { removeAdmin, removeLoggedIn } from '@/auth/unsetAuth';
 function auth(credentials: object) {
     const endpoint = 'login';
     return axios.get(`${SERVER_HOST}/sanctum/csrf-cookie`).then(() =>
@@ -9,4 +9,12 @@ function auth(credentials: object) {
     )
 }
 
+function logout(): void {
+    post('logout', {}).then(() => {
+        removeLoggedIn();
+        removeAdmin();
+    })
+}
+
 export default auth;
+export { logout, auth }

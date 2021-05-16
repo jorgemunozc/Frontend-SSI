@@ -1,47 +1,61 @@
 <template>
   <div class="ui text container">
-    <form @submit.prevent="register" class="ui form">
+    <form @submit.prevent="register" class="ui large form">
       <div class="field">
-        <label for="razon_social">Razon Social</label>
-        <input v-model="solicitud.razon_social" type="text" />
+        <div class="p-float-label">
+          <InputText v-model="solicitud.razon_social" type="text" id="razon_social"/>
+          <label for="razon_social">Razon Social</label>
+        </div>
       </div>
-      <GirosDropdown v-model="solicitud.giro" />
       <div class="field">
-          <label for="correo">Correo</label>
-        <div class="field">
-          <input type="text" v-model="correoParcial" />
+        <div class="p-float-label">
+          <GirosDropdown v-model="solicitud.giro" />
+          <label for="">Giro</label>
+        </div>
+      </div>
+      <div class="inline fields">
+        <div class="field ten wide">
+          <div class="p-float-label">
+            <InputText type="text" v-model="correoParcial" />
+            <label for="correo">Correo</label>
+          </div>
         </div>
         <div class="field">
-          <label for=""></label>
+          <i class="large at icon"></i>
+        </div>
+        <div class="inline field six wide">
           <DominiosDropdown v-model="dominioCorreo" />
         </div>
       </div>
       <div class="field">
-        <label for="">Direccion</label>
-        <input
-          type="text"
-          v-model="solicitud.domicilio"
-          name="domicilio"
-          id="domicilio"
-        />
+        <div class="p-float-label">
+          <InputText
+            type="text"
+            v-model="solicitud.domicilio"
+            name="domicilio"
+            id="domicilio"
+          />
+          <label for="">Direccion</label>
+        </div>
       </div>
       <div class="field">
-        <label for="ciudad">Ciudad</label>
-        <input
-          type="text"
-          v-model="solicitud.ciudad"
-          name="ciudad"
-          id="ciudad"
-        />
+        <div class="p-float-label">
+          <InputText
+            type="text"
+            v-model="solicitud.ciudad"
+            name="ciudad"
+            id="ciudad"
+          />
+          <label for="ciudad">Ciudad</label>
+        </div>
       </div>
-      <input
-        class="ui fluid submit button blue"
-        type="submit"
-        value="Registrar"
-      />
+      <button
+        class="massive ui fluid submit button blue"
+        :class="{'loading': isLoading}"
+      >Registrar</button>
     </form>
-    <div class="ui message" v-if="message">
-      <span>{{ message }}</span>
+    <div class="ui message" :class="{'error': hasError, 'success': !hasError}" v-if="message">
+      <span v-html="message"></span>
     </div>
   </div>
 </template>
@@ -59,7 +73,7 @@ export default defineComponent({
     GirosDropdown,
   },
   setup() {
-    let solicitud = ref({
+    const solicitud = ref({
       razon_social: "",
       correo: "",
       domicilio: "",
@@ -70,46 +84,58 @@ export default defineComponent({
     const dominioCorreo = ref("");
     const correoParcial = ref("");
     const message = ref("");
-    const mostrarMensaje = (msg) => {
+    const isLoading = ref(false);
+    const hasError = ref(false);
+    const successMsg = 'Su solicitud ha sido ingresada con exito.<br>' + 
+                        'Una vez aprobada sera enviado un correo a la direccion registrada con los datos de acceso a la plataforma.';
+
+    const mostrarMensaje = async (msg) => {
       message.value = msg;
-      setTimeout(() => {
+      await setTimeout(() => {
         message.value = "";
-      }, 4000);
+        hasError.value = false;
+      }, 6000);
     };
     return {
       solicitud,
       dominioCorreo,
       correoParcial,
       message,
+      isLoading,
+      hasError,
       mostrarMensaje,
+      successMsg,
     };
   },
 
   methods: {
-    async register() {
+    register() {
       this.solicitud.correo = this.parseMail(
         this.correoParcial,
         this.dominioCorreo
       );
       console.log("Registrando formulario *beep beep*...");
-      console.log(this.solicitud.correo);
-      await crearSolicitud(this.solicitud)
-        .then((res) => {
-          res;
+      this.isLoading = true;
+      crearSolicitud(this.solicitud)
+        .then(() => {
+          this.mostrarMensaje(this.successMsg);
         })
         .catch((error) => {
           const statusCode = error.response.status;
           let msg = "";
+          this.hasError = true;
           switch (statusCode) {
             case 422:
               msg = "Complete todos los campos.";
               break;
             case 500:
             default:
-              msg = "Error inesperado en el server.";
+              msg = "Error inesperado en el servidor.";
           }
           this.mostrarMensaje(`No se pudo procesar solicitud: ${msg}`);
-          return null;
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
       // if (solicitudCreada != null && solicitudCreada.id > 0) {
       //   this.$router.push()
@@ -122,3 +148,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+  .p-float-label {
+    width: 100%;
+  }
+</style>

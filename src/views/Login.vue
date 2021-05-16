@@ -15,7 +15,7 @@
                         <input type="password" v-model="pass">
                     </div>
                 </div>
-                <input class="ui fluid submit button blue" type="submit" value="Ingresar">
+                <input class="ui big fluid submit button blue" type="submit" value="Ingresar">
             </form>
         </div>
     <div class="ui message"><span>No tiene cuenta? Registrese <router-link to="registro">aqui</router-link></span></div>
@@ -25,6 +25,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import auth from '@/services/LoginService';
+import { setLoggedIn, setAdminSession } from '@/auth/setAuth';
 
 export default defineComponent({
     data() {
@@ -45,9 +46,11 @@ export default defineComponent({
             const credenciales = this.crearCredenciales();
             auth(credenciales)
                 .then((rol) =>{
-                    let redirect = 'profile';
+                    let redirect = 'home';
+                    setLoggedIn();
                     if (rol === 'ADMIN') {
                         redirect = 'dashboard';
+                        setAdminSession();
                     }
                     this.$router.push(redirect);
                 })

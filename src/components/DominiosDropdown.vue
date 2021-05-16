@@ -1,8 +1,7 @@
 <template>
-  <select v-model="selected" @change="$emit('update:modelValue', $event.target.value)">
-      <option disabled value="">Seleccione correo</option>
-      <option v-for="dom in dominios" :key="dom.id" :value="dom.dominio">@{{dom.dominio}}</option>
-  </select>
+<Dropdown v-model="selected" :options="dominios" 
+  optionLabel="dominio" optionValue="dominio" placeholder="Seleccione correo"/>
+  
 </template>
 
 <script lang="ts">
@@ -13,14 +12,14 @@ export default defineComponent({
   // emits: ['update:modelValue'],
   // props: ['modelValue'],
   data() {
-    let dominios = ref({});
-    let getDominiosCorreo = async () => {
+    const dominios = ref({});
+    const getDominiosCorreo = async () => {
       await getDominios()
         .then((res) => (dominios.value = res))
         .catch(() => (dominios.value = []));
     };
     getDominiosCorreo();
-    let selected = "";
+    const selected = ref();
     return {
       dominios,
       selected,
@@ -28,3 +27,10 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+  .p-dropdown {
+    width: 100%;
+  }
+  
+</style>

@@ -1,9 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Test from "@/views/TestView.vue";
+import isLoggedIn from '@/auth/isLoggedIn';
+import isAdmin from '@/auth/isAdmin';
 
+import Test from "@/views/TestView.vue";
 import Navbar from '@/components/Navbar.vue';
 import PanelDominios from '@/views/admin/PanelDominios.vue';
 import Footer from '@/components/Footer.vue';
+import Login from '@/views/Login.vue';
+import NotFound from '@/views/errors/NotFound.vue';
 
 const router = createRouter({
 history: createWebHistory(),
@@ -15,34 +19,65 @@ routes: [
     {
         name: 'test',
         path: '/test',
-        component: () => import('@/views/Login.vue')
+        component: () => import('@/components/empresa/Credencial.vue'),
     },
     {
-        name: 'registro',
+        name: 'Registro',
         path: '/registro',
-        component: () => import('@/views/FormularioRegistro.vue')
-    },
-    {
-        path: '/login',
-        component: () => import('@/views/Login.vue')
-    },
-    {
-        path: '/home/:rut',
-        component: () => import('@/views/Home.vue')
-    },
-    {
-        path: '/dashboard',
-        components: {
-            default: PanelDominios,
-            a: Navbar,
-            footer: Footer,
+        component: () => import('@/views/FormularioRegistro.vue'),
+        meta: {
+            isGuest: true,
         }
     },
     {
-        path: '/ver-solicitudes',
-        component: () => import('@/components/solicitudes/SolicitudesList.vue')
+        name: 'Login',
+        path: '/login',
+        component: Login,
+        meta: {
+            isGuest: true,
+        }
     },
+    {
+        name: 'Perfil',
+        path: '/home',
+        component: () => import('@/views/Home.vue'),
+        meta: {
+            requiresAuth: true,
+        }
+    },
+    {
+        name: 'Dashboard',
+        path: '/dashboard',
+        component: () => import('@/views/admin/Dashboard.vue'),
+        meta: {
+            requiresAuth: true,
+        }
+    },
+    {
+        name: 'Solicitudes',
+        path: '/ver-solicitudes',
+        component: () => import('@/views/admin/VerSolicitudes.vue'),
+        meta: {
+            requiresAuth: true,
+        }
+    },
+    {
+        path: '/:pathMatch(.*)',
+        component: NotFound,
+    }
 ],
 });
 
+router.beforeEach((to, from) => {
+    // if (to.matched.some(record => record.meta.requiresAuth)) {
+    //     if (!isLoggedIn()) {
+    //         return {name: 'Login'};
+    //     } 
+    // } else if(to.matched.some(record => record.meta.isGuest)) {
+    //     if (isLoggedIn()) {
+    //         if (isAdmin()) return { name : 'Dashboard'};
+    //         return { name: 'Home' };
+    //     }
+    // }
+})
 export default router;

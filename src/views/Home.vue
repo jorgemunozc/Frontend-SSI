@@ -1,32 +1,23 @@
 <template>
-    <h1>PERFIL EMPRESA</h1>
-    <InfoBasica :rut="rut" />
+    <div class="ui">
+        <h1 class="row">PERFIL EMPRESA</h1>
+        <div>
+            <Navbar />
+        </div>
+        <InfoBasica />
+    </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, onBeforeMount, onMounted, ref, watch } from 'vue';
 import InfoBasica from "@/components/empresa/InfoBasica.vue";
+import Navbar from '@/components/Navbar.vue';
 import { useRoute } from 'vue-router';
 
 export default defineComponent({
     components: {
         InfoBasica,
+        Navbar,
     },
-    setup() {
-        const route = useRoute();
-        const rut = ref();
-        onBeforeMount(() => {
-            rut.value = route.params.rut;
-            console.log(rut.value);
-        });
-        onMounted(
-            () => {
-                console.log('Componente home montado')
-            }
-        )
-        return {
-            rut,
-        }
-    }
 })
 </script>

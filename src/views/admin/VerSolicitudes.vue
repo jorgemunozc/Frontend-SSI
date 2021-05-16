@@ -1,22 +1,17 @@
 <template>
-    <ul>
-        <li v-for="solicitud in solicitudes" :key="solicitud.id">{{solicitudes}}</li>
-    </ul>
+  <div class="ui centered grid">
+      <h2 class="header">Solicitudes Pendientes de Aprobacion</h2>
+      <SolicitudList />
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-import { listaSolicitudes } from '@/services/SolicitudService';
+<script lang="ts"> 
+import { defineComponent } from "vue";
+import SolicitudList from "@/components/solicitudes/SolicitudesList.vue";
 
 export default defineComponent({
-    async setup() {
-        let solicitudes = ref({});
-        await listaSolicitudes().then(res => {
-            solicitudes.value = res;
-        });
-        return {
-            solicitudes,
-        }
-    },
-})
+  components: {
+    SolicitudList,
+  },
+});
 </script>
