@@ -26,7 +26,7 @@
       </tr>
     </tbody>
   </table>
-  <div v-if="hasMessage" :class="{ 'error': hasError }">
+  <div v-if="hasMessage" class="ui message" :class="{ 'error': hasError }">
     {{ message }}
   </div>
 </template>

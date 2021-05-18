@@ -9,8 +9,8 @@ function auth(credentials: object) {
     )
 }
 
-function logout(): void {
-    post('logout', {}).then(() => {
+function logout()  {
+    return post<Object>('logout', {}).then(() => {
         removeLoggedIn();
         removeAdmin();
     })

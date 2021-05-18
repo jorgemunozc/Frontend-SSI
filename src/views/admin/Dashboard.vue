@@ -1,18 +1,22 @@
 <template>
-  <h1>ADMIN</h1>
-  <div>
-    <Navbar userType="ADMIN" />
+  <div class="row">
+    <div class="three wide column">
+      <Navbar userType="ADMIN" />
+    </div>
+    <div class="ui twelve wide column grid">
+      <h1 class="ui blue header">ADMIN</h1>
+      <SolicitudList />
+    </div>
   </div>
-  <SolicitudList />
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import Navbar from "@/components/Navbar.vue";
-import SolicitudList from '@/components/solicitudes/SolicitudesList.vue';
+import SolicitudList from "@/components/solicitudes/SolicitudesList.vue";
 export default defineComponent({
   components: {
-      Navbar,
-      SolicitudList,
-  }
+    Navbar,
+    SolicitudList,
+  },
 });
 </script>

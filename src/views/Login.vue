@@ -1,84 +1,107 @@
 <template>
-    <div class="ui text container">
-        <div class="column">
-            <h2 class="ui blue image header">Ingresar a Sistema</h2>
-            <form @submit.prevent="login" class="ui form large stacked segment">
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="user icon" />
-                        <input type="text" v-model="user">
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="lock icon"/>
-                        <input type="password" v-model="pass">
-                    </div>
-                </div>
-                <input class="ui big fluid submit button blue" type="submit" value="Ingresar">
-            </form>
+  <div class="ui text container">
+    <div class="column">
+      <h2 class="ui blue image header">Ingresar a Sistema</h2>
+      <form @submit.prevent="login" class="ui form large segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon" />
+            <input type="text" v-model="user" />
+          </div>
         </div>
-    <div class="ui message"><span>No tiene cuenta? Registrese <router-link to="registro">aqui</router-link></span></div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon" />
+            <input type="password" v-model="pass" />
+          </div>
+        </div>
+        <input
+          class="ui big fluid submit button blue"
+          type="submit"
+          value="Ingresar"
+        />
+      </form>
     </div>
-
+    <div class="ui message">
+      <span
+        >¿No tiene cuenta? Registrese
+        <router-link to="registro">aqui</router-link></span
+      >
+    </div>
+    <div v-if="hasError" class="ui error message">
+      <i class="exclamation circle icon"></i>
+        {{ mensaje }}
+    </div>
+  </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
-import auth from '@/services/LoginService';
-import { setLoggedIn, setAdminSession } from '@/auth/setAuth';
+import { defineComponent } from "vue";
+import auth from "@/services/LoginService";
+import { setLoggedIn, setAdminSession } from "@/auth/setAuth";
 
 export default defineComponent({
-    data() {
-        return {
-            pass: '',
-            user: '',
-        }
+  data() {
+    return {
+      pass: "",
+      user: "",
+      hasError: false,
+      mensaje: "",
+    };
+  },
+
+  methods: {
+    login() {
+      console.log("Intentando loguear...");
+      if (this.pass.length === 0 || this.user.length === 0) {
+        console.log("campos vacios");
+        this.displayError("Complete los campos");
+        return;
+      }
+      this.hasError = false;
+
+      const credenciales = this.crearCredenciales();
+      auth(credenciales)
+        .then((rol) => {
+          let redirect = "home";
+          setLoggedIn();
+          if (rol === "ADMIN") {
+            redirect = "dashboard";
+            setAdminSession();
+          }
+          this.$router.push(redirect);
+        })
+        .catch(() => {
+            this.displayError('Credenciales incorrectas. Intentelo nuevamente.');
+        });
     },
 
-    methods: {
-        login() {
-            console.log('Intentando loguear...');
-            if (this.pass.length === 0 || this.user.length === 0) {
-                console.log('campos vacios');
-                return
-            }
+    crearCredenciales() {
+      const password = this.pass;
+      let credenciales: { [k: string]: string } = {
+        password: password,
+      };
+      if (this.metodoLogin() === "correo") {
+        credenciales.correo = this.user;
+      } else {
+        credenciales.rut = this.user;
+      }
+      return credenciales;
+    },
 
-            const credenciales = this.crearCredenciales();
-            auth(credenciales)
-                .then((rol) =>{
-                    let redirect = 'home';
-                    setLoggedIn();
-                    if (rol === 'ADMIN') {
-                        redirect = 'dashboard';
-                        setAdminSession();
-                    }
-                    this.$router.push(redirect);
-                })
-                .catch(() => console.log('No se pudo loguear :('));
-        },
+    metodoLogin() {
+      let metodo = "rut";
+      const esCorreo = this.user.indexOf("@") != -1;
+      if (esCorreo) {
+        metodo = "correo";
+      }
 
-        crearCredenciales() {
-            const password = this.pass;
-            let credenciales: {[k: string]: string} = {
-                'password': password
-            };
-            if (this.metodoLogin() === 'correo') {
-                credenciales.correo = this.user;
-            } else {
-                credenciales.rut = this.user;
-            }
-            return credenciales;
-        },
+      return metodo;
+    },
 
-        metodoLogin() {
-            let metodo = 'rut';
-            const esCorreo = this.user.indexOf('@') != -1;
-            if (esCorreo) {
-                metodo = 'correo';
-            }
-
-            return metodo;
-        }
-    }
-})
+    displayError(msg: string) {
+      this.hasError = true;
+      this.mensaje = msg;
+    },
+  },
+});
 </script>

@@ -18,7 +18,13 @@ const app = createApp(App);
 
 initAxios();
 app.use(router);
-app.use(PrimeVue);
+app.use(PrimeVue, {
+    locale: {
+        emptyMessage: 'Sin opciones',
+        emptyFilterMessag: 'Sin resultados'
+    }
+        
+});
 app.component('Dropdown', Dropdown);
 app.component('InputText', InputText);
 app.mount('#app');

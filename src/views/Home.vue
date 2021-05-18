@@ -1,10 +1,14 @@
 <template>
-    <div class="ui">
-        <h1 class="row">PERFIL EMPRESA</h1>
-        <div>
+    <div class="row">
+        <div class="three wide column">
             <Navbar />
         </div>
-        <InfoBasica />
+        <div class="ui twelve wide column grid">
+            <div >
+                <h1 class="ui blue header">PERFIL EMPRESA</h1>
+            </div>
+            <InfoBasica />
+        </div>
     </div>
 </template>
 

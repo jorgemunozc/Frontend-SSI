@@ -1,20 +1,20 @@
 <template>
-    <div class="ui centered grid">
-        <div class="ui grid">
-            <div class="row">
-                Razon Social: {{ empresa.razon_social }}
+    <div class="ui sixteen wide column grid">
+        <div class="ui fluid grid container">
+            <div class="row ui vertical segment grid">
+                <span class="bold">Razon Social:</span>  {{ empresa.razon_social }}
             </div>
-            <div class="row">
-                Giro: {{ empresa.giro }}
+            <div class="row ui vertical segment grid">
+                <span class="bold">Giro:</span> {{ empresa.giro }}
             </div>
-            <div class="row">
-                Rut: {{ empresa.rut }} - {{ empresa.dv }}
+            <div class="row ui vertical segment grid">
+                <span class="bold">Rut:</span> {{ empresa.rut }} - {{ empresa.dv }}
             </div>
-            <div class="row">
-                Direccion: {{ empresa.domicilio }}
+            <div class="row ui vertical segment grid">
+                <span class="bold">Direccion:</span> {{ empresa.domicilio }}
             </div>
-            <div class="row">
-                Ciudad: {{ empresa.ciudad }}
+            <div class="row ui vertical segment grid">
+                <span class="bold">Ciudad:</span> {{ empresa.ciudad }}
             </div>
         </div>
     </div>
@@ -43,3 +43,9 @@ export default defineComponent({
     
 })
 </script>
+
+<style scoped>
+.bold {
+    font-weight: bold;
+}
+</style>
