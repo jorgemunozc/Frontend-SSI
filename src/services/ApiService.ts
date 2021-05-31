@@ -1,9 +1,22 @@
 import { API_HOST } from '../config';
 import axios from 'axios';
 
+import { removeAdmin, removeLoggedIn } from '@/auth/unsetAuth'; 
+import router from '@/router';
+
 function init(): void {
     axios.defaults.withCredentials = true;
     axios.defaults.baseURL = API_HOST;
+
+    axios.interceptors.response.use((response) => response, function (error){
+        if(error.response.status == 401){
+            console.log('removiendo cookies')
+            removeLoggedIn();
+            removeAdmin();
+            router.push({name: 'Login'});
+        }
+        return Promise.reject(error);
+    });
 }
 
 function get<T>(resource: string, id?: number | string): Promise<T> {
