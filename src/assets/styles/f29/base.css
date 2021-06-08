@@ -1,0 +1,25 @@
+
+:root {
+--max-w: 1280px;
+--primary-color: hsl(200, 65%, 90%);
+--primary-color-ligther: hsl(200, 65%, 98%);
+--primary-color-darker: hsl(200, 65%, 50%);
+--secondary-color: hsl(0, 0%, 91%);
+--input-size: 129px;
+}
+
+.f29 {
+    text-align: left;
+    max-width: var(--max-w, 1280px);
+    font-size: 1rem;
+    margin: auto;
+}
+table {
+    /* border: 1px solid red; */
+    border-collapse: collapse;
+}
+td,
+th {
+    border: 1px solid gray;
+    padding: 2px 5px;
+}

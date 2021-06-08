@@ -1,0 +1,38 @@
+@import 'f29/base.css';
+@import 'f29/seccion.css';
+@import 'f29/input.css';
+
+.f29__header {
+    width: 100%;
+    max-width: var(--max-w);
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+.f29__header__item {
+    flex-basis: 25%;
+}
+
+.f29__header__item > table {
+    height: 64px;
+}
+
+.celda-codigo {
+    background-color: var(--primary-color);
+}
+
+.celda-linea, .celda-signo {
+    background-color: var(--secondary-color);
+}
+
+.celda-codigo,
+.celda-linea,
+.celda-signo {
+    width: 32px;
+    text-align: center;
+}
+
+.f29__fila-vacia {
+    height: 2rem;
+}
