@@ -1,31 +1,47 @@
 <template>
   <div
-    class="ui fluid vertical labeled icon menu"
     v-if="userType === 'ADMIN'"
+    class="ui fluid vertical labeled icon menu"
     style="height: 100%"
   >
-    <router-link class="item" to="/ver-solicitudes">
-      <i class="file icon"></i>
+    <router-link
+      class="item"
+      to="/ver-solicitudes"
+    >
+      <i class="file icon" />
       Gestionar Solicitudes
     </router-link>
-    <a class="item" @click="logOut">
-      <i class="power off icon"></i>
+    <a
+      class="item"
+      @click="logOut"
+    >
+      <i class="power off icon" />
       Cerrar Sesion
     </a>
-    <div class="item"></div>
+    <div class="item" />
     <!-- <li>Gestionar Dominios</li> -->
   </div>
-  <div v-else class="ui fluid vertical labeled icon menu" style="height: 100%">
-    <router-link class="item" to="/home">
-      <i class="user icon"></i>
+  <div
+    v-else
+    class="ui fluid vertical labeled icon menu"
+    style="height: 100%"
+  >
+    <router-link
+      class="item"
+      to="/home"
+    >
+      <i class="user icon" />
       Mis Datos
     </router-link>
     <!-- <a class="item">Ver Formulario 19</a> -->
-    <a class="item" @click="logOut">
-      <i class="power off icon"></i>
+    <a
+      class="item"
+      @click="logOut"
+    >
+      <i class="power off icon" />
       Cerrar Sesion
     </a>
-    <div class="item"></div>
+    <div class="item" />
   </div>
 </template>
 

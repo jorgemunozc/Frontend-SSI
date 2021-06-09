@@ -9,10 +9,16 @@
     <div>{{ solicitud.correo }}</div>
   </td>
   <td>
-    <button class="tiny ui dark teal button" @click="aceptarSolicitud">
+    <button
+      class="tiny ui dark teal button"
+      @click="aceptarSolicitud"
+    >
       Aceptar
     </button>
-    <button class="tiny ui red button" @click="rechazarSolicitud">
+    <button
+      class="tiny ui red button"
+      @click="rechazarSolicitud"
+    >
       Rechazar
     </button>
   </td>

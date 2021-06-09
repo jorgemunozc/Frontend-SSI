@@ -1,13 +1,24 @@
 <template>
   <table>
     <tr>
-      <td class="celda-linea">113</td>
-      <td>TOTAL DETERMINADO</td>
-      <td class="celda-codigo">547</td>
-      <td class="f29__input-wrapper">
-        <input type="text" class="f29__input" :value="cod547" disabled />
+      <td class="celda-linea">
+        113
       </td>
-      <td class="celda-signo">=</td>
+      <td>TOTAL DETERMINADO</td>
+      <td class="celda-codigo">
+        547
+      </td>
+      <td class="f29__input-wrapper">
+        <input
+          type="text"
+          class="f29__input"
+          :value="cod547"
+          disabled
+        >
+      </td>
+      <td class="celda-signo">
+        =
+      </td>
     </tr>
   </table>
 </template>

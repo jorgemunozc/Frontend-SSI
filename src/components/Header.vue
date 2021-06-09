@@ -1,7 +1,11 @@
 <template>
-    <div class="main-header">
-        <div class="main-header__logo"><router-link to='/'>SERVICIO SIMULADO DE IMPUESTOS</router-link></div>
+  <div class="main-header">
+    <div class="main-header__logo">
+      <router-link to="/">
+        SERVICIO SIMULADO DE IMPUESTOS
+      </router-link>
     </div>
+  </div>
 </template>
 
 <style scoped>

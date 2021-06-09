@@ -2,23 +2,43 @@
   <table>
     <tbody>
       <tr class="f29__seccion__subheader">
-        <th colspan="8">IMPUESTO DETERMINADO</th>
+        <th colspan="8">
+          IMPUESTO DETERMINADO
+        </th>
       </tr>
       <tr>
-        <td class="celda-linea">48</td>
+        <td class="celda-linea">
+          48
+        </td>
         <td>
           Remanente de cr&eacute;dito fiscal para el per&iacute;odo siguiente
         </td>
-        <td class="celda-codigo">77</td>
+        <td class="celda-codigo">
+          77
+        </td>
         <td class="f29__input-wrapper">
-          <input type="text" class="f29__input" :value="cod77" disabled />
+          <input
+            type="text"
+            class="f29__input"
+            :value="cod77"
+            disabled
+          >
         </td>
         <td>IVA determinado</td>
-        <td class="celda-codigo">89</td>
-        <td class="f29__input-wrapper">
-          <input type="text" class="f29__input" :value="cod89" disabled />
+        <td class="celda-codigo">
+          89
         </td>
-        <td class="celda-signo">+</td>
+        <td class="f29__input-wrapper">
+          <input
+            type="text"
+            class="f29__input"
+            :value="cod89"
+            disabled
+          >
+        </td>
+        <td class="celda-signo">
+          +
+        </td>
       </tr>
     </tbody>
   </table>

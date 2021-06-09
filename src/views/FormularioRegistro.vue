@@ -1,9 +1,14 @@
 <template>
   <div class="ui text container">
-    <div class="ui tiny warning icon message" style="margin-bottom: 3rem">
-      <i class="attention icon"></i>
+    <div
+      class="ui tiny warning icon message"
+      style="margin-bottom: 3rem"
+    >
+      <i class="attention icon" />
       <div class="content">
-        <div class="header">Informaci&oacute;n</div>
+        <div class="header">
+          Informaci&oacute;n
+        </div>
         <ul class="info-text list">
           <li>
             Para tener acceso a la plataforma debe llenar el siguiente formulario.
@@ -19,67 +24,116 @@
         </ul>
       </div>
     </div>
-    <h1 class="ui header">Formulario de Registro</h1>
-    <form @submit.prevent="register" class="ui large form">
-      <div class="field" :class="{'error': errores.razon_social}" style="position:relative">
+    <h1 class="ui header">
+      Formulario de Registro
+    </h1>
+    <form
+      class="ui large form"
+      @submit.prevent="register"
+    >
+      <div
+        class="field"
+        :class="{'error': errores.razon_social}"
+        style="position:relative"
+      >
         <div class="p-float-label">
-          <InputText v-model="solicitud.razon_social" type="text" id="razon_social" />
+          <InputText
+            id="razon_social"
+            v-model="solicitud.razon_social"
+            type="text"
+          />
           <label for="razon_social">Razon Social</label>
         </div>
-        <small class="ui pointing red label" v-if="errores.razon_social">{{ errores.razon_social }}</small>
+        <small
+          v-if="errores.razon_social"
+          class="ui pointing red label"
+        >{{ errores.razon_social }}</small>
       </div>
-      <div class="field" :class="{'error': errores.giro}">
+      <div
+        class="field"
+        :class="{'error': errores.giro}"
+      >
         <div class="p-float-label">
-          <GirosDropdown v-model="solicitud.giro" :class="{'p-invalid': errores.giro}"/>
+          <GirosDropdown
+            v-model="solicitud.giro"
+            :class="{'p-invalid': errores.giro}"
+          />
           <label for="">Giro</label>
         </div>
       </div>
-      <div class="inline fields" :class="{'error': errores.correo}">
+      <div
+        class="inline fields"
+        :class="{'error': errores.correo}"
+      >
         <div class="field ten wide">
           <div class="p-float-label">
-            <InputText type="text" v-model="correoParcial" />
+            <InputText
+              v-model="correoParcial"
+              type="text"
+            />
             <label for="correo">Correo</label>
           </div>
         </div>
         <div class="field">
-          <i class="large at icon"></i>
+          <i class="large at icon" />
         </div>
         <div class="inline field six wide">
           <DominiosDropdown v-model="dominioCorreo" />
         </div>
-      <small class="ui left pointing red label" v-if="errores.correo">{{ errores.correo }}</small>
+        <small
+          v-if="errores.correo"
+          class="ui left pointing red label"
+        >{{ errores.correo }}</small>
       </div>
-      <div class="field" :class="{'error': errores.domicilio}">
+      <div
+        class="field"
+        :class="{'error': errores.domicilio}"
+      >
         <div class="p-float-label">
           <InputText
-            type="text"
-            v-model="solicitud.domicilio"
-            name="domicilio"
             id="domicilio"
+            v-model="solicitud.domicilio"
+            type="text"
+            name="domicilio"
           />
           <label for="">Direccion</label>
         </div>
-        <small class="ui pointing red label" v-if="errores.domicilio">{{ errores.domicilio }}</small>
+        <small
+          v-if="errores.domicilio"
+          class="ui pointing red label"
+        >{{ errores.domicilio }}</small>
       </div>
-      <div class="field" :class="{'error': errores.ciudad}">
+      <div
+        class="field"
+        :class="{'error': errores.ciudad}"
+      >
         <div class="p-float-label">
           <InputText
-            type="text"
-            v-model="solicitud.ciudad"
-            name="ciudad"
             id="ciudad"
+            v-model="solicitud.ciudad"
+            type="text"
+            name="ciudad"
           />
           <label for="ciudad">Ciudad</label>
         </div>
-        <small class="ui pointing red label" v-if="errores.ciudad">{{ errores.ciudad }}</small>
+        <small
+          v-if="errores.ciudad"
+          class="ui pointing red label"
+        >{{ errores.ciudad }}</small>
       </div>
       <button
         class="massive ui fluid submit button blue"
         :class="{'loading': isLoading}"
-      >Registrar</button>
+      >
+        Registrar
+      </button>
     </form>
-    <div class="ui message" :class="{'error': hasError, 'success': !hasError}" v-if="message">
-      <small v-html="message"></small>
+    <div
+      v-if="message"
+      class="ui message"
+      :class="{'error': hasError, 'success': !hasError}"
+    >
+      <small v-html="message" />
     </div>
   </div>
 </template>

@@ -1,10 +1,12 @@
 <template>
   <div class="row">
     <div class="three wide column">
-      <Navbar userType="ADMIN" />
+      <Navbar user-type="ADMIN" />
     </div>
     <div class="ui twelve wide column grid">
-      <h1 class="ui blue header">Solicitudes Pendientes de Aprobación</h1>
+      <h1 class="ui blue header">
+        Solicitudes Pendientes de Aprobación
+      </h1>
       <div class="sixteen wide column">
         <SolicitudList />
       </div>

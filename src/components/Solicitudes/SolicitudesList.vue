@@ -6,14 +6,17 @@
         <th>Empresa</th>
         <th>Giro</th>
         <th>Correo</th>
-        <th class="three wide"></th>
+        <th class="three wide" />
       </tr>
     </thead>
     <tbody>
       <tr v-if="typeof solicitudes == 'undefined' || solicitudes.length === 0">
         <td>Sin solicitudes pendientes por procesar.</td>
       </tr>
-      <tr  v-for="(solicitud, index) in solicitudes" :key="solicitud.id">
+      <tr
+        v-for="(solicitud, index) in solicitudes"
+        :key="solicitud.id"
+      >
         <!-- <td>
           <input type="checkbox" v-model="selectedRows" :value="index">
         </td> -->
@@ -26,7 +29,11 @@
       </tr>
     </tbody>
   </table>
-  <div v-if="hasMessage" class="ui message" :class="{ 'error': hasError }">
+  <div
+    v-if="hasMessage"
+    class="ui message"
+    :class="{ 'error': hasError }"
+  >
     {{ message }}
   </div>
 </template>

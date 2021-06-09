@@ -1,3 +1,3 @@
 <template>
-    <h1>Dominios</h1>
+  <h1>Dominios</h1>
 </template>

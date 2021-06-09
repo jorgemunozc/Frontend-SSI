@@ -1,7 +1,11 @@
 <template>
-<Dropdown v-model="selected" :options="dominios" 
-  optionLabel="dominio" optionValue="dominio" placeholder="Seleccione correo"/>
-  
+  <Dropdown
+    v-model="selected"
+    :options="dominios" 
+    option-label="dominio"
+    option-value="dominio"
+    placeholder="Seleccione correo"
+  />
 </template>
 
 <script lang="ts">

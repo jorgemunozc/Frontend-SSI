@@ -1,8 +1,17 @@
 <template>
-    <h1>PDF</h1>
-    <object :data="dataSrc" type="application/pdf" width="800" height="400" style="overflow:scroll;">
-    <embed :src="dataSrc" type="application/pdf">
-    </object>
+  <h1>PDF</h1>
+  <object
+    :data="dataSrc"
+    type="application/pdf"
+    width="800"
+    height="400"
+    style="overflow:scroll;"
+  >
+    <embed
+      :src="dataSrc"
+      type="application/pdf"
+    >
+  </object>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';

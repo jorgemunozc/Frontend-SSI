@@ -1,5 +1,5 @@
 <template>
-    <Dropdown :options="ciudades"/>
+  <Dropdown :options="ciudades" />
 </template>
 
 <script lang="ts">

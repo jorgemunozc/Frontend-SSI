@@ -1,16 +1,27 @@
 <template>
   <table>
     <tr>
-      <td class="celda-linea">65</td>
+      <td class="celda-linea">
+        65
+      </td>
       <th>
         SUB TOTAL IMPUESTO DETERMINADO ANVERSO (Suma de las l&iacute;neas 49 a
         64, columna Impuesto y/o PPM determinado)
       </th>
-      <td class="celda-codigo">595</td>
-      <td class="f29__input-wrapper">
-        <input type="text" class="f29__input" :value="cod595" disabled />
+      <td class="celda-codigo">
+        595
       </td>
-      <td class="celda-signo">=</td>
+      <td class="f29__input-wrapper">
+        <input
+          type="text"
+          class="f29__input"
+          :value="cod595"
+          disabled
+        >
+      </td>
+      <td class="celda-signo">
+        =
+      </td>
     </tr>
   </table>
 </template>

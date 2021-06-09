@@ -1,15 +1,17 @@
 <template>
-    <div class="row">
-        <div class="three wide column">
-            <Navbar />
-        </div>
-        <div class="ui twelve wide column grid">
-            <div >
-                <h1 class="ui blue header">PERFIL EMPRESA</h1>
-            </div>
-            <InfoBasica />
-        </div>
+  <div class="row">
+    <div class="three wide column">
+      <Navbar />
     </div>
+    <div class="ui twelve wide column grid">
+      <div>
+        <h1 class="ui blue header">
+          PERFIL EMPRESA
+        </h1>
+      </div>
+      <InfoBasica />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

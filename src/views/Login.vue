@@ -1,36 +1,48 @@
 <template>
   <div class="ui text container">
     <div class="column">
-      <h2 class="ui blue image header">Ingresar a Sistema</h2>
-      <form @submit.prevent="login" class="ui form large segment">
+      <h2 class="ui blue image header">
+        Ingresar a Sistema
+      </h2>
+      <form
+        class="ui form large segment"
+        @submit.prevent="login"
+      >
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon" />
-            <input type="text" v-model="user" />
+            <input
+              v-model="user"
+              type="text"
+            >
           </div>
         </div>
         <div class="field">
           <div class="ui left icon input">
             <i class="lock icon" />
-            <input type="password" v-model="pass" />
+            <input
+              v-model="pass"
+              type="password"
+            >
           </div>
         </div>
         <input
           class="ui big fluid submit button blue"
           type="submit"
           value="Ingresar"
-        />
+        >
       </form>
     </div>
     <div class="ui message">
-      <span
-        >¿No tiene cuenta? Registrese
-        <router-link to="registro">aqui</router-link></span
-      >
+      <span>¿No tiene cuenta? Registrese
+        <router-link to="registro">aqui</router-link></span>
     </div>
-    <div v-if="hasError" class="ui error message">
-      <i class="exclamation circle icon"></i>
-        {{ mensaje }}
+    <div
+      v-if="hasError"
+      class="ui error message"
+    >
+      <i class="exclamation circle icon" />
+      {{ mensaje }}
     </div>
   </div>
 </template>

@@ -1,8 +1,13 @@
 <template>
-    <Dropdown 
+  <Dropdown 
     v-model="selected"
-    :options="giros" :filter="true" :showClear="true"
-    optionLabel="giro" optionValue="giro" placeholder="Seleccione un giro" />
+    :options="giros"
+    :filter="true"
+    :show-clear="true"
+    option-label="giro"
+    option-value="giro"
+    placeholder="Seleccione un giro"
+  />
 </template>
 
 
