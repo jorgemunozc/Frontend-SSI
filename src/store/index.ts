@@ -239,14 +239,24 @@ const store = {
     }
   },
 
+  resetValues() {
+    for (const prop in this.state) {
+      if (prop === 'cod750') {
+        this.state[prop] = false;
+        continue;
+      }
+      this.state[prop] = 0;
+    }
+  },
   /**
    * Realiza la suma de los campos de una seccion del formulario y guarda el resultado
    * en el codigo del campo especificado.
    * @param targetProps Codigo de campos que se desean sumar
-   * @param propsResta Codigo de campos dentro de @targetPros que deben ser restados
-   * @param targetProp Codigo del campo en el que se desea guardar el resultado
+   * @param propsResta Codigo de campos dentro de *targetPros* que deben ser restados
+   * @param targetProp Codigo del campo en el que se desea guardar el resultado, si es
+   *                   especificado, caso contrario devuelve el valor calculado.
    */
-  calcularTotal(targetProps: string[], propsResta: string[], targetProp: string) {
+  calcularTotal(targetProps: string[], propsResta: string[], targetProp?: string): number | void {
     const values = extractValues(this.state, targetProps);
     let total = 0;
     for (const prop in values) {
@@ -256,7 +266,11 @@ const store = {
         total += values[prop];
       }
     }
-    this.state[targetProp] = total;
+    if (typeof targetProp != 'undefined'){
+      this.state[targetProp] = total;
+      return;
+    }
+    return total;
   },
   
   calcularDebito() {
@@ -302,7 +316,20 @@ const store = {
     const propsResta = ['cod723'];
 
     this.calcularTotal(targetProps, propsResta, 'cod595');
-  }
+  },
+
+  //calcula la diferencia entre debito y credito del Impuesto art 37
+  calcularImp37(): number {
+    const targetProps = [
+      'cod113', 'cod28', 'cod548', 'cod540', 'cod541',
+    ];
+    const propsResta = [
+      'cod28', 'cod548', 'cod540',
+    ];
+    const total = this.calcularTotal(targetProps, propsResta);
+    return +total;
+  },
+
 }
 
 function extractValues(target: Formulario29, propNames: string[]): number[] {

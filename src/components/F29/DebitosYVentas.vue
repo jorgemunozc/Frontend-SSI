@@ -19,17 +19,45 @@
         </th>
         <td>Exportaciones</td>
         <td class="celda-codigo">585</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod585" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod585"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">20</td>
-        <td colspan="2"><input type="text" class="f29__input" v-model.lazy="datos.cod20" maxlength="12"/></td>
+        <td colspan="2">
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod20"
+            maxlength="12"
+          />
+        </td>
       </tr>
       <tr>
         <td class="celda-linea">2</td>
         <td>Ventas y/o Servicios prestados Exentos, o No Gravados del giro</td>
         <td class="celda-codigo">586</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod586" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod586"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">142</td>
-        <td colspan="2"><input type="text" class="f29__input" v-model.lazy="datos.cod142" maxlength="12"/></td>
+        <td colspan="2">
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod142"
+            maxlength="12"
+          />
+        </td>
       </tr>
 
       <tr>
@@ -39,9 +67,23 @@
           (contribuyentes retenidos)
         </td>
         <td class="celda-codigo">731</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod731" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod731"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">732</td>
-        <td colspan="2"><input type="text" class="f29__input" v-model.lazy="datos.cod732" maxlength="12"/></td>
+        <td colspan="2">
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod732"
+            maxlength="12"
+          />
+        </td>
       </tr>
 
       <tr>
@@ -51,9 +93,23 @@
           giro
         </td>
         <td class="celda-codigo">714</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod714" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod714"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">715</td>
-        <td colspan="2"><input type="text" class="f29__input" v-model.lazy="datos.cod715" maxlength="12"/></td>
+        <td colspan="2">
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod715"
+            maxlength="12"
+          />
+        </td>
       </tr>
 
       <tr>
@@ -63,9 +119,23 @@
           (contribuyentes retenidos) y Factura de Inicio emitida
         </td>
         <td class="celda-codigo">515</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod515" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod515"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">587</td>
-        <td colspan="2"><input type="text" class="f29__input" v-model.lazy="datos.cod587" maxlength="12"/></td>
+        <td colspan="2">
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod587"
+            maxlength="12"
+          />
+        </td>
       </tr>
 
       <tr>
@@ -75,7 +145,14 @@
           neto)
         </td>
         <td class="celda-codigo">720</td>
-        <td colspan="2"><input type="text" class="f29__input" v-model.lazy="datos.cod720" maxlength="12"/></td>
+        <td colspan="2">
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod720"
+            maxlength="12"
+          />
+        </td>
       </tr>
 
       <!-- encabezado -->
@@ -92,9 +169,23 @@
         <th class="vertical-header" rowspan="11">Genera D&eacute;bito</th>
         <td>Facturas emitidas por ventas y servicios del giro</td>
         <td class="celda-codigo">503</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod503" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod503"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">502</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod502" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod502"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
 
@@ -104,9 +195,23 @@
           Facturas emitidas por la venta de bienes inmuebles afectas a IVA
         </td>
         <td class="celda-codigo">763</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod763" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod763"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">764</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod764" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod764"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
 
@@ -117,9 +222,23 @@
           del giro (activo fijo y otros)
         </td>
         <td class="celda-codigo">716</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod716" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod716"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">717</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod717" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod717"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
 
@@ -127,9 +246,23 @@
         <td class="celda-linea">10</td>
         <td>Boletas</td>
         <td class="celda-codigo">110</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod110" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod110"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">111</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod111" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod111"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
       <tr>
@@ -139,9 +272,23 @@
           trav&eacute;s de medios electr&oacute;nicos
         </td>
         <td class="celda-codigo">758</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod758" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod758"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">759</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod759" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod759"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
       <tr>
@@ -152,9 +299,23 @@
           cambio de sujeto
         </td>
         <td class="celda-codigo">512</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod512" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod512"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">513</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod513" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod513"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
       <tr>
@@ -165,9 +326,23 @@
           parcial de cambio de sujeto
         </td>
         <td class="celda-codigo">509</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod509" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod509"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">510</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod510" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod510"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">-</td>
       </tr>
       <tr>
@@ -177,9 +352,23 @@
           autorizadas por el Servicio
         </td>
         <td class="celda-codigo">708</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod708" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod708"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">709</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod709" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod709"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">-</td>
       </tr>
       <tr>
@@ -189,9 +378,23 @@
           giro (activo fijo y otros)
         </td>
         <td class="celda-codigo">733</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod733" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod733"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">734</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod734" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod734"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">-</td>
       </tr>
       <tr>
@@ -201,18 +404,46 @@
           (contribuyentes retenidos)
         </td>
         <td class="celda-codigo">516</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod516" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod516"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">517</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod517" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod517"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
       <tr>
         <td class="celda-linea">17</td>
         <td>Liquidaci&oacute;n y Liquidaci&oacute;n Factura</td>
         <td class="celda-codigo">500</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod500" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod500"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-codigo">501</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod501" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod501"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
       <tr>
@@ -222,7 +453,14 @@
           excesivas registradas en otros per&iacute;odos por Art. 27 bis
         </td>
         <td class="celda-codigo">154</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod154" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod154"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
       <tr>
@@ -233,7 +471,14 @@
           19.738/01)
         </td>
         <td class="celda-codigo">518</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod518" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod518"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
       <tr>
@@ -244,7 +489,14 @@
           amoblados
         </td>
         <td class="celda-codigo">713</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod713" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod713"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
       <tr>
@@ -255,25 +507,60 @@
               <td>Adiciones al D&eacute;bito por IEPD Ley 20.765</td>
               <td>M3</td>
               <td class="celda-codigo">738</td>
-              <td><input type="text" class="f29__input" v-model.lazy="datos.cod738" maxlength="12"/></td>
+              <td>
+                <input
+                  type="text"
+                  class="f29__input"
+                  v-model.lazy="datos.cod738"
+                  maxlength="12"
+                />
+              </td>
               <td>Base</td>
               <td class="celda-codigo">739</td>
-              <td><input type="text" class="f29__input" v-model.lazy="datos.cod739" maxlength="12"/></td>
+              <td>
+                <input
+                  type="text"
+                  class="f29__input"
+                  v-model.lazy="datos.cod739"
+                  maxlength="12"
+                />
+              </td>
               <td>Variable</td>
               <td class="celda-codigo">740</td>
-              <td><input type="text" class="f29__input" v-model.lazy="datos.cod740" maxlength="12"/></td>
+              <td>
+                <input
+                  type="text"
+                  class="f29__input"
+                  v-model.lazy="datos.cod740"
+                  maxlength="12"
+                />
+              </td>
             </tr>
           </table>
         </td>
         <td class="celda-codigo">741</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod741" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod741"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
       <tr>
         <td class="celda-linea">22</td>
         <th colspan="5">TOTAL D&Eacute;BITOS</th>
         <td class="celda-codigo">538</td>
-        <td><input type="text" class="f29__input" v-model.lazy="cod538" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="cod538"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">=</td>
       </tr>
     </tbody>
@@ -295,9 +582,11 @@ export default defineComponent({
 
   computed: {
     cod538(): string {
-        this.store.calcularDebito();
-        const cod538 = this.datos.cod538.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
-        return cod538;
+      this.store.calcularDebito();
+      const cod538 = this.datos.cod538
+        .toString()
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+      return cod538;
     },
   },
 });

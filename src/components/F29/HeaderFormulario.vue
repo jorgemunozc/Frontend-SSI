@@ -4,7 +4,7 @@
       <div colspan="3" class="f29__seccion__header">PERIODO TRIBUTARIO</div>
       <table>
         <tr>
-          <td rowspan="2"  class="celda-codigo">15</td>
+          <td rowspan="2" class="celda-codigo">15</td>
           <td>MES</td>
           <td>AÑO</td>
         </tr>

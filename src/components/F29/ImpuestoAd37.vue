@@ -19,7 +19,14 @@
         <td class="celda-linea">70</td>
         <td colspan="12">Letra j) (tasa 50%)</td>
         <td class="celda-codigo">526</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod526" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod526"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
       <tr>
@@ -29,7 +36,14 @@
           y Art. 40 D.L. 825 (tasa 15%)
         </td>
         <td class="celda-codigo">113</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod113" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod113"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
       <tr>
@@ -39,7 +53,14 @@
           825
         </td>
         <td class="celda-codigo">28</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod28" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod28"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">-</td>
       </tr>
       <tr>
@@ -49,7 +70,14 @@
           exportadores D.L. 825
         </td>
         <td class="celda-codigo">548</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod548" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod548"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">-</td>
       </tr>
       <tr>
@@ -58,7 +86,14 @@
           Remanente cr&eacute;dito Art. 37 mes anterior D.L. 825
         </td>
         <td class="celda-codigo">540</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod540" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod540"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">-</td>
       </tr>
       <tr>
@@ -68,7 +103,14 @@
           Art. 37 letras a), b) y c) D.L. 825
         </td>
         <td class="celda-codigo">541</td>
-        <td><input type="text" class="f29__input" v-model.lazy="datos.cod541" maxlength="12"/></td>
+        <td>
+          <input
+            type="text"
+            class="f29__input"
+            v-model.lazy="datos.cod541"
+            maxlength="12"
+          />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
 
@@ -79,10 +121,14 @@
           siguiente
         </td>
         <td class="celda-codigo">549</td>
-        <td><input type="text" class="f29__input" :value="cod549" disabled/></td>
+        <td>
+          <input type="text" class="f29__input" :value="cod549" disabled />
+        </td>
         <td colspan="3">Impuesto Adicional Art. 37 y Art. 40 determinado</td>
         <td class="celda-codigo">550</td>
-        <td><input type="text" class="f29__input" :value="cod550" disabled/></td>
+        <td>
+          <input type="text" class="f29__input" :value="cod550" disabled />
+        </td>
         <td class="celda-signo">+</td>
       </tr>
     </tbody>
@@ -91,7 +137,8 @@
 
 <script lang="ts">
 import store from "@/store";
-import { defineComponent } from "vue";
+import { parseNumber } from "@/utils/numbers";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   setup() {
@@ -99,7 +146,33 @@ export default defineComponent({
     return {
       datos,
       store,
-    }
+    };
+  },
+
+  computed: {
+    impuestoArt37(): number {
+      return store.calcularImp37();
+    },
+    cod549(): string {
+      let imp37 = this.impuestoArt37;
+      if (imp37 < 0) {
+        store.setValue("cod549", imp37 * -1);
+      } else {
+        store.setValue("cod549", 0);
+      }
+      const cod549 = ref(this.datos.cod549);
+      return parseNumber(cod549.value);
+    },
+    cod550(): string {
+      let imp37 = this.impuestoArt37;
+      if (imp37 > 0) {
+        store.setValue("cod550", imp37);
+      } else {
+        store.setValue("cod550", 0);
+      }
+      const cod550 = ref(this.datos.cod550);
+      return parseNumber(cod550.value);
+    },
   },
 });
 </script>

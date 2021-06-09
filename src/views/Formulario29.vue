@@ -1,5 +1,4 @@
 <template>
-    <div>codigo 750 {{variables.cod750}}</div>
     <div class="f29">
         <div class="f29__seccion">
             <header-formulario />
@@ -91,7 +90,6 @@ export default defineComponent({
         TotalDeterminado,
         RemanenteCreditosEsp,
         TotalesFormulario,
-        
     },
 
     setup() {
@@ -100,7 +98,7 @@ export default defineComponent({
         return {
             variables,
         }
-    }
+    },
 })
 </script>
 
