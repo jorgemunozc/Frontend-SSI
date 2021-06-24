@@ -20,6 +20,7 @@
   "rules": {
     // override/add rules settings here, such as:
     // 'vue/no-unused-vars': 'warning'
-    "@typescript-eslint/ban-types": "off"
+    "@typescript-eslint/ban-types": "off",
+    "@vue/singleline-html-element-content-newline": "off"
   }
 }
