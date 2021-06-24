@@ -3,7 +3,9 @@
     <div class="sixteen wide column">
       <Header />
     </div>
-    <router-view />
+    <div class="sixteen wide column">
+      <router-view />
+    </div>
   </div>  
 </template>
 
