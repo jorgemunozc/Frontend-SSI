@@ -1,5 +1,5 @@
 import { reactive } from 'vue';
-
+import { extractValues } from '@/utils/extractValuesFromF29';
 const store = {
   state: reactive<Formulario29>({
     cod585: 0,
@@ -7,7 +7,7 @@ const store = {
     cod731: 0,
     cod714: 0,
     cod515: 0,
-    cod20: 0,
+    cod20:  0,
     cod142: 0,
     cod732: 0,
     cod715: 0,
@@ -97,13 +97,13 @@ const store = {
     cod537: 0,//Total Creditos
 
 
-    cod77: 0,//Remanente determinado
-    cod89: 0,//IVA determinado
+    cod77:  0,//Remanente determinado
+    cod89:  0,//IVA determinado
 
     cod751: 0,
     cod735: 0,
     cod750: false,
-    cod30: 0,
+    cod30:  0,
     cod565: 0,
     cod700: 0,
     cod563: 0,
@@ -112,7 +112,7 @@ const store = {
     cod115: 0,
     cod542: 0,
     cod702: 0,
-    cod68: 0,
+    cod68:  0,
     cod122: 0,
     cod711: 0,
     cod721: 0,
@@ -120,21 +120,21 @@ const store = {
     cod724: 0,
 
     cod760: 0,
-    cod50: 0,
-    cod48: 0,
+    cod50:  0,
+    cod48:  0,
     cod151: 0,
     cod153: 0,
-    cod54: 0,
-    cod56: 0,
+    cod54:  0,
+    cod56:  0,
     cod588: 0,
     cod589: 0,
-    cod62: 0,
+    cod62:  0,
     cod123: 0,
     cod703: 0,
-    cod66: 0,
+    cod66:  0,
     cod723: 0,
     cod152: 0,
-    cod70: 0,
+    cod70:  0,
 
     cod595: 0,
 
@@ -145,7 +145,7 @@ const store = {
     cod522: 0,
     cod526: 0,
     cod113: 0,
-    cod28: 0,
+    cod28:  0,
     cod548: 0,
     cod540: 0,
     cod541: 0,
@@ -153,7 +153,7 @@ const store = {
     cod550: 0,//iva determinado
 
     cod577: 0,
-    cod32: 0,
+    cod32:  0,
     cod150: 0,
     cod146: 0,
     cod752: 0,
@@ -169,9 +169,9 @@ const store = {
     cod753: 0,
 
     cod576: 0,
-    cod33: 0,
+    cod33:  0,
     cod149: 0,
-    cod85: 0,
+    cod85:  0,
     cod754: 0,
     cod551: 0,
     cod559: 0,
@@ -189,7 +189,7 @@ const store = {
     cod543: 0,
     cod573: 0,
     cod598: 0,
-    cod39: 0,
+    cod39:  0,
     cod554: 0,
     cod736: 0,
     cod597: 0,
@@ -239,6 +239,14 @@ const store = {
     }
   },
 
+  loadData(rawData: Formulario29): void {
+    for (const prop in rawData)
+    {
+      this.setValue(prop, rawData[prop]);
+    }
+  },
+
+  //Resetea el estado del formulario.
   resetValues() {
     for (const prop in this.state) {
       if (prop === 'cod750') {
@@ -266,17 +274,17 @@ const store = {
         total += values[prop];
       }
     }
-    if (typeof targetProp != 'undefined'){
+    if (typeof targetProp != 'undefined') {
       this.state[targetProp] = total;
       return;
     }
     return total;
   },
-  
+
   calcularDebito() {
     const targetProps = [
       'cod502', 'cod764', 'cod717', 'cod111', 'cod759',
-      'cod513', 'cod510', 'cod709', 'cod734', 'cod517', 
+      'cod513', 'cod510', 'cod709', 'cod734', 'cod517',
       'cod501', 'cod154', 'cod518', 'cod713', 'cod741'
     ];
     const propsResta = [
@@ -294,7 +302,7 @@ const store = {
     ];
 
     const propsResta = [
-      'cod528', 'cod593', 'cod594', 'cod592', 'cod539', 
+      'cod528', 'cod593', 'cod594', 'cod592', 'cod539',
       'cod539', 'cod718',
     ];
     this.calcularTotal(targetProps, propsResta, 'cod537');
@@ -305,10 +313,11 @@ const store = {
     return (this.state.cod538) - (this.state.cod537);
   },
 
+  //Calcula subtotal de impuesto para el codigo 595 y lo actualiza en la store
   calcularSubImpDeterm() {
     const targetProps = [
       'cod89', 'cod760', 'cod50', 'cod48', 'cod151',
-      'cod153','cod54', 'cod56', 'cod588', 'cod589',
+      'cod153', 'cod54', 'cod56', 'cod588', 'cod589',
       'cod62', 'cod123', 'cod703', 'cod66', 'cod723',
       'cod152', 'cod70',
     ];
@@ -318,7 +327,7 @@ const store = {
     this.calcularTotal(targetProps, propsResta, 'cod595');
   },
 
-  //calcula la diferencia entre debito y credito del Impuesto art 37
+  //Calcula la diferencia entre debito y credito del Impuesto art 37
   calcularImp37(): number {
     const targetProps = [
       'cod113', 'cod28', 'cod548', 'cod540', 'cod541',
@@ -330,15 +339,6 @@ const store = {
     return +total;
   },
 
-}
-
-function extractValues(target: Formulario29, propNames: string[]): number[] {
-  const extractedValues: number[] = [];
-  for (let i = 0; i < propNames.length; i++) {
-    const prop = propNames[i];
-    extractedValues[prop] = +target[prop];
-  }
-  return extractedValues;
 }
 
 export default store;
