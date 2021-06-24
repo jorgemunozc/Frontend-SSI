@@ -8,6 +8,7 @@
  */
 
 declare interface Formulario29 {
+  estado?: string,
   /*************************************
    * SECCION: DEBITOS Y VENTAS
    ************************************* 
