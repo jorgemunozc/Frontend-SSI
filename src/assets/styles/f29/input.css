@@ -9,24 +9,24 @@
 
 .f29__input,
 .f29__input--md {
-  border: 1px solid var(--secondary-color);
-  background-color: var(--primary-color-ligther);
+  border: 1px solid var(--f29-secondary-color);
+  background-color: var(--f29-primary-color-ligther);
   text-align: right;
 }
 
 .f29__input:focus,
 .f29__input--md:focus {
   outline: 0;
-  border: 1px solid var(--primary-color-darker);
+  border: 1px solid var(--f29-primary-color-darker);
 }
 
 .f29__input:hover,
 .f29__input--md:hover {
-  border: 1px solid var(--primary-color);
+  border: 1px solid var(--f29-primary-color);
 }
 
 .f29__input:disabled {
-  background-color: var(--secondary-color);
+  background-color: var(--f29-secondary-color);
 }
 
 .f29__input-wrapper {

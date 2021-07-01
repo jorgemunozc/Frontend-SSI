@@ -1,10 +1,10 @@
 
 :root {
 --max-w: 1280px;
---primary-color: hsl(200, 65%, 90%);
---primary-color-ligther: hsl(200, 65%, 98%);
---primary-color-darker: hsl(200, 65%, 50%);
---secondary-color: hsl(0, 0%, 91%);
+--f29-primary-color: hsl(200, 65%, 90%);
+--f29-primary-color-ligther: hsl(200, 65%, 98%);
+--f29-primary-color-darker: hsl(200, 65%, 50%);
+--f29-secondary-color: hsl(0, 0%, 91%);
 --input-size: 129px;
 }
 

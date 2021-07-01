@@ -9,7 +9,7 @@
 }
 
 .f29__seccion__header {
-    background-color: var(--primary-color);
+    background-color: var(--f29-primary-color);
     font-weight: 700;
     font-size: 1.2rem;
     text-align: center;
@@ -23,7 +23,7 @@
 }
 
 .f29__seccion__subheader {
-    background-color: var(--secondary-color);
+    background-color: var(--f29-secondary-color);
     text-align: center;
 }
 
