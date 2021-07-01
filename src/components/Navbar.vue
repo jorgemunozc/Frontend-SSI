@@ -34,6 +34,12 @@
       Mis Datos
     </router-link>
     <!-- <a class="item">Ver Formulario 19</a> -->
+    <router-link 
+      to="/f29"
+      class="item"
+    >
+      Formulario 29
+      </router-link>
     <a
       class="item"
       @click="logOut"
