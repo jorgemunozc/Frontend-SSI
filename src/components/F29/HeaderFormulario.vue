@@ -19,8 +19,8 @@
           <td>AÑO</td>
         </tr>
         <tr>
-          <td>04</td>
-          <td>2021</td>
+          <td>{{month}}</td>
+          <td>{{year}}</td>
         </tr>
       </table>
     </div>
@@ -35,12 +35,12 @@
           <td class="celda-codigo">
             3
           </td>
-          <td>121345665</td>
+          <td>{{ rut }}</td>
         </tr>
       </table>
     </div>
 
-    <div class="f29__header__item">
+    <div class="f29__header__item folio">
       <div class="f29__seccion__header">
         FOLIO
       </div>
@@ -50,9 +50,25 @@
           <td class="celda-codigo">
             7
           </td>
-          <td>45</td>
+          <td><span v-if="folio > 0">{{ folio }}</span></td>
         </tr>
       </table>
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  props: {
+    folio: {
+      type: Number,
+      default: 0,
+    },
+    rut: String,
+    month: Number,
+    year: Number, 
+  }
+})
+</script>

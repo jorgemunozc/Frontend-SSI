@@ -1,7 +1,7 @@
 <template>
   <table>
     <thead>
-      <tr>
+      <tr class="f29__seccion__subheader">
         <th colspan="16">
           ANTICIPO CAMBIO DE SUJETO (CONTRIBUYENTES RETENIDOS)
         </th>
