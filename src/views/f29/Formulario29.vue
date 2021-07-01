@@ -1,7 +1,7 @@
 <template>
   <div class="f29">
     <div class="f29__seccion">
-      <header-formulario :folio="folio" :rut="datosEmpresa.rut" />
+      <header-formulario :folio="folio" :rut="datosEmpresa.rut" :month="periodo.month" :year="periodo.year"/>
     </div>
     <div class="f29__seccion">
       <info-empresa :razonSocial="datosEmpresa.razonSocial"/>
@@ -103,10 +103,11 @@ export default defineComponent({
   props: {
     folio: Number,
     datosEmpresa: Object,
-  },
-
-  setup() {
-    
+    periodo: Object,
+    editable: {
+      type: Boolean,
+      default: true
+    }
   },
 });
 </script>
