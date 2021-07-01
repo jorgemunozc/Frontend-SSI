@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import isLoggedIn from '@/auth/isLoggedIn';
 import isAdmin from '@/auth/isAdmin';
+import F29Acciones from '@/views/f29/F29Acciones.vue';
 
-import Test from "@/views/TestView.vue";
-import Footer from '@/components/Footer.vue';
 import Login from '@/views/Login.vue';
 import NotFound from '@/views/errors/NotFound.vue';
+import NuevoFormulario from '@/views/f29/NuevoFormulario.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -17,7 +17,7 @@ const router = createRouter({
         {
             name: 'test',
             path: '/test',
-            component: () => import('@/views/Formulario29.vue'),
+            component: () => import('@/views/f29/F29Acciones.vue'),
         },
         {
             name: 'Registro',
@@ -58,6 +58,41 @@ const router = createRouter({
             meta: {
                 requiresAuth: true,
             }
+        },
+        {
+            path: '/f29',
+            component: F29Acciones,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            name: 'Seleccion Periodo',
+            path: '/f29-seleccion',
+            component: () => import('@/views/f29/SeleccionarPeriodo.vue'),
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            name: 'Nuevo F29',
+            path: '/nuevo-f29',
+            component: NuevoFormulario,
+            meta: {
+                requiresAuth: true,
+            },
+            props: route => ({ month: route.query.month, year: route.query.year})
+        },
+        {
+            name: 'Consulta F29',
+            path: '/f29-consulta',
+            component: () => import('@/views/f29/F29Consulta.vue'),
+        },
+        {
+            name: 'Ver F29',
+            path: '/ver-f29',
+            component: () => import('@/views/f29/MostrarFormulario.vue'),
+            props: route => ({ month: route.query.month, year: route.query.year})
         },
         {
             path: '/:pathMatch(.*)',
