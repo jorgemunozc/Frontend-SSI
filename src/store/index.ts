@@ -2,6 +2,8 @@ import { reactive } from 'vue';
 import { extractValues } from '@/utils/extractValuesFromF29';
 const store = {
   state: reactive<Formulario29>({
+
+    folio: 0,
     cod585: 0,
     cod586: 0,
     cod731: 0,
