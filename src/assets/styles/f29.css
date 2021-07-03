@@ -41,10 +41,10 @@
 }
 
 .f29-wrapper {
-    height: 70vh;
+    height: 65vh;
     width: 90%;
     overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-x: scroll;
     margin: 0 auto;
 }
 

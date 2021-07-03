@@ -1,6 +1,6 @@
 
 :root {
---max-w: 1280px;
+--f29-width: 1280px;
 --f29-primary-color: hsl(200, 65%, 90%);
 --f29-primary-color-ligther: hsl(200, 65%, 98%);
 --f29-primary-color-darker: hsl(200, 65%, 50%);
@@ -10,7 +10,7 @@
 
 .f29 {
     text-align: left;
-    max-width: var(--max-w, 1280px);
+    max-width: var(--f29--width, 1210px);
     font-size: 1rem;
     margin: auto;
 }
