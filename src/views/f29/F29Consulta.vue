@@ -1,36 +1,52 @@
 <template>
-  <table>
-    <thead>
-      <tr>
-        <td>Mes</td>
-        <td colspan="10">Periodos Tributarios</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td v-for="year in years" :key="year">{{ year }}</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(month, index) in months" :key="month">
-        <td>{{ month }}</td>
-        <td v-for="year in years" :key="year">
-          <a v-if="hasF29(year, index + 1)" @click="loadF29(year, index + 1)">
-            Ver
-          </a>
-          <span v-else>-</span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="three wide column">
+  <Navbar />
+</div>
+  <div class="twelve wide column">
+    <table>
+      <thead>
+        <tr>
+          <td rowspan="2">Mes</td>
+          <td colspan="10">Periodos Tributarios</td>
+        </tr>
+        <tr>
+    
+          <td v-for="year in years" :key="year">{{ year }}</td>
+        </tr>
+      </thead>
+      <tbody v-if="!isLoading">
+        <tr v-for="(month, index) in months" :key="month">
+          <td>{{ month }}</td>
+          <td v-for="year in years" :key="year">
+            <a v-if="hasF29(year, index + 1)" @click="loadF29(year, index + 1)">
+              Ver
+            </a>
+            <span v-else>-</span>
+          </td>
+        </tr>
+      </tbody>
+      <tbody v-else>
+        <tr>
+          <td class="ui centered column" colspan="99">
+            <div class="ui tiny inline active loader"></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import Navbar from '@/components/Navbar.vue';
 import { obtenerFormularios } from "@/services/F29Service";
 import { buscarF29 } from "@/services/F29Service";
 import store from "@/store";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
+  components: {
+    Navbar,
+  },
   setup() {
     const years = ref<string[]>([]);
     const months = [
@@ -50,6 +66,7 @@ export default defineComponent({
     let f29Data = {};
     const f29Store = store;
     const router = useRouter();
+    const isLoading = ref(true);
     const loadYears = function (dataSource: Object) {
       Object.keys(dataSource)
         .sort(function (a, b) {
@@ -96,16 +113,18 @@ export default defineComponent({
         console.error(err.response.data);
       })
     }
-    
+
     obtenerFormularios().then((res) => {
       loadYears(res);
       f29Data = res;
+      isLoading.value = false;
     });
 
     return {
       months,
       years,
       f29Data,
+      isLoading,
       hasF29,
       loadF29,
     };

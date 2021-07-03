@@ -1,21 +1,33 @@
 <template>
-  <Formulario29 :folio="folio" :editable="false" :periodo="{month, year}" :datosEmpresa="empresa"/>
+<div class="three wide column">
+  <Navbar />
+</div>
+  <div class="twelve wide colum">
+    <Formulario29
+      :folio="folio"
+      :editable="false"
+      :periodo="{ month, year }"
+      :datosEmpresa="empresa"
+    />
+  </div>
 </template>
 
 <script lang="ts">
 /**
  * TODO: Ver que hacer cuando refrescan el navegador (la store se resetea)
  */
-import store from '@/store'
-import { defineComponent, reactive } from 'vue'
-import { obtenerDatosEmpresa } from '@/utils/loadUserData';
-import Formulario29 from '@/views/f29/Formulario29.vue';
+import store from "@/store";
+import { defineComponent, reactive } from "vue";
+import { obtenerDatosEmpresa } from "@/utils/loadUserData";
+import Formulario29 from "@/views/f29/Formulario29.vue";
+import Navbar from '@/components/Navbar.vue';
 
 export default defineComponent({
   components: {
     Formulario29,
+    Navbar,
   },
-  props: ['month', 'year'],
+  props: ["month", "year"],
   setup() {
     const f29Data = store.state;
     const folio = f29Data.folio;
@@ -26,11 +38,11 @@ export default defineComponent({
       apellidoMaterno: "",
       rut: "",
     });
-    obtenerDatosEmpresa(empresa)
+    obtenerDatosEmpresa(empresa);
     return {
       folio,
       empresa,
-    }
+    };
   },
-})
+});
 </script>
