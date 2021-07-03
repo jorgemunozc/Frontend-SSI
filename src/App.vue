@@ -3,9 +3,7 @@
     <div class="sixteen wide column">
       <Header />
     </div>
-    <div class="sixteen wide column">
-      <router-view />
-    </div>
+    <router-view />
   </div>  
 </template>
 
@@ -16,7 +14,7 @@ import Header from '@/components/Header.vue';
 export default defineComponent({
   name: "App",
   components: {
-    Header
+    Header,
   }
 });
 </script>
