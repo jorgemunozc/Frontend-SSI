@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="userType === 'ADMIN'"
+    v-if="isLoggedIn() && isAdmin()"
     class="ui fluid vertical labeled icon menu"
     style="height: 100%"
   >
@@ -22,7 +22,7 @@
     <!-- <li>Gestionar Dominios</li> -->
   </div>
   <div
-    v-else
+    v-else-if="isLoggedIn()"
     class="ui fluid vertical labeled icon menu"
     style="height: 100%"
   >
@@ -38,6 +38,7 @@
       to="/f29"
       class="item"
     >
+    <i class="folder icon"></i>
       Formulario 29
       </router-link>
     <a
@@ -47,23 +48,19 @@
       <i class="power off icon" />
       Cerrar Sesion
     </a>
-    <div class="item" />
+    <!-- <div class="item" /> -->
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { Rol } from "@/types/enums/Rol";
+import { defineComponent, ref } from "vue";
 import { logout } from "@/services/LoginService";
 import { useRouter } from "vue-router";
+import isLoggedIn from '@/auth/isLoggedIn';
+import isAdmin from '@/auth/isAdmin';
+
 export default defineComponent({
   name: "Navbar",
-  props: {
-    userType: {
-      type: String,
-      default: Rol.EMPRESA,
-    },
-  },
   setup() {
     const router = useRouter();
     const logOut = () => {
@@ -71,9 +68,10 @@ export default defineComponent({
         router.push({ path: "/" });
       });
     };
-
     return {
       logOut,
+      isLoggedIn,
+      isAdmin,
     };
   },
 });
