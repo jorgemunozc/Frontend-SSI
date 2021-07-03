@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="three wide column">
-      <Navbar user-type="ADMIN" />
+      <Navbar />
     </div>
     <div class="ui twelve wide column grid">
       <h1 class="ui blue header">
