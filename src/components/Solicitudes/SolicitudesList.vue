@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <tr v-if="typeof solicitudes == 'undefined' || solicitudes.length === 0">
-        <td>Sin solicitudes pendientes por procesar.</td>
+        <td colspan="4">Sin solicitudes pendientes por procesar.</td>
       </tr>
       <tr
         v-for="(solicitud, index) in solicitudes"
