@@ -9,10 +9,11 @@ import InputText from 'primevue/inputtext';
 
 import { initAxios } from '@/services/ApiService';
 
-import '../semantic/dist/semantic.min.css';
+// import '../semantic/dist/semantic.min.css';
 import 'primevue/resources/primevue.min.css';
 import 'primevue/resources/themes/mdc-light-indigo/theme.css';
 import 'primeicons/primeicons.css';
+import './index.css';
 
 const app = createApp(App);
 

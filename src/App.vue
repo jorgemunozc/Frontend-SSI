@@ -1,6 +1,6 @@
 <template>
-  <div class="ui grid">
-    <div class="sixteen wide column">
+  <div class="container mx-auto h-full font-sans">
+    <div class="container">
       <Header />
     </div>
     <router-view />

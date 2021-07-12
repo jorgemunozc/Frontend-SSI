@@ -1,137 +1,139 @@
 <template>
-  <div class="ui text container">
+  <div class="py-4 max-w-xl mx-2 md:mx-auto relative">
     <div
-      class="ui tiny warning icon message"
-      style="margin-bottom: 3rem"
+      class="
+        flex
+        items-center
+        bg-yellow-50
+        text-yellow-900
+        border
+        rounded
+        border-yellow-900
+        p-4
+        mb-8
+      "
     >
-      <i class="attention icon" />
-      <div class="content">
-        <div class="header">
-          Informaci&oacute;n
-        </div>
-        <ul class="info-text list">
+      <i class="pi pi-exclamation-circle text-2xl w-10 mr-8 md:text-4xl" />
+      <div class=" text-xs md:text-sm">
+        <div class="font-bold text-center">Informaci&oacute;n</div>
+        <ul class="info-text list-disc">
           <li>
-            Para tener acceso a la plataforma debe llenar el siguiente formulario.
+            Para tener acceso a la plataforma debe llenar el siguiente
+            formulario.
           </li>
           <li>
-            Una vez enviado el formulario, el profesor de la asignatura o un encargado
-            del sitio revisionara su solicitud de acceso.
+            Una vez enviado el formulario, el profesor de la asignatura o un
+            encargado del sitio revisionar&aacute; su solicitud de acceso.
           </li>
           <li>
-            Si su solicitud es aceptada, enviaremos un mensaje al correo registrado
-            con los datos de acceso al sitio.
+            Si su solicitud es aceptada, enviaremos un mensaje al correo
+            registrado con los datos de acceso al sitio.
           </li>
         </ul>
       </div>
     </div>
-    <h1 class="ui header">
-      Formulario de Registro
-    </h1>
-    <form
-      class="ui large form"
-      @submit.prevent="register"
-    >
+
+    <h1 class="text-2xl font-bold text-center mb-4 text-blue-600">Formulario de Registro</h1>
+    <form class="flex flex-wrap text-sm" @submit.prevent="register">
       <div
-        class="field"
-        :class="{'error': errores.razon_social}"
-        style="position:relative"
+        class="w-full relative mb-9"
+        :class="{ error: errores.razon_social }"
       >
         <div class="p-float-label">
           <InputText
             id="razon_social"
             v-model="solicitud.razon_social"
             type="text"
+            class="w-full"
           />
-          <label for="razon_social">Razon Social</label>
+          <label for="razon_social">Raz&oacute;n Social</label>
         </div>
-        <small
+        <div 
           v-if="errores.razon_social"
-          class="ui pointing red label"
-        >{{ errores.razon_social }}</small>
+          class="w-full h-6 pl-2 my-1 absolute top-full bg-red-200 text-red-800 rounded-b"
+        >
+          <small>{{ errores.razon_social }}</small>
+        </div>
       </div>
-      <div
-        class="field"
-        :class="{'error': errores.giro}"
-      >
+      <div class="w-full relative mb-9" :class="{ error: errores.giro }">
         <div class="p-float-label">
           <GirosDropdown
             v-model="solicitud.giro"
-            :class="{'p-invalid': errores.giro}"
+            :class="{ 'p-invalid': errores.giro }"
+            class="text-center w-full"
           />
           <label for="">Giro</label>
         </div>
+        <div 
+          v-if="errores.giro"
+          class="w-full h-6 pl-2 my-1 absolute top-full bg-red-200 text-red-800 rounded-b"
+        >
+          <small>{{ errores.giro }}</small>
+        </div>
       </div>
-      <div
-        class="inline fields"
-        :class="{'error': errores.correo}"
-      >
-        <div class="field ten wide">
+      <div class="w-full relative mb-9 flex" :class="{ error: errores.correo }">
+        <div class="flex-grow">
           <div class="p-float-label">
-            <InputText
-              v-model="correoParcial"
-              type="text"
-            />
+            <InputText v-model="correoParcial" type="text" class="w-full"/>
             <label for="correo">Correo</label>
           </div>
         </div>
-        <div class="field">
-          <i class="large at icon" />
+        <div class="text-3xl mx-1 flex items-center">
+          @
         </div>
-        <div class="inline field six wide">
-          <DominiosDropdown v-model="dominioCorreo" />
+        <div class="w-1/3">
+          <DominiosDropdown v-model="dominioCorreo" class="p-0"/>
         </div>
-        <small
-          v-if="errores.correo"
-          class="ui left pointing red label"
-        >{{ errores.correo }}</small>
+        <div v-if="errores.correo" class="w-full h-6 pl-2 my-1 absolute top-full bg-red-200 text-red-800 rounded-b">
+          <small>{{ errores.correo }}</small>
+        </div>
       </div>
-      <div
-        class="field"
-        :class="{'error': errores.domicilio}"
-      >
+      <div class="w-full relative mb-9" :class="{ error: errores.domicilio }">
         <div class="p-float-label">
           <InputText
             id="domicilio"
             v-model="solicitud.domicilio"
             type="text"
             name="domicilio"
+            class="w-full"
           />
-          <label for="">Direccion</label>
+          <label for="">Direcci&oacute;n</label>
         </div>
-        <small
-          v-if="errores.domicilio"
-          class="ui pointing red label"
-        >{{ errores.domicilio }}</small>
+        <div v-if="errores.domicilio" class="w-full h-6 pl-2 my-1 absolute top-full bg-red-200 text-red-800 rounded-b">
+          <small>{{ errores.domicilio }}</small>
+        </div>
       </div>
-      <div
-        class="field"
-        :class="{'error': errores.ciudad}"
-      >
+      <div class="w-full relative mb-9" :class="{ error: errores.ciudad }">
         <div class="p-float-label">
           <InputText
             id="ciudad"
             v-model="solicitud.ciudad"
             type="text"
             name="ciudad"
+            class="w-full"
           />
           <label for="ciudad">Ciudad</label>
         </div>
-        <small
-          v-if="errores.ciudad"
-          class="ui pointing red label"
-        >{{ errores.ciudad }}</small>
+        <div v-if="errores.ciudad">
+          <div  class="w-full h-6 pl-2 my-1 absolute top-full bg-red-200 text-red-800 rounded-b">
+            <small>{{errores.ciudad}}</small>
+          </div>
+        </div>
       </div>
       <button
-        class="massive ui fluid submit button blue"
-        :class="{'loading': isLoading}"
+        class=" w-full inline-flex justify-center items-center p-4 bg-blue-600 hover:bg-blue-700 text-white rounded"
       >
-        Registrar
+        <svg :class="{'opacity-0': !isLoading}" class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24" fill="none">
+         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>Registrar</span>
       </button>
     </form>
     <div
       v-if="message"
-      class="ui message"
-      :class="{'error': hasError, 'success': !hasError}"
+      class="border rounded p-2 text-center focus"
+      :class="{ 'error-alert': hasError, 'success-alert': !hasError }"
     >
       <small v-html="message" />
     </div>
@@ -139,7 +141,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
+import { defineComponent, ref} from "vue";
 import DominiosDropdown from "@/components/DominiosDropdown.vue";
 import GirosDropdown from "@/components/GirosDropdown.vue";
 import { crearSolicitud } from "@/services/SolicitudService";
@@ -172,15 +174,16 @@ export default defineComponent({
     const message = ref("");
     const isLoading = ref(false);
     const hasError = ref(false);
-    const successMsg = 'Su solicitud ha sido ingresada con exito.<br>' + 
-                        'Una vez aprobada sera enviado un correo a la direccion registrada con los datos de acceso a la plataforma.';
+    const successMsg =
+      "Su solicitud ha sido ingresada con exito.<br>" +
+      "Una vez aprobada sera enviado un correo a la direccion registrada con los datos de acceso a la plataforma.";
 
     const mostrarMensaje = async (msg) => {
       message.value = msg;
       await setTimeout(() => {
         message.value = "";
         hasError.value = false;
-      }, 6000);
+      }, 10000);
     };
     return {
       solicitud,
@@ -234,7 +237,7 @@ export default defineComponent({
 
     pushErrors(data) {
       console.log(data);
-      if (typeof data != 'object') {
+      if (typeof data != "object") {
         return;
       }
       for (const field in data) {
@@ -245,17 +248,17 @@ export default defineComponent({
       for (const field in this.errores) {
         this.errores[field] = null;
       }
-    }
+    },
   },
 });
 </script>
 
 <style lang="scss" scoped>
-  .p-float-label {
-    width: 100%;
-  }
+.p-float-label {
+  width: 100%;
+}
 
-  .info-text {
-    text-align: left;
-  }
+.info-text {
+  text-align: left;
+}
 </style>

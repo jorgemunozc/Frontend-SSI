@@ -1,17 +1,20 @@
 
 :root {
---f29-width: 1280px;
+/* --f29-width: 1210px; */
+--f29-width: 980px;
 --f29-primary-color: hsl(200, 65%, 90%);
 --f29-primary-color-ligther: hsl(200, 65%, 98%);
 --f29-primary-color-darker: hsl(200, 65%, 50%);
 --f29-secondary-color: hsl(0, 0%, 91%);
---input-size: 129px;
+--input-size: 96px;
+--input-size-sm: 50px;
 }
 
 .f29 {
     text-align: left;
-    max-width: var(--f29--width, 1210px);
-    font-size: 1rem;
+    width: var(--f29-width, 1210px);
+    font-size: 0.7em;
+    font-family: 'Arial', sans-serif;
     margin: auto;
 }
 table {
@@ -22,4 +25,8 @@ td,
 th {
     border: 1px solid gray;
     padding: 2px 5px;
+}
+
+@media screen and (max-width: 650px) {
+    
 }

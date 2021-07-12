@@ -1,33 +1,37 @@
 <template>
-  <div
+  <nav
     v-if="isLoggedIn() && isAdmin()"
-    class="ui fluid vertical labeled icon menu"
-    style="height: 100%"
+    class="flex md:flex-col items-stretch md:fixed bg-gray-800 md:w-48"
   >
     <router-link
-      class="item"
+      class="block py-4 hover:bg-gray-700 text-center text-white"
       to="/ver-solicitudes"
     >
       <i class="file icon" />
       Gestionar Solicitudes
     </router-link>
+    <router-link 
+      to="test"
+      class="block py-4 hover:bg-gray-700 text-center text-white"
+    >
+      Gesti&oacute;n dominio correos
+    </router-link>
     <a
-      class="item"
+      class="block py-4 hover:bg-red-900 text-center text-white cursor-pointer"
       @click="logOut"
     >
       <i class="power off icon" />
       Cerrar Sesion
     </a>
-    <div class="item" />
+    
     <!-- <li>Gestionar Dominios</li> -->
-  </div>
-  <div
+  </nav>
+  <nav
     v-else-if="isLoggedIn()"
-    class="ui fluid vertical labeled icon menu"
-    style="height: 100%"
+    class="flex justify-start items-stretch bg-blue-50 mb-4 h-12 w-full"
   >
     <router-link
-      class="item"
+      class="flex items-center px-4 border-b-2 border-black border-opacity-0 hover:border-opacity-100 hover:bg-blue-100"
       to="/home"
     >
       <i class="user icon" />
@@ -36,20 +40,19 @@
     <!-- <a class="item">Ver Formulario 19</a> -->
     <router-link 
       to="/f29"
-      class="item"
+      class="flex items-center px-4 border-b-2 border-black border-opacity-0 hover:border-opacity-100 hover:bg-blue-100"
     >
     <i class="folder icon"></i>
       Formulario 29
       </router-link>
     <a
-      class="item"
+      class="flex items-center px-4 cursor-pointer hover:bg-red-400"
       @click="logOut"
     >
-      <i class="power off icon" />
-      Cerrar Sesion
+      Cerrar Sesi&oacute;n
     </a>
     <!-- <div class="item" /> -->
-  </div>
+  </nav>
 </template>
 
 <script lang="ts">

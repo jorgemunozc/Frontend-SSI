@@ -1,11 +1,11 @@
 <template>
-  <div class="row">
-    <div class="three wide column">
+  <div class="container">
+    <div>
       <Navbar />
     </div>
-    <div class="ui twelve wide column grid">
-      <h1 class="ui blue header">
-        ADMIN
+    <div class="md:ml-48 p-2">
+      <h1 class="text-blue-700 font-semibold text-2xl mb-4">
+        Gesti&oacute;n de Solicitudes de Ingreso a Plataforma
       </h1>
       <SolicitudList />
     </div>

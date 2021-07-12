@@ -1,22 +1,23 @@
 <template>
-  <div class="three wide column">
+  <div class="container">
       <Navbar />
-    </div>
-  <div class="thirteen wide column">
-    <p>
-      Mediante esta opción podrás realizar tu declaración de Formulario 29 (F29)
-    </p>
-    <p>
-      Te recomendamos revisar con detención la información antes de enviar tu
-      declaración.
-    </p>
-    <div class="ui centered grid">
-      <div>Para comenzar, selecciona el periodo a declarar:</div>
-      <form class="ui form" @submit.prevent="mostrarF29">
-        <div class="inline fields">
-          <div class="inline field">
-            <label for="month">Mes</label>
-            <select name="month" id="month" class="ui dropdown" v-model="selectedMonth">
+  </div>
+  <div class="mx-2 h-80 max-w-3xl lg:mx-8">
+    <h1 class="text-blue-700 text-2xl font-semibold mb-2">Declarar IVA</h1>
+    <div class="container text-sm">
+      <p class="mb-2">
+        Mediante esta opción podrás realizar tu declaración de Formulario 29 (F29)
+      </p>
+      <p class="mb-2">
+        Te recomendamos revisar con detención la información antes de enviar tu
+        declaración.
+      </p>
+      <div class="flex flex-col max-w-4xl bg-gray-100 my-4 p-2">
+        <div class="max-w-xs text-sm mb-4">Para comenzar, selecciona el per&iacute;odo a declarar:</div>
+        <form class="flex flex-grow" @submit.prevent="mostrarF29">
+          <div class="mx-2">
+            <label for="month" class="mx-2">Mes</label>
+            <select name="month" id="month" class="border h-8 px-2" v-model="selectedMonth">
               <option value="1">Enero</option>
               <option value="2">Febrero</option>
               <option value="3">Marzo</option>
@@ -31,22 +32,21 @@
               <option value="12">Diciembre</option>
             </select>
           </div>
-          <div class="inline field">
-            <label for="year">Año</label>
-            <select name="year" id="year" class="ui dropdown" v-model="selectedYear">
+          <div class="mx-2">
+            <label for="year" class="mx-2">Año</label>
+            <select name="year" id="year" class="border h-8 px-2" v-model="selectedYear">
               <option v-for="year in years" :key="year.id" :value="year">{{ year }}</option>
             </select>
           </div>
-          <div>
-            <button class="ui blue button">Aceptar</button>
+          <div class=" self-end xs:self-auto mx-2">
+            <button class="bg-blue-800 px-4 text-white h-8">Aceptar</button>
           </div>
-        </div>
-      </form>
-    </div>
-    <div v-if="errorMsg">
-      {{ errorMsg }}
+          
+        </form>
+      </div>
     </div>
   </div>
+  <AlertBase v-if="errorMsg" :mensaje="errorMsg" v-model:isOpen="errorMsg"/>
 </template>
 <script lang="ts">
 /**
@@ -58,10 +58,12 @@ import { buscarF29 } from '@/services/F29Service';
 import store from '@/store';
 import { useRouter } from 'vue-router';
 import Navbar from '@/components/Navbar.vue';
+import AlertBase from '@/components/AlertBase.vue';
 
 export default defineComponent({
   components: {
     Navbar,
+    AlertBase
   },
   setup() {
     const f29Store = store;
@@ -74,6 +76,9 @@ export default defineComponent({
     const errorMsg = ref('');
     let currentPeriod = new Date();
     currentPeriod.setDate(1);
+    //Hack para resetear hora y milisegundos
+    // currentPeriod.setHours(0,0,0);
+    // currentPeriod.setMilliseconds(0);
     const setCurrPeriod = () => {
       if (currDate.getMonth() === 0) {
           selectedMonth.value = 12;
@@ -92,7 +97,8 @@ export default defineComponent({
     }
 
     const mostrarF29 = () => {
-      const selectedPeriod = new Date(selectedYear.value, selectedMonth.value);
+      const selectedPeriod = new Date(selectedYear.value, selectedMonth.value - 1);
+      selectedPeriod.setHours(0,0,0);
       if (selectedPeriod > currentPeriod) {
         errorMsg.value = 'Período seleccionado no es válido.';
         return;

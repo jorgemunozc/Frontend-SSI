@@ -1,21 +1,22 @@
 <template>
-  <table class="ui very basic celled table">
+  <table class="w-full max-w-4xl">
     <thead>
       <tr>
         <!-- <th><input type="checkbox" v-model="isChecked" @checked="checkAll"></th> -->
-        <th>Empresa</th>
-        <th>Giro</th>
-        <th>Correo</th>
-        <th class="three wide" />
+        <th class="w-3/12">Empresa</th>
+        <th class="w-4/12">Giro</th>
+        <th class="w-3/12">Correo</th>
+        <th class="w-2/12"/>
       </tr>
     </thead>
     <tbody>
       <tr v-if="typeof solicitudes == 'undefined' || solicitudes.length === 0">
-        <td colspan="4">Sin solicitudes pendientes por procesar.</td>
+        <td colspan="4" class="text-center">Sin solicitudes pendientes por procesar.</td>
       </tr>
       <tr
         v-for="(solicitud, index) in solicitudes"
         :key="solicitud.id"
+        class="hover:bg-gray-100 cursor-default"
       >
         <!-- <td>
           <input type="checkbox" v-model="selectedRows" :value="index">

@@ -1,8 +1,8 @@
 <template>
-  <div class="main-header">
+  <div class="main-header text-xs">
     <div class="main-header__logo">
       <router-link to="/">
-        SERVICIO SIMULADO DE IMPUESTOS
+        SERVICIO SIMULADO <br>DE IMPUESTOS
       </router-link>
     </div>
   </div>
@@ -11,19 +11,19 @@
 <style scoped>
 .main-header {
     color: white;
-    height: 100px;
+    height: 80px;
     background-color: var(--blue-800);
     display: flex;
     width: 100%;
     justify-content: flex-start;
-    align-items: end;
-    padding: 20px 10px;
+    align-items: center;
+    padding-left: 1rem;
 }
 .main-header__logo {
     display: block;
-    font-size: 2rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    max-width: 30%;
+    width: 50%;
     line-height: 1;
 }
 

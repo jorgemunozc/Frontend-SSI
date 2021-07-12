@@ -1,10 +1,10 @@
 <template>
-  <div class="three wide column">
+  <div class="container">
     <Navbar />
   </div>
-  <div class="twelve wide column grid">
+  <div class="container mx-2">
     <div>
-      <h1 class="ui blue header">PERFIL EMPRESA</h1>
+      <h1 class="text-2xl text-blue-700 font-semibold">PERFIL EMPRESA</h1>
     </div>
     <InfoBasica />
   </div>
