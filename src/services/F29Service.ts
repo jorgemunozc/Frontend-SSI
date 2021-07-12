@@ -24,7 +24,7 @@ function guardarF29(data: Formulario29, estado: string, periodo?: string) {
   } else {
     payload = {...data, 'estado': estado }; 
   }
-  return post<Object>(resource, payload);
+  return post<F29Response>(resource, payload);
 }
 
 function actualizarF29(data: Formulario29, folio: number, nuevoEstado?: string) {
