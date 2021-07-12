@@ -1,8 +1,8 @@
 <template>
-<div class="three wide column">
+<div class="container">
   <Navbar />
 </div>
-  <div class="twelve wide colum">
+  <div class="container mx-2 overflow-x-scroll">
     <Formulario29
       :folio="folio"
       :editable="false"

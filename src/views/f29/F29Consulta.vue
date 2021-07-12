@@ -1,24 +1,24 @@
 <template>
-<div class="three wide column">
+<div class="container">
   <Navbar />
 </div>
-  <div class="twelve wide column">
-    <table>
+  <div class="container px-4">
+    <table class="mx-auto">
       <thead>
         <tr>
-          <td rowspan="2">Mes</td>
-          <td colspan="10">Periodos Tributarios</td>
+          <td rowspan="2" class="bg-gray-300">Mes</td>
+          <td colspan="10" class="bg-gray-300">Per&iacute;odos Tributarios</td>
         </tr>
         <tr>
-    
-          <td v-for="year in years" :key="year">{{ year }}</td>
+          <td v-if="isLoading"><Loading-spinner class="w-full"/></td>
+          <td v-for="year in years" :key="year" class="bg-blue-100 text-center">{{ year }}</td>
         </tr>
       </thead>
       <tbody v-if="!isLoading">
         <tr v-for="(month, index) in months" :key="month">
-          <td>{{ month }}</td>
-          <td v-for="year in years" :key="year">
-            <a v-if="hasF29(year, index + 1)" @click="loadF29(year, index + 1)">
+          <td class="bg-blue-100">{{ month }}</td>
+          <td v-for="year in years" :key="year" class="text-center">
+            <a v-if="hasF29(year, index + 1)" @click="loadF29(year, index + 1)" class="text-blue-700 hover:text-blue-800 cursor-pointer">
               Ver
             </a>
             <span v-else>-</span>
@@ -27,8 +27,14 @@
       </tbody>
       <tbody v-else>
         <tr>
-          <td class="ui centered column" colspan="99">
-            <div class="ui tiny inline active loader"></div>
+          <td>
+            <span class="opacity-0">Septiembre</span>
+            <LoadingSpinner class="w-full"/>
+          </td>
+          <td class="h-80" colspan="99">
+            <div>
+              <LoadingSpinner class="w-full"/>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -38,6 +44,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import Navbar from '@/components/Navbar.vue';
+import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import { obtenerFormularios } from "@/services/F29Service";
 import { buscarF29 } from "@/services/F29Service";
 import store from "@/store";
@@ -46,6 +53,7 @@ import { useRouter } from "vue-router";
 export default defineComponent({
   components: {
     Navbar,
+    LoadingSpinner,
   },
   setup() {
     const years = ref<string[]>([]);
@@ -78,7 +86,10 @@ export default defineComponent({
             years.value.push(nextYear);
           }
           years.value.push(year);
-        });
+        })
+      if (years.value.length === 0) {
+        years.value.push('2021');
+      }
     };
 
     const hasF29 = function (year: string | number, month: string | number) {

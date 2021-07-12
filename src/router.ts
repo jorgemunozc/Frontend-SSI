@@ -6,6 +6,9 @@ import F29Acciones from '@/views/f29/F29Acciones.vue';
 import Login from '@/views/Login.vue';
 import NotFound from '@/views/errors/NotFound.vue';
 import NuevoFormulario from '@/views/f29/NuevoFormulario.vue';
+import F29Comprobante from '@/views/f29/F29Comprobante.vue';
+import F29Consulta from '@/views/f29/F29Consulta.vue';
+import store from "./store";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -68,7 +71,7 @@ const router = createRouter({
         },
         {
             name: 'Seleccion Periodo',
-            path: '/f29-seleccion',
+            path: '/f29-declarar-seleccion',
             component: () => import('@/views/f29/SeleccionarPeriodo.vue'),
             meta: {
                 requiresAuth: true,
@@ -86,13 +89,28 @@ const router = createRouter({
         {
             name: 'Consulta F29',
             path: '/f29-consulta',
-            component: () => import('@/views/f29/F29Consulta.vue'),
+            component: F29Consulta,
+            meta: {
+                requiresAuth: true,
+            }
         },
         {
             name: 'Ver F29',
             path: '/ver-f29',
             component: () => import('@/views/f29/MostrarFormulario.vue'),
             props: route => ({ month: route.query.month, year: route.query.year})
+        },
+        {
+            path: '/f29-comprobante',
+            component: F29Comprobante,
+            meta: {
+                requiresAuth: true,
+            },
+            beforeEnter: (to, from) => {
+                if (store.state.folio === 0) {
+                    return {name: 'Seleccion Periodo'}
+                }
+            }
         },
         {
             path: '/:pathMatch(.*)',

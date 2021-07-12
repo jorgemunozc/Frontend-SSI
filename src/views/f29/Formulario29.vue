@@ -1,5 +1,5 @@
 <template>
-  <div class="f29">
+  <div class="f29 text-xs">
     <div class="f29__seccion">
       <header-formulario :folio="folio" :rut="datosEmpresa.rut" :month="periodo.month" :year="periodo.year"/>
     </div>

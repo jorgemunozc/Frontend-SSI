@@ -1,13 +1,23 @@
 <template>
-    <div class="three wide column">
+    <div class="container">
       <Navbar />
     </div>
-  <div class="twelve wide column">
-    <div class="row">
-      <router-link to="f29-seleccion">Declarar IVA (F29)</router-link>
+  <div class="mx-4 max-w-xl">
+    <div class="border px-4 my-4 hover:bg-gray-200">
+      <router-link 
+        to="f29-declarar-seleccion" 
+        class="w-full block"
+      >
+        Declarar IVA (F29)
+      </router-link>
     </div>
-    <div class="row">
-      <router-link to="f29-consulta">Consulta F29</router-link>
+    <div class="border px-4 my-4 hover:bg-gray-200">
+      <router-link 
+        to="f29-consulta"
+        class="block w-full"
+      >
+        Consulta F29
+      </router-link>
     </div>
   </div>
 </template>

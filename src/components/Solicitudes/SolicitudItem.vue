@@ -8,18 +8,18 @@
   <td>
     <div>{{ solicitud.correo }}</div>
   </td>
-  <td>
+  <td class="text-center">
     <button
-      class="tiny ui dark teal button"
+      class="w-8 bg-green-700 text-white mx-2 rounded"
       @click="aceptarSolicitud"
     >
-      Aceptar
+      <i class="pi pi-check"></i>
     </button>
     <button
-      class="tiny ui red button"
+      class="w-8 bg-red-700 text-white mx-2 rounded"
       @click="rechazarSolicitud"
     >
-      Rechazar
+      <i class="pi pi-times"></i>
     </button>
   </td>
 </template>

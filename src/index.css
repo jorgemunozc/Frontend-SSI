@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.error input{
+  @apply border-red-600 text-red-900
+}
+
+.error-alert {
+  @apply border-red-600 text-red-900 bg-red-100 my-4
+}
+
+.success-alert {
+  @apply border-green-600 text-green-700 bg-green-50 my-4
+}

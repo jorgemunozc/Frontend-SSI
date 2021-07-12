@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import { getDominios } from "@/services/DominioService";
 
 export default defineComponent({
@@ -28,7 +28,7 @@ export default defineComponent({
       dominios,
       selected,
     };
-  },
+  }
 });
 </script>
 
