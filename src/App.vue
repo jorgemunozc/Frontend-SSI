@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto h-full font-sans">
+  <div class="h-screen container mx-auto font-sans flex flex-col">
     <div class="container">
       <Header />
     </div>
