@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full flex flex-col mt-8 md:my-16">
+  <div class="flex flex-col pt-8 md:py-16">
     <div class="px-12 py-6 flex flex-col w-full self-center max-w-lg rounded border border-gray-200 md:px-8">
       <h2 class="mx-auto uppercase text-blue-500 font-semibold">
         Ingresar a Sistema
