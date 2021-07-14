@@ -1,19 +1,19 @@
 import { API_HOST } from '../config';
 import axios from 'axios';
 
-import { removeAdmin, removeLoggedIn } from '@/auth/unsetAuth'; 
+import { removeAdmin, removeLoggedIn } from '@/auth/unsetAuth';
 import router from '@/router';
 
 function init(): void {
     axios.defaults.withCredentials = true;
     axios.defaults.baseURL = API_HOST;
 
-    axios.interceptors.response.use((response) => response, function (error){
-        if(error.response.status == 401){
-            console.log('removiendo cookies')
+    axios.interceptors.response.use((response) => response, function (error) {
+        const errorCode = error.response.status;
+        if (errorCode === 401 || errorCode === 419) {
             removeLoggedIn();
             removeAdmin();
-            router.push({name: 'Login'});
+            router.push({ name: 'Login' });
         }
         return Promise.reject(error);
     });
@@ -44,4 +44,4 @@ function deleteResource(resource: string, id: number | string): Promise<Object> 
     return axios.delete(`${resource}/${id}`);
 }
 
-export {get, post, update, deleteResource, init as initAxios};
+export { get, post, update, deleteResource, init as initAxios };
