@@ -8,10 +8,10 @@
         justify-between
         w-full
         p-2
-        bg-red-500
         shadow
         text-white
       "
+      :class="type === 'error'? 'bg-red-700': 'bg-green-700'"
     >
       <span class="flex-grow text-center">{{ mensaje }}</span>
       <label class="close cursor-pointer" title="close" for="footeralert">
@@ -37,6 +37,10 @@ export default defineComponent({
   props: {
     mensaje: String,
     isOpen: Boolean,
+    type: {
+      type: String,
+      default: 'error'
+    }
   },
   emits: ['update:isOpen'],
 });
