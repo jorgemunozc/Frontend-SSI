@@ -2,7 +2,7 @@
 <div class="container">
   <Navbar />
 </div>
-  <div class="container mx-2 overflow-x-scroll">
+  <div class="container mx-2 overflow-x-auto h-5/6">
     <Formulario29
       :folio="folio"
       :editable="false"

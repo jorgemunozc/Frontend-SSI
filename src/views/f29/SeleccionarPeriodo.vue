@@ -111,8 +111,8 @@ export default defineComponent({
       buscarF29(periodoTributario)
       .then((res) => {
         if (res.estado === 'ENVIADO') {
-          console.error('Declaracion de mes seleccionado ya fue enviada. No se puede modificar');
-          errorMsg.value = 'Declaracion de mes seleccionado ya fue enviada. No se puede modificar';
+          console.error('Declaración de mes seleccionado ya fue enviada. No se puede modificar');
+          errorMsg.value = 'Declaración de mes seleccionado ya fue enviada. No se puede modificar';
           return;
         }
         f29Store.loadData(res);

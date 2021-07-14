@@ -2,11 +2,11 @@
   <div class="container">
     <Navbar />
   </div>
-  <div class="container">
+  <div class="container h-2/4 flex flex-col flex-grow">
     <h3 class="text-blue-700 font-semibold text-center px-4 mb-4">
       INGRESO DE DECLARACION MENSUAL Y PAGO DE IMPUESTOS EN FORMULARIO 29
     </h3>
-    <div class="f29-wrapper">
+    <div class="f29-wrapper flex-grow">
       <Formulario29
         :folio="folio"
         :datosEmpresa="empresa"
@@ -15,34 +15,37 @@
     </div>
     <div class="f29__botones">
       <button
-        class="bg-blue-700 hover:bg-blue-800 text-white rounded px-4 h-8"
+        class="w-20 flex justify-center items-center bg-blue-700 hover:bg-blue-800 text-white rounded px-4 h-8"
         @click="mostrarConfirmacion"
       >
         Enviar
       </button>
       <button
-        class="bg-blue-700 hover:bg-blue-800 text-white rounded px-4 h-8"
+        class="w-20 flex justify-center items-center bg-blue-700 hover:bg-blue-800 text-white rounded px-4 h-8"
         @click="guardarFormulario"
       >
-        Guardar
+        <LoadingSpinner v-if="isSaving"/>
+        <span v-else>Guardar</span>
       </button>
       <button
-        class="bg-yellow-400 hover:bg-yellow-500 text-white rounded px-4 h-8"
+        class="w-20 flex justify-center items-center bg-yellow-400 hover:bg-yellow-500 text-white rounded px-4 h-8"
         @click="limpiarForm"
       >
         Borrar
       </button>
     </div>
+    <AlertBase v-if="showAlert" :type="alertType" :mensaje="alertMsg" v-model:isOpen="showAlert"/>
+
     <div class="popup-bg" v-if="showPopUp">
       <div class="popup-wrapper">
         <div v-if="showRedirect" class="text-center">
-          <h2 class="text-lg font-bold">Formulario enviado exitosamente</h2>
+          <h2 class="text-base sm:text-lg font-bold">Formulario enviado exitosamente</h2>
           <p>Redirigiendo...</p>
-          <LoadingSpinner class="w-full" />
+          <LoadingSpinner />
         </div>
         <div v-else>
-          <h2 class="text-center font-bold text-lg">{{ title }}</h2>
-          <p class="text-center">{{ msg }}</p>
+          <h2 class="text-center font-bold text-sm sm:text-lg">{{ title }}</h2>
+          <p class="text-center text-xs sm:text-base">{{ msg }}</p>
           <div class="flex justify-center mt-4">
             <button
               class="
@@ -56,7 +59,7 @@
               "
               @click="enviarFormulario"
             >
-              <LoadingSpinner v-if="isLoading" class="w-full" />
+              <LoadingSpinner v-if="isLoading" />
               <span v-else>Aceptar</span>
             </button>
             <button
@@ -81,10 +84,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
+import { defineComponent, ref, reactive, computed } from "vue";
 import Formulario29 from "@/views/f29/Formulario29.vue";
 import Navbar from "@/components/Navbar.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
+import AlertBase from '@/components/AlertBase.vue';
 import { obtenerDatosEmpresa } from "@/utils/loadUserData";
 import store from "@/store";
 import { guardarF29, actualizarF29 } from "@/services/F29Service";
@@ -96,17 +100,22 @@ export default defineComponent({
     Formulario29,
     Navbar,
     LoadingSpinner,
+    AlertBase,
   },
   props: ["month", "year"],
   setup(props) {
     const f29Store = store;
     const f29Data = store.state;
     const router = useRouter();
-    let puedeInsertar = false;
-    const folio = f29Data.folio;
+    let puedeInsertar = false;//Verifica si puede crear un nuevo formulario
+    const folio = computed(() => f29Data.folio);
     const estadof29 = f29Store.state.estado;
     const isLoading = ref(false);
+    const isSaving = ref(false);
     const showRedirect = ref(false);
+    const showAlert = ref(false);
+    const alertType = ref('normal');
+    const alertMsg = ref('');
     const periodoTributario = `${props.year}-${
       props.month < 10 ? "0" + props.month : props.month
     }-01`;
@@ -120,7 +129,7 @@ export default defineComponent({
 
     obtenerDatosEmpresa(empresa);
 
-    if (folio === 0 && typeof estadof29 == "undefined") {
+    if (folio.value === 0 && typeof estadof29 == "undefined") {
       puedeInsertar = true;
     }
     if (puedeInsertar) {
@@ -132,14 +141,24 @@ export default defineComponent({
     const enviarFormulario = function () {
       isLoading.value = true;
       if (puedeInsertar) {
-        guardarF29(f29Data, "ENVIADO", periodoTributario).then((res) => {
+        guardarF29(f29Data, "ENVIADO", periodoTributario)
+        .then((res) => {
           f29Store.setValue('folio', res.folio);
           puedeInsertar = false;
           mostrarRedireccion();
           redirigirAComprobante();
+        })
+        .catch((err) => {
+            if (err.response.status === 400) {
+              const errorMsg  = err.response.data.error;
+              cerrarConfirmacion();
+              mostrarAlerta(errorMsg, true);
+            } else {
+              console.error(err.response.data);
+            }
         });
       } else {
-        actualizarF29(f29Data, folio, "ENVIADO").then(() => {
+        actualizarF29(f29Data, folio.value, "ENVIADO").then(() => {
           puedeInsertar = false;
           mostrarRedireccion();
           redirigirAComprobante();
@@ -148,10 +167,30 @@ export default defineComponent({
     };
 
     const guardarFormulario = function () {
+      isSaving.value = true;
       if (puedeInsertar) {
-        guardarF29(f29Data, "GUARDADO", periodoTributario);
+        guardarF29(f29Data, "GUARDADO", periodoTributario)
+        .then((res) => {
+          f29Store.setValue('folio', res.folio);
+          puedeInsertar = false;
+          mostrarAlerta('Formulario guardado correctamente.', false);
+        })
+        .catch((err) => {
+            if (err.response.status === 400) {
+              const errorMsg  = err.response.data.error;
+              cerrarConfirmacion();
+              mostrarAlerta(errorMsg, true);
+            } else {
+              console.error(err.response.data);
+            }
+        })
+        .finally(() => isSaving.value = false);
       } else {
-        actualizarF29(f29Data, folio, "GUARDADO");
+        actualizarF29(f29Data, folio.value, "GUARDADO")
+        .then(() => {
+          mostrarAlerta('Formulario guardado correctamente.', false);
+        })
+        .finally(() => isSaving.value = false);
       }
     };
 
@@ -161,7 +200,12 @@ export default defineComponent({
     const title = "¿Está seguro que desea enviar declaración de impuestos?";
     const msg =
       "Una vez enviada la declaración no podrá realizar modificaciones.";
-    const mostrarConfirmacion = () => (showPopUp.value = true);
+    const mostrarConfirmacion = () => {
+      if (isLoading.value === true) {
+        isLoading.value = false;
+      }
+      showPopUp.value = true;
+    };
 
     const cerrarConfirmacion = () => (showPopUp.value = false);
     const mostrarRedireccion = () => (showRedirect.value = true);
@@ -171,6 +215,16 @@ export default defineComponent({
         router.push("f29-comprobante");
       }, 3000);
     };
+
+    const mostrarAlerta = function (msg: string, isError: boolean) {
+      if (isError) {
+        alertType.value = "error";
+      } else {
+        alertType.value = "normal";
+      }
+      alertMsg.value = msg;
+      showAlert.value = true;
+    }
 
     return {
       limpiarForm,
@@ -188,6 +242,10 @@ export default defineComponent({
       folio,
       periodoTributario,
       isLoading,
+      showAlert,
+      alertType,
+      alertMsg,
+      isSaving,
     };
   },
 });
@@ -196,7 +254,7 @@ export default defineComponent({
 <style scoped>
 .f29__botones {
   width: 90%;
-  margin: 2rem auto;
+  margin: 1rem auto;
   display: flex;
   justify-content: space-around;
 }
@@ -217,14 +275,18 @@ export default defineComponent({
 .popup-wrapper {
   position: relative;
   top: 50%;
-  left: 20%;
-  width: 60%;
-  max-width: 600px;
+  width: 300px;
   z-index: 997;
   background-color: white;
   cursor: default;
   padding: 10px;
-  margin: 0;
+  margin: 0 auto;
   box-shadow: 1px 1px 8px 2px rgb(104, 101, 101);
+}
+
+@media screen and (min-width: 640px) {
+  .popup-wrapper {
+   width: 600px;
+  }
 }
 </style>

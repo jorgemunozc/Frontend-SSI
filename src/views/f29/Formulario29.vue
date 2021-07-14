@@ -1,52 +1,57 @@
 <template>
   <div class="f29 text-xs">
     <div class="f29__seccion">
-      <header-formulario :folio="folio" :rut="datosEmpresa.rut" :month="periodo.month" :year="periodo.year"/>
+      <header-formulario
+        :folio="folio"
+        :rut="datosEmpresa.rut"
+        :month="periodo.month"
+        :year="periodo.year"
+      />
     </div>
     <div class="f29__seccion">
-      <info-empresa :razonSocial="datosEmpresa.razonSocial"/>
+      <info-empresa :razonSocial="datosEmpresa.razonSocial" />
     </div>
     <div class="f29__seccion">
       <div class="f29__seccion__header">D&Eacute;BITOS Y VENTAS</div>
-      <debitos-y-ventas />
+      <debitos-y-ventas :editable="editable" />
     </div>
     <div class="f29__seccion">
       <div class="f29__seccion__header">CR&Eacute;DITOS Y COMPRAS</div>
-      <compras-y-creditos />
+      <compras-y-creditos :editable="editable" />
     </div>
     <div class="f29__seccion">
       <impuesto-determinado />
     </div>
     <div class="f29__seccion">
       <div class="f29__seccion__header">IMPUESTO A LA RENTA D.L. 824/74</div>
-      <impuesto-renta />
+      <impuesto-renta :editable="editable" />
     </div>
     <div class="f29__seccion">
       <subtotal-impuesto-determinado />
     </div>
     <div class="f29__seccion">
       <div class="f29__seccion__header">TRIBUTACI&Oacute;N SIMPLIFICADA</div>
-      <tributacion-simplificada />
+      <tributacion-simplificada :editable="editable" />
     </div>
     <div class="f29__seccion">
       <div class="f29__seccion__header">
         IMPUESTO ADICIONAL ART. 37 D.L. 825/74
       </div>
-      <impuesto-ad-37 />
+      <impuesto-ad-37 :editable="editable" />
     </div>
     <div class="f29__seccion">
       <div class="f29__seccion__header">
         IMPUESTO ADICIONAL ART. 42 D.L. 825
       </div>
-      <impuesto-ad-42 />
+      <impuesto-ad-42 :editable="editable" />
     </div>
     <div class="f29__seccion">
       <div class="f29__seccion__header">CAMBIO SUJETO D.L. 825</div>
-      <cambio-sujeto />
+      <cambio-sujeto :editable="editable" />
     </div>
     <div class="f29__seccion">
       <div class="f29__seccion__header">CR&Eacute;DITOS ESPECIALES</div>
-      <creditos-especiales />
+      <creditos-especiales :editable="editable" />
     </div>
     <div class="f29__seccion">
       <total-determinado />
@@ -55,7 +60,7 @@
       <div class="f29__seccion__header">
         REMANENTE CR&Eacute;DITOS ESPECIALES
       </div>
-      <remanente-creditos-esp />
+      <remanente-creditos-esp :editable="editable" />
     </div>
     <div class="f29__seccion">
       <totales-formulario />
@@ -64,10 +69,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent } from "vue";
 
 import HeaderFormulario from "@/components/F29/HeaderFormulario.vue";
-import InfoEmpresa from '@/components/F29/InfoEmpresa.vue';
+import InfoEmpresa from "@/components/F29/InfoEmpresa.vue";
 import DebitosYVentas from "@/components/F29/DebitosYVentas.vue";
 import ComprasYCreditos from "@/components/F29/CreditosYCompras.vue";
 import ImpuestoDeterminado from "@/components/F29/ImpuestoDeterminado.vue";
@@ -106,12 +111,12 @@ export default defineComponent({
     periodo: Object,
     editable: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 });
 </script>
 
-<style>
+<style scoped>
 @import "~@/assets/styles/f29.css";
 </style>

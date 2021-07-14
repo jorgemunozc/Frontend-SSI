@@ -7,10 +7,10 @@
       <thead>
         <tr>
           <td rowspan="2" class="bg-gray-300">Mes</td>
-          <td colspan="10" class="bg-gray-300">Per&iacute;odos Tributarios</td>
+          <td colspan="10" class="bg-gray-300 text-center">Per&iacute;odos Tributarios</td>
         </tr>
         <tr>
-          <td v-if="isLoading"><Loading-spinner class="w-full"/></td>
+          <td v-if="isLoading"><Loading-spinner /></td>
           <td v-for="year in years" :key="year" class="bg-blue-100 text-center">{{ year }}</td>
         </tr>
       </thead>
@@ -29,11 +29,11 @@
         <tr>
           <td>
             <span class="opacity-0">Septiembre</span>
-            <LoadingSpinner class="w-full"/>
+            <LoadingSpinner />
           </td>
           <td class="h-80" colspan="99">
             <div>
-              <LoadingSpinner class="w-full"/>
+              <LoadingSpinner />
             </div>
           </td>
         </tr>
