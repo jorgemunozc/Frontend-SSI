@@ -17,6 +17,7 @@
           type="text"
           class="f29__input"
           maxlength="12"
+          :disabled="!editable"
         >
       </td>
       <td class="celda-signo" />
@@ -38,6 +39,7 @@
           type="text"
           class="f29__input"
           maxlength="12"
+          :disabled="!editable"
         >
       </td>
       <td class="celda-signo" />
@@ -59,6 +61,7 @@
           type="text"
           class="f29__input"
           maxlength="12"
+          :disabled="!editable"
         >
       </td>
       <td class="celda-signo" />
@@ -80,6 +83,7 @@
           type="text"
           class="f29__input"
           maxlength="12"
+          :disabled="!editable"
         >
       </td>
       <td class="celda-signo" />
@@ -102,6 +106,7 @@
           type="text"
           class="f29__input"
           maxlength="12"
+          :disabled="!editable"
         >
       </td>
       <td class="celda-signo" />
@@ -114,6 +119,7 @@ import store from "@/store";
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  props: ['editable'],
   setup() {
     const datos = store.state;
 

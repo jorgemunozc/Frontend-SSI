@@ -18,6 +18,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -48,6 +49,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -102,6 +104,7 @@
                   type="text"
                   class="f29__input"
                   maxlength="12"
+                  :disabled="!editable"
                 >
               </td>
               <td>
@@ -110,6 +113,7 @@
                   type="text"
                   class="f29__input"
                   maxlength="12"
+                  :disabled="!editable"
                 >
               </td>
             </tr>
@@ -124,6 +128,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -148,6 +153,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -171,6 +177,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -194,6 +201,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -217,6 +225,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -240,6 +249,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -263,6 +273,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -312,6 +323,7 @@
           <input
             v-model="datos.cod750"
             type="checkbox"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -323,6 +335,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -334,6 +347,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -345,6 +359,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -356,6 +371,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -367,6 +383,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -390,6 +407,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -401,6 +419,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -412,6 +431,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -423,6 +443,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -434,6 +455,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -457,6 +479,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -468,6 +491,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -479,6 +503,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -490,6 +515,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -501,6 +527,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -525,6 +552,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -567,6 +595,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -578,6 +607,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -589,6 +619,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td colspan="2">
@@ -626,6 +657,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -649,6 +681,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -664,6 +697,7 @@ import store from "@/store";
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  props: ['editable'],
   setup() {
     const datos = store.state;
     return {

@@ -36,6 +36,8 @@
             v-model.lazy="datos.cod511"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -46,6 +48,8 @@
             v-model.lazy="datos.cod514"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
       </tr>
@@ -81,6 +85,8 @@
             v-model.lazy="datos.cod564"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -91,6 +97,8 @@
             v-model.lazy="datos.cod521"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
       </tr>
@@ -109,6 +117,8 @@
             v-model.lazy="datos.cod566"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -119,6 +129,8 @@
             v-model.lazy="datos.cod560"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
       </tr>
@@ -137,6 +149,8 @@
             v-model.lazy="datos.cod584"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -147,6 +161,8 @@
             v-model.lazy="datos.cod562"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
       </tr>
@@ -188,6 +204,8 @@
             v-model.lazy="datos.cod519"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -198,6 +216,8 @@
             v-model.lazy="datos.cod520"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -221,6 +241,8 @@
             v-model.lazy="datos.cod761"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -231,6 +253,8 @@
             v-model.lazy="datos.cod762"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -254,6 +278,8 @@
             v-model.lazy="datos.cod765"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -264,6 +290,8 @@
             v-model.lazy="datos.cod766"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -286,6 +314,8 @@
             v-model.lazy="datos.cod524"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -296,6 +326,8 @@
             v-model.lazy="datos.cod525"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -319,6 +351,8 @@
             v-model.lazy="datos.cod527"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -329,6 +363,8 @@
             v-model.lazy="datos.cod528"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -352,6 +388,8 @@
             v-model.lazy="datos.cod531"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -362,6 +400,8 @@
             v-model.lazy="datos.cod532"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -390,6 +430,8 @@
             v-model.lazy="datos.cod534"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -400,6 +442,8 @@
             v-model.lazy="datos.cod535"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -421,6 +465,8 @@
             v-model.lazy="datos.cod536"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-codigo">
@@ -431,6 +477,8 @@
             v-model.lazy="datos.cod553"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -452,6 +500,8 @@
             v-model.lazy="datos.cod504"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -473,6 +523,8 @@
             v-model.lazy="datos.cod593"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -494,6 +546,8 @@
             v-model.lazy="datos.cod594"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -515,6 +569,8 @@
             v-model.lazy="datos.cod592"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -536,6 +592,8 @@
             v-model.lazy="datos.cod539"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -559,6 +617,8 @@
             v-model.lazy="datos.cod718"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -581,6 +641,8 @@
             v-model.lazy="datos.cod164"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -627,6 +689,8 @@
             v-model.lazy="datos.cod730"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td>Base</td>
@@ -638,6 +702,8 @@
             v-model.lazy="datos.cod742"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td
@@ -651,6 +717,8 @@
             v-model.lazy="datos.cod127"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td
@@ -671,6 +739,8 @@
             v-model.lazy="datos.cod743"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
       </tr>
@@ -697,6 +767,8 @@
             v-model.lazy="datos.cod729"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td>Base</td>
@@ -708,6 +780,8 @@
             v-model.lazy="datos.cod744"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td
@@ -721,6 +795,8 @@
             v-model.lazy="datos.cod544"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td
@@ -741,6 +817,8 @@
             v-model.lazy="datos.cod745"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
       </tr>
@@ -761,6 +839,8 @@
             v-model.lazy="datos.cod523"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -783,6 +863,8 @@
             v-model.lazy="datos.cod712"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -805,6 +887,8 @@
             v-model.lazy="datos.cod757"
             type="text"
             class="f29__input"
+            maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -843,6 +927,7 @@ import store from "@/store";
 import { parseNumber } from "@/utils/numbers";
 
 export default defineComponent({
+  props: ['editable'],
   setup() {
     const datos = store.state;
     return {

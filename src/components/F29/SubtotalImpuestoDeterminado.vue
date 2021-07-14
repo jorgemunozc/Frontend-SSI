@@ -29,7 +29,7 @@
 <script lang="ts">
 import store from "@/store";
 import { parseNumber } from "@/utils/numbers";
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   setup() {

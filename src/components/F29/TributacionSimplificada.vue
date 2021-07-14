@@ -27,6 +27,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
       </tr>
@@ -47,6 +48,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
       </tr>
@@ -84,6 +86,7 @@ import { parseNumber } from "@/utils/numbers";
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  props: ['editable'],
   setup() {
     const datos = store.state;
     return {

@@ -17,6 +17,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -39,6 +40,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -62,6 +64,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -85,6 +88,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -108,6 +112,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -130,6 +135,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -153,6 +159,7 @@
             type="text"
             class="f29__input"
             maxlength="12"
+            :disabled="!editable"
           >
         </td>
         <td class="celda-signo">
@@ -207,6 +214,7 @@ import { parseNumber } from "@/utils/numbers";
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({
+  props: ['editable'],
   setup() {
     const datos = store.state;
     return {
