@@ -1,13 +1,13 @@
 <template>
-  <div class="container">
-    <div>
-      <Navbar />
-    </div>
-    <div class="md:ml-48 p-2">
+  <div class="container overflow-hidden">
+    <Navbar class="md:h-full"/>
+    <div class="flex flex-col md:ml-48 p-2 h-full">
       <h1 class="text-blue-700 font-semibold text-2xl mb-4">
         Gesti&oacute;n de Solicitudes de Ingreso a Plataforma
       </h1>
-      <SolicitudList />
+      <div class="overflow-y-auto">
+        <SolicitudList />
+      </div>
     </div>
   </div>
 </template>

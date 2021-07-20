@@ -1,22 +1,22 @@
 <template>
-  <table class="w-full max-w-4xl">
-    <thead>
+  <table class="w-full max-w-4xl xl:mx-auto border">
+    <thead class="h-12">
       <tr>
         <!-- <th><input type="checkbox" v-model="isChecked" @checked="checkAll"></th> -->
-        <th class="w-3/12">Empresa</th>
-        <th class="w-4/12">Giro</th>
-        <th class="w-3/12">Correo</th>
-        <th class="w-2/12"/>
+        <th class="w-3/12 sticky top-0 bg-white border-0 border-r border-gray-300 bg-blue-200 z-20">Empresa</th>
+        <th class="w-4/12 sticky top-0 bg-white border-0 border-r border-gray-300 bg-blue-200 z-20">Giro</th>
+        <th class="w-3/12 sticky top-0 bg-white border-0 border-r border-gray-300 bg-blue-200 z-20">Correo</th>
+        <th class="w-2/12 sticky top-0 bg-white border-0 bg-blue-200 z-20"/>
       </tr>
     </thead>
     <tbody>
       <tr v-if="typeof solicitudes == 'undefined' || solicitudes.length === 0">
-        <td colspan="4" class="text-center">Sin solicitudes pendientes por procesar.</td>
+        <td colspan="4" class="text-center border-0 h-16">Sin solicitudes pendientes por procesar.</td>
       </tr>
       <tr
         v-for="(solicitud, index) in solicitudes"
         :key="solicitud.id"
-        class="hover:bg-gray-100 cursor-default"
+        class="hover:bg-gray-200 hover:bg-opacity-50 cursor-default border-b border-t h-12 max-h-12 overflow-y-hidden relative"
       >
         <!-- <td>
           <input type="checkbox" v-model="selectedRows" :value="index">
@@ -30,22 +30,18 @@
       </tr>
     </tbody>
   </table>
-  <div
-    v-if="hasMessage"
-    class="ui message"
-    :class="{ 'error': hasError }"
-  >
-    {{ message }}
-  </div>
+  <AlertBase :mensaje="message" v-if="hasMessage" v-model:isOpen="hasMessage" class="container alert-solicitud"/>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import SolicitudItem from "@/components/solicitudes/SolicitudItem.vue";
+import AlertBase from '@/components/AlertBase.vue';
 import { listaSolicitudes } from "@/services/SolicitudService";
 
 export default defineComponent({
   components: {
     SolicitudItem,
+    AlertBase,
   },
   setup() {
     const solicitudes = ref();
@@ -59,7 +55,6 @@ export default defineComponent({
       solicitudes.value = await listaSolicitudes();
     };
     const removeItem = (index) => {
-      console.log(index);
       solicitudes.value.splice(index, 1);
     };
 
@@ -72,7 +67,6 @@ export default defineComponent({
 
     const displayMessage = (data: MessageData) => {
       hasMessage.value = true;
-      let displayTime = 2000;
       let msg = "";
       if (data.type === "error") {
         hasError.value = true;
@@ -83,11 +77,6 @@ export default defineComponent({
         }
       }
       message.value = msg;
-      setTimeout(() => {
-        hasError.value = false;
-        hasMessage.value = false;
-        message.value = "";
-      }, displayTime);
     };
 
     
@@ -108,3 +97,10 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+  .alert-solicitud {
+    left: 50%;
+    transform: translate(-50%,0);
+  }
+</style>

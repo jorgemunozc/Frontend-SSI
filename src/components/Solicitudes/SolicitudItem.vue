@@ -1,35 +1,54 @@
 <template>
-  <td>
+  <td class="border-0 border-r border-gray-300">
     <div>{{ solicitud.razon_social }}</div>
   </td>
-  <td>
+  <td class="border-0 border-r border-gray-300">
     <div>{{ solicitud.giro }}</div>
   </td>
-  <td>
+  <td class="border-0 border-r border-gray-300">
     <div>{{ solicitud.correo }}</div>
   </td>
-  <td class="text-center">
+  <td class="text-center border-0 border-gray-300">
     <button
-      class="w-8 bg-green-700 text-white mx-2 rounded"
+      class="w-8 bg-green-600 hover:bg-green-800 text-white mx-2 rounded"
       @click="aceptarSolicitud"
     >
       <i class="pi pi-check"></i>
     </button>
     <button
-      class="w-8 bg-red-700 text-white mx-2 rounded"
+      class="w-8 bg-red-600 hover:bg-red-800 text-white mx-2 rounded"
       @click="rechazarSolicitud"
     >
       <i class="pi pi-times"></i>
     </button>
+    <div
+    v-if="isProcessing"
+      class="
+        absolute
+        top-0
+        left-0
+        h-full
+        w-full
+        bg-gray-200
+        z-10
+        flex
+        items-center
+        justify-center
+        bg-opacity-60
+      "
+    >
+      <LoadingSpinner />
+    </div>
   </td>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, ref } from "vue";
 import { modificarSolicitud } from "@/services/SolicitudService";
 import { crearEmpresa, eliminarEmpresa } from "@/services/EmpresaService";
 import { crearUsuario } from "@/services/AuthService";
 import Estado from "@/types/enums/Estado";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
 
 const enum Acciones {
   APROBAR_SOLICITUD,
@@ -39,6 +58,9 @@ const enum Acciones {
 
 export default defineComponent({
   name: "SolicitudItem",
+  components: {
+    LoadingSpinner,
+  },
   props: {
     solicitud: {
       type: Object as PropType<Solicitud>,
@@ -47,11 +69,14 @@ export default defineComponent({
   },
   emits: ["itemChanged:approved", "itemChanged:rejected", "newMessage"],
   setup(props, { emit }) {
+    const isProcessing = ref(false);
+
     const aceptarSolicitud = () => {
       //Arreglo donde se mantendra las acciones ejecutadas exitosamente
       //en caso de necesitar hacer un rollback.
       const colaAcciones: Acciones[] = [];
       const dataAcciones: { [key: number]: number } = [];
+      isProcessing.value = true;
 
       modificarSolicitud(props.solicitud.id, "APROBADO")
         .then(() => {
@@ -88,6 +113,9 @@ export default defineComponent({
           }
           console.log(err.response.data.errors);
           sendMessage("error", err.response.data.errors);
+        })
+        .finally(() => {
+          isProcessing.value = false;
         });
     };
     const rechazarSolicitud = () => {
@@ -107,6 +135,7 @@ export default defineComponent({
     return {
       rechazarSolicitud,
       aceptarSolicitud,
+      isProcessing,
     };
   },
 });
