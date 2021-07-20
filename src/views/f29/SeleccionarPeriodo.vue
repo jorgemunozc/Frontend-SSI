@@ -46,7 +46,7 @@
       </div>
     </div>
   </div>
-  <AlertBase v-if="errorMsg" :mensaje="errorMsg" v-model:isOpen="errorMsg"/>
+  <AlertBase v-if="errorMsg" :mensaje="errorMsg" v-model:isOpen="errorMsg" class="container"/>
 </template>
 <script lang="ts">
 /**
@@ -55,7 +55,7 @@
  */
 import { defineComponent, ref } from 'vue'
 import { buscarF29 } from '@/services/F29Service';
-import store from '@/store';
+import store from '@/store/f29.module';
 import { useRouter } from 'vue-router';
 import Navbar from '@/components/Navbar.vue';
 import AlertBase from '@/components/AlertBase.vue';

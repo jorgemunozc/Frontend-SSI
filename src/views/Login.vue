@@ -35,7 +35,7 @@
       <span>¿No tiene cuenta? Reg&iacute;strese
         <router-link to="registro" class="text-blue-600 hover:text-blue-400">aqu&iacute;</router-link></span>
     </div>
-    <AlertBase  v-if="hasError" :mensaje="mensaje" v-model:isOpen="hasError"/>
+    <AlertBase  v-if="hasError" :mensaje="mensaje" v-model:isOpen="hasError" class="container"/>
   </div>
 </template>
 <script lang="ts">

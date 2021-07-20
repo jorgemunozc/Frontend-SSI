@@ -15,31 +15,72 @@
     </div>
     <div class="f29__botones">
       <button
-        class="w-20 flex justify-center items-center bg-blue-700 hover:bg-blue-800 text-white rounded px-4 h-8"
+        class="
+          w-20
+          flex
+          justify-center
+          items-center
+          bg-blue-700
+          hover:bg-blue-800
+          text-white
+          rounded
+          px-4
+          h-8
+        "
         @click="mostrarConfirmacion"
       >
         Enviar
       </button>
       <button
-        class="w-20 flex justify-center items-center bg-blue-700 hover:bg-blue-800 text-white rounded px-4 h-8"
+        class="
+          w-20
+          flex
+          justify-center
+          items-center
+          bg-blue-700
+          hover:bg-blue-800
+          text-white
+          rounded
+          px-4
+          h-8
+        "
         @click="guardarFormulario"
       >
-        <LoadingSpinner v-if="isSaving"/>
+        <LoadingSpinner v-if="isSaving" />
         <span v-else>Guardar</span>
       </button>
       <button
-        class="w-20 flex justify-center items-center bg-yellow-400 hover:bg-yellow-500 text-white rounded px-4 h-8"
+        class="
+          w-20
+          flex
+          justify-center
+          items-center
+          bg-yellow-400
+          hover:bg-yellow-500
+          text-white
+          rounded
+          px-4
+          h-8
+        "
         @click="limpiarForm"
       >
         Borrar
       </button>
     </div>
-    <AlertBase v-if="showAlert" :type="alertType" :mensaje="alertMsg" v-model:isOpen="showAlert"/>
+    <AlertBase
+      v-if="showAlert"
+      :type="alertType"
+      :mensaje="alertMsg"
+      v-model:isOpen="showAlert"
+      class="container"
+    />
 
     <div class="popup-bg" v-if="showPopUp">
       <div class="popup-wrapper">
         <div v-if="showRedirect" class="text-center">
-          <h2 class="text-base sm:text-lg font-bold">Formulario enviado exitosamente</h2>
+          <h2 class="text-base sm:text-lg font-bold">
+            Formulario enviado exitosamente
+          </h2>
           <p>Redirigiendo...</p>
           <LoadingSpinner />
         </div>
@@ -88,9 +129,9 @@ import { defineComponent, ref, reactive, computed } from "vue";
 import Formulario29 from "@/views/f29/Formulario29.vue";
 import Navbar from "@/components/Navbar.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
-import AlertBase from '@/components/AlertBase.vue';
+import AlertBase from "@/components/AlertBase.vue";
 import { obtenerDatosEmpresa } from "@/utils/loadUserData";
-import store from "@/store";
+import store from "@/store/f29.module";
 import { guardarF29, actualizarF29 } from "@/services/F29Service";
 import { useRouter } from "vue-router";
 
@@ -107,15 +148,15 @@ export default defineComponent({
     const f29Store = store;
     const f29Data = store.state;
     const router = useRouter();
-    let puedeInsertar = false;//Verifica si puede crear un nuevo formulario
+    let puedeInsertar = false; //Verifica si puede crear un nuevo formulario
     const folio = computed(() => f29Data.folio);
     const estadof29 = f29Store.state.estado;
     const isLoading = ref(false);
     const isSaving = ref(false);
     const showRedirect = ref(false);
     const showAlert = ref(false);
-    const alertType = ref('normal');
-    const alertMsg = ref('');
+    const alertType = ref("normal");
+    const alertMsg = ref("");
     const periodoTributario = `${props.year}-${
       props.month < 10 ? "0" + props.month : props.month
     }-01`;
@@ -142,27 +183,37 @@ export default defineComponent({
       isLoading.value = true;
       if (puedeInsertar) {
         guardarF29(f29Data, "ENVIADO", periodoTributario)
-        .then((res) => {
-          f29Store.setValue('folio', res.folio);
-          puedeInsertar = false;
-          mostrarRedireccion();
-          redirigirAComprobante();
-        })
-        .catch((err) => {
+          .then((res) => {
+            f29Store.setValue("folio", res.folio);
+            puedeInsertar = false;
+            mostrarRedireccion();
+            redirigirAComprobante();
+          })
+          .catch((err) => {
             if (err.response.status === 400) {
-              const errorMsg  = err.response.data.error;
+              const errorMsg = err.response.data.error;
               cerrarConfirmacion();
               mostrarAlerta(errorMsg, true);
             } else {
               console.error(err.response.data);
             }
-        });
+          });
       } else {
-        actualizarF29(f29Data, folio.value, "ENVIADO").then(() => {
-          puedeInsertar = false;
-          mostrarRedireccion();
-          redirigirAComprobante();
-        });
+        actualizarF29(f29Data, folio.value, "ENVIADO")
+          .then(() => {
+            puedeInsertar = false;
+            mostrarRedireccion();
+            redirigirAComprobante();
+          })
+          .catch((err) => {
+            if (err.response.status === 400) {
+              const errorMsg = err.response.data.error;
+              cerrarConfirmacion();
+              mostrarAlerta(errorMsg, true);
+            } else {
+              console.error(err.response.data);
+            }
+          });
       }
     };
 
@@ -170,27 +221,34 @@ export default defineComponent({
       isSaving.value = true;
       if (puedeInsertar) {
         guardarF29(f29Data, "GUARDADO", periodoTributario)
-        .then((res) => {
-          f29Store.setValue('folio', res.folio);
-          puedeInsertar = false;
-          mostrarAlerta('Formulario guardado correctamente.', false);
-        })
-        .catch((err) => {
+          .then((res) => {
+            f29Store.setValue("folio", res.folio);
+            puedeInsertar = false;
+            mostrarAlerta("Formulario guardado correctamente.", false);
+          })
+          .catch((err) => {
             if (err.response.status === 400) {
-              const errorMsg  = err.response.data.error;
-              cerrarConfirmacion();
+              const errorMsg = err.response.data.error;
               mostrarAlerta(errorMsg, true);
             } else {
               console.error(err.response.data);
             }
-        })
-        .finally(() => isSaving.value = false);
+          })
+          .finally(() => (isSaving.value = false));
       } else {
         actualizarF29(f29Data, folio.value, "GUARDADO")
-        .then(() => {
-          mostrarAlerta('Formulario guardado correctamente.', false);
-        })
-        .finally(() => isSaving.value = false);
+          .then(() => {
+            mostrarAlerta("Formulario guardado correctamente.", false);
+          })
+          .catch((err) => {
+            if (err.response.status === 400) {
+              const errorMsg = err.response.data.error;
+              mostrarAlerta(errorMsg, true);
+            } else {
+              console.error(err.response.data);
+            }
+          })
+          .finally(() => (isSaving.value = false));
       }
     };
 
@@ -224,7 +282,7 @@ export default defineComponent({
       }
       alertMsg.value = msg;
       showAlert.value = true;
-    }
+    };
 
     return {
       limpiarForm,
@@ -286,7 +344,7 @@ export default defineComponent({
 
 @media screen and (min-width: 640px) {
   .popup-wrapper {
-   width: 600px;
+    width: 600px;
   }
 }
 </style>
