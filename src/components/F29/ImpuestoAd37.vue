@@ -209,7 +209,7 @@
 </template>
 
 <script lang="ts">
-import store from "@/store";
+import store from "@/store/f29.module";
 import { parseNumber } from "@/utils/numbers";
 import { defineComponent, ref } from "vue";
 

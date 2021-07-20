@@ -791,7 +791,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import store from "@/store";
+import store from "@/store/f29.module";
 
 export default defineComponent({
   props: ['editable'],

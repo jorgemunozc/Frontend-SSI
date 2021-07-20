@@ -693,7 +693,7 @@
 </template>
 
 <script lang="ts">
-import store from "@/store";
+import store from "@/store/f29.module";
 import { defineComponent } from "vue";
 
 export default defineComponent({
