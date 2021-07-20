@@ -1,5 +1,5 @@
 <template>
-  <div class="alert-footer container fixed bottom-0">
+  <div class="alert-footer fixed bottom-0 transition">
     <input :value="isOpen" @input="$emit('update:isOpen')" type="checkbox" id="footeralert" class="hidden" />
     <div
       class="
@@ -13,8 +13,8 @@
       "
       :class="type === 'error'? 'bg-red-700': 'bg-green-700'"
     >
-      <span class="flex-grow text-center">{{ mensaje }}</span>
-      <label class="close cursor-pointer" title="close" for="footeralert">
+      <span class="flex-grow text-center px-4">{{ mensaje }}</span>
+      <label class="close cursor-pointer" title="Cerrar" for="footeralert">
         <svg
           class="fill-current text-white"
           xmlns="http://www.w3.org/2000/svg"
