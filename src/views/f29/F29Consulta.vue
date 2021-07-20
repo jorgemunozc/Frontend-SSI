@@ -3,7 +3,12 @@
   <Navbar />
 </div>
   <div class="container px-4">
-    <table class="mx-auto">
+    <h1 class="text-blue-700 text-2xl font-semibold mb-2">Formularios 29 Declarados</h1>
+    <p class="font-light">
+      Aqu&iacute; podr&aacute; revisar todas las declaraciones de impuestos mensuales declarados exitosamente en
+      cada per&iacute;odo tributario.
+    </p>
+    <table class="mx-8 mt-4">
       <thead>
         <tr>
           <td rowspan="2" class="bg-gray-300">Mes</td>
@@ -47,7 +52,7 @@ import Navbar from '@/components/Navbar.vue';
 import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import { obtenerFormularios } from "@/services/F29Service";
 import { buscarF29 } from "@/services/F29Service";
-import store from "@/store";
+import store from "@/store/f29.module";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
@@ -94,10 +99,10 @@ export default defineComponent({
 
     const hasF29 = function (year: string | number, month: string | number) {
       if (typeof year === "string") {
-        year = +year;
+        year = parseInt(year);
       }
       if (typeof month === "string") {
-        month = +month;
+        month = parseInt(month);
       }
       if (f29Data[year] && f29Data[year].indexOf(month) !== -1) {
         return true;
