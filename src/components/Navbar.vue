@@ -1,7 +1,7 @@
 <template>
   <nav
     v-if="isLoggedIn() && isAdmin()"
-    class="flex md:flex-col items-stretch md:fixed bg-gray-800 md:w-48"
+    class="flex flex-col items-stretch bg-gray-800 md:fixed md:w-48"
   >
     <router-link
       class="block py-4 hover:bg-gray-700 text-center text-white"
@@ -11,7 +11,7 @@
       Gestionar Solicitudes
     </router-link>
     <router-link 
-      to="test"
+      to="dominios-correo"
       class="block py-4 hover:bg-gray-700 text-center text-white"
     >
       Gesti&oacute;n dominio correos
@@ -21,7 +21,7 @@
       @click="logOut"
     >
       <i class="power off icon" />
-      Cerrar Sesion
+      Cerrar Sesi&oacute;n
     </a>
     
     <!-- <li>Gestionar Dominios</li> -->
