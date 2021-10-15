@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --port=8083",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "inspect": "vue-cli-service inspect --mode production > webpackconfig.ts"
@@ -13,7 +13,6 @@
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
-    "gulp": "^4.0.2",
     "postcss": "^7.0.36",
     "primeicons": "^4.1.0",
     "primevue": "^3.3.3",
