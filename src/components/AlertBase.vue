@@ -1,6 +1,12 @@
 <template>
   <div class="alert-footer fixed bottom-0 transition">
-    <input :value="isOpen" @input="$emit('update:isOpen')" type="checkbox" id="footeralert" class="hidden" />
+    <input
+      id="footeralert"
+      :value="isOpen"
+      type="checkbox"
+      class="hidden"
+      @input="$emit('update:isOpen')"
+    >
     <div
       class="
         flex
@@ -14,7 +20,11 @@
       :class="type === 'error'? 'bg-red-700': 'bg-green-700'"
     >
       <span class="flex-grow text-center px-4">{{ mensaje }}</span>
-      <label class="close cursor-pointer" title="Cerrar" for="footeralert">
+      <label
+        class="close cursor-pointer"
+        title="Cerrar"
+        for="footeralert"
+      >
         <svg
           class="fill-current text-white"
           xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +34,7 @@
         >
           <path
             d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
-          ></path>
+          />
         </svg>
       </label>
     </div>
@@ -35,8 +45,14 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   props: {
-    mensaje: String,
-    isOpen: Boolean,
+    mensaje: {
+      type: String,
+      default: ''
+    },
+    isOpen: {
+      type: Boolean,
+      default: false
+    },
     type: {
       type: String,
       default: 'error'
