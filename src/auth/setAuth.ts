@@ -1,8 +1,8 @@
-function setLoggedIn() {
+function setLoggedIn(): void {
     localStorage.setItem('isLoggedIn', 'true');
 }
 
-function setAdminSession() {
+function setAdminSession(): void {
     localStorage.setItem('isAdmin', 'true');
 }
 

@@ -26,11 +26,14 @@ const router = createRouter({
             path: '/',
             redirect: 'login'
         },
-        // {
-        //     name: 'test',
-        //     path: '/test',
-        //     component: () => import('@/views/admin/PanelDominios.vue'),
-        // },
+        {
+            name: 'test',
+            path: '/test',
+            component: () => import('@/views/TestView.vue'),
+            meta: {
+                requiresAuth: true
+            }
+        },
         {
             name: 'Registro',
             path: '/registro',

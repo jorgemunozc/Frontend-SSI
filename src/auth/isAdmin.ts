@@ -1,4 +1,4 @@
-function isAdmin() {
+function isAdmin(): boolean {
     return localStorage.getItem('isAdmin')? true: false;
 }
 
