@@ -34,9 +34,6 @@ export default defineComponent({
     const cargarDatos = () => {
       obtenerEmpresa()
         .then((data) => (empresa.value = data))
-        .catch((err) => {
-          console.log(err.response);
-        });
     };
     cargarDatos();
     return {

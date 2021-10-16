@@ -1,9 +1,11 @@
 <template>
   <div class="container">
-      <Navbar />
+    <Navbar />
   </div>
   <div class="mx-2 h-80 max-w-3xl lg:mx-8">
-    <h1 class="text-blue-700 text-2xl font-semibold mb-2">Declarar IVA</h1>
+    <h1 class="text-blue-700 text-2xl font-semibold mb-2">
+      Declarar IVA
+    </h1>
     <div class="container text-sm">
       <p class="mb-2">
         Mediante esta opción podrás realizar tu declaración de Formulario 29 (F29)
@@ -13,40 +15,97 @@
         declaración.
       </p>
       <div class="flex flex-col max-w-4xl bg-gray-100 my-4 p-2">
-        <div class="max-w-xs text-sm mb-4">Para comenzar, selecciona el per&iacute;odo a declarar:</div>
-        <form class="flex flex-grow" @submit.prevent="mostrarF29">
+        <div class="max-w-xs text-sm mb-4">
+          Para comenzar, selecciona el per&iacute;odo a declarar:
+        </div>
+        <form
+          class="flex flex-grow"
+          @submit.prevent="mostrarF29"
+        >
           <div class="mx-2">
-            <label for="month" class="mx-2">Mes</label>
-            <select name="month" id="month" class="border h-8 px-2" v-model="selectedMonth">
-              <option value="1">Enero</option>
-              <option value="2">Febrero</option>
-              <option value="3">Marzo</option>
-              <option value="4">Abril</option>
-              <option value="5">Mayo</option>
-              <option value="6">Junio</option>
-              <option value="7">Julio</option>
-              <option value="8">Agosto</option>
-              <option value="9">Septiembre</option>
-              <option value="10">Octubre</option>
-              <option value="11">Noviembre</option>
-              <option value="12">Diciembre</option>
+            <label
+              for="month"
+              class="mx-2"
+            >Mes</label>
+            <select
+              id="month"
+              v-model="selectedMonth"
+              name="month"
+              class="border h-8 px-2"
+            >
+              <option value="1">
+                Enero
+              </option>
+              <option value="2">
+                Febrero
+              </option>
+              <option value="3">
+                Marzo
+              </option>
+              <option value="4">
+                Abril
+              </option>
+              <option value="5">
+                Mayo
+              </option>
+              <option value="6">
+                Junio
+              </option>
+              <option value="7">
+                Julio
+              </option>
+              <option value="8">
+                Agosto
+              </option>
+              <option value="9">
+                Septiembre
+              </option>
+              <option value="10">
+                Octubre
+              </option>
+              <option value="11">
+                Noviembre
+              </option>
+              <option value="12">
+                Diciembre
+              </option>
             </select>
           </div>
           <div class="mx-2">
-            <label for="year" class="mx-2">Año</label>
-            <select name="year" id="year" class="border h-8 px-2" v-model="selectedYear">
-              <option v-for="year in years" :key="year.id" :value="year">{{ year }}</option>
+            <label
+              for="year"
+              class="mx-2"
+            >Año</label>
+            <select
+              id="year"
+              v-model="selectedYear"
+              name="year"
+              class="border h-8 px-2"
+            >
+              <option
+                v-for="year in years"
+                :key="year.id"
+                :value="year"
+              >
+                {{ year }}
+              </option>
             </select>
           </div>
           <div class=" self-end xs:self-auto mx-2">
-            <button class="bg-blue-800 px-4 text-white h-8">Aceptar</button>
+            <button class="bg-blue-800 px-4 text-white h-8">
+              Aceptar
+            </button>
           </div>
-          
         </form>
       </div>
     </div>
   </div>
-  <AlertBase v-if="errorMsg" :mensaje="errorMsg" v-model:isOpen="errorMsg" class="container"/>
+  <AlertBase
+    v-if="errorMsg"
+    v-model:isOpen="errorMsg"
+    :mensaje="errorMsg"
+    class="container"
+  />
 </template>
 <script lang="ts">
 /**

@@ -1,6 +1,6 @@
 declare interface Empresa {
     rut: number,
-    dv: number,
+    dv: string,
     razon_social: string,
     domicilio: string,
     ciudad: string,

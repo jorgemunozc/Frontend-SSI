@@ -15,7 +15,9 @@
     >
       <i class="pi pi-exclamation-circle text-2xl w-10 mr-8 md:text-4xl" />
       <div class=" text-xs md:text-sm">
-        <div class="font-bold text-center">Informaci&oacute;n</div>
+        <div class="font-bold text-center">
+          Información
+        </div>
         <ul class="info-text list-disc">
           <li>
             Para tener acceso a la plataforma debe llenar el siguiente
@@ -33,8 +35,13 @@
       </div>
     </div>
 
-    <h1 class="text-2xl font-bold text-center mb-4 text-blue-600">Formulario de Registro</h1>
-    <form class="flex flex-wrap text-sm" @submit.prevent="register">
+    <h1 class="text-2xl font-bold text-center mb-4 text-blue-600">
+      Formulario de Registro
+    </h1>
+    <form
+      class="flex flex-wrap text-sm"
+      @submit.prevent="register"
+    >
       <div
         class="w-full relative mb-9"
         :class="{ error: errores.razon_social }"
@@ -55,7 +62,44 @@
           <small>{{ errores.razon_social }}</small>
         </div>
       </div>
-      <div class="w-full relative mb-9" :class="{ error: errores.giro }">
+      <div class="w-full mb-1 flex items-center">
+        <input 
+          id="rutCheckbox"
+          :value="poseeRut" 
+          type="checkbox"
+          @change="mostrarRut($event.target.checked)"
+        >
+        <label for="rutCheckbox">Empresa posee RUT?</label>
+      </div>
+      <div 
+        class="w-full relative mb-9"
+        :class="{ error: errores.rut }"
+      >
+        <div class="p-float-label">
+          <InputText
+            id="rut"
+            v-model.lazy="rutEmpresa"
+            type="text"
+            class="w-full"
+            :disabled="!poseeRut"
+            maxlength="10"
+          />
+          <label for="rut">Rut</label>
+        </div>
+        <div>
+          <small>Ej: 80300200-8</small>
+        </div>
+        <div 
+          v-if="errores.rut"
+          class="w-full h-6 pl-2 my-1 absolute top-full bg-red-200 text-red-800 rounded-b"
+        >
+          <small>{{ errores.rut }}</small>
+        </div>
+      </div>
+      <div
+        class="w-full relative mb-9"
+        :class="{ error: errores.giro }"
+      >
         <div class="p-float-label">
           <GirosDropdown
             v-model="solicitud.giro"
@@ -71,10 +115,17 @@
           <small>{{ errores.giro }}</small>
         </div>
       </div>
-      <div class="w-full relative mb-9 flex" :class="{ error: errores.correo }">
+      <div
+        class="w-full relative mb-9 flex"
+        :class="{ error: errores.correo }"
+      >
         <div class="flex-grow">
           <div class="p-float-label">
-            <InputText v-model="correoParcial" type="text" class="w-full"/>
+            <InputText
+              v-model="correoParcial"
+              type="text"
+              class="w-full"
+            />
             <label for="correo">Correo</label>
           </div>
         </div>
@@ -82,13 +133,22 @@
           @
         </div>
         <div class="w-1/3">
-          <DominiosDropdown v-model="dominioCorreo" class="p-0"/>
+          <DominiosDropdown
+            v-model="dominioCorreo"
+            class="p-0"
+          />
         </div>
-        <div v-if="errores.correo" class="w-full h-6 pl-2 my-1 absolute top-full bg-red-200 text-red-800 rounded-b">
+        <div
+          v-if="errores.correo"
+          class="w-full h-6 pl-2 my-1 absolute top-full bg-red-200 text-red-800 rounded-b"
+        >
           <small>{{ errores.correo }}</small>
         </div>
       </div>
-      <div class="w-full relative mb-9" :class="{ error: errores.domicilio }">
+      <div
+        class="w-full relative mb-9"
+        :class="{ error: errores.domicilio }"
+      >
         <div class="p-float-label">
           <InputText
             id="domicilio"
@@ -99,11 +159,17 @@
           />
           <label for="">Direcci&oacute;n</label>
         </div>
-        <div v-if="errores.domicilio" class="w-full h-6 pl-2 my-1 absolute top-full bg-red-200 text-red-800 rounded-b">
+        <div
+          v-if="errores.domicilio"
+          class="w-full h-6 pl-2 my-1 absolute top-full bg-red-200 text-red-800 rounded-b"
+        >
           <small>{{ errores.domicilio }}</small>
         </div>
       </div>
-      <div class="w-full relative mb-9" :class="{ error: errores.ciudad }">
+      <div 
+        class="w-full relative mb-9" 
+        :class="{ error: errores.ciudad }"
+      >
         <div class="p-float-label">
           <InputText
             id="ciudad"
@@ -115,17 +181,33 @@
           <label for="ciudad">Ciudad</label>
         </div>
         <div v-if="errores.ciudad">
-          <div  class="w-full h-6 pl-2 my-1 absolute top-full bg-red-200 text-red-800 rounded-b">
-            <small>{{errores.ciudad}}</small>
+          <div class="w-full h-6 pl-2 my-1 absolute top-full bg-red-200 text-red-800 rounded-b">
+            <small>{{ errores.ciudad }}</small>
           </div>
         </div>
       </div>
       <button
         class=" w-full inline-flex justify-center items-center p-4 bg-blue-600 hover:bg-blue-700 text-white rounded"
       >
-        <svg :class="{'opacity-0': !isLoading}" class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24" fill="none">
-         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        <svg
+          :class="{'opacity-0': !isLoading}"
+          class="animate-spin h-5 w-5 mr-3"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          />
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          />
         </svg>
         <span>Registrar</span>
       </button>
@@ -141,7 +223,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref} from "vue";
+import { computed, defineComponent, ref, reactive} from "vue";
 import DominiosDropdown from "@/components/DominiosDropdown.vue";
 import GirosDropdown from "@/components/GirosDropdown.vue";
 import { crearSolicitud } from "@/services/SolicitudService";
@@ -153,13 +235,14 @@ export default defineComponent({
     GirosDropdown,
   },
   setup() {
-    const solicitud = ref({
+    const solicitud = reactive({
       razon_social: "",
       correo: "",
       domicilio: "",
       ciudad: "",
       estado: "PENDIENTE",
       giro: "",
+      rut: '' as string | null,
     });
 
     const errores = ref({
@@ -168,16 +251,42 @@ export default defineComponent({
       domicilio: null,
       ciudad: null,
       giro: null,
+      rut: null
     });
+
+    const poseeRut = ref(false);
     const dominioCorreo = ref("");
     const correoParcial = ref("");
     const message = ref("");
     const isLoading = ref(false);
     const hasError = ref(false);
     const successMsg =
-      "Su solicitud ha sido ingresada con exito.<br>" +
-      "Una vez aprobada sera enviado un correo a la direccion registrada con los datos de acceso a la plataforma.";
+      "Su solicitud ha sido ingresada con éxito.<br>" +
+      "Una vez aprobada será enviado un correo a la dirección registrada con los datos de acceso a la plataforma.";
 
+
+    const rutEmpresa = computed({
+      get: (): string => {
+        if (solicitud.rut) {
+          return solicitud.rut
+        }
+        return ''
+      },
+      set: (nuevoRut: string) => {
+        if (nuevoRut) {
+          solicitud.rut = nuevoRut
+        }
+      }
+    });
+
+    const mostrarRut = function (isChecked: boolean) {
+      poseeRut.value = isChecked;
+      if (isChecked) {
+        solicitud.rut = '';
+      } else {
+        solicitud.rut = null;
+      }
+    }
     const mostrarMensaje = async (msg) => {
       message.value = msg;
       await setTimeout(() => {
@@ -193,8 +302,11 @@ export default defineComponent({
       message,
       isLoading,
       hasError,
-      mostrarMensaje,
       successMsg,
+      poseeRut,
+      rutEmpresa,
+      mostrarMensaje,
+      mostrarRut
     };
   },
 
@@ -207,6 +319,9 @@ export default defineComponent({
       console.log("Registrando formulario *beep beep*...");
       this.isLoading = true;
       this.cleanErrors();
+      if (!this.poseeRut) {
+        this.solicitud.rut = null
+      }
       crearSolicitud(this.solicitud)
         .then(() => {
           this.mostrarMensaje(this.successMsg);
@@ -236,7 +351,6 @@ export default defineComponent({
     },
 
     pushErrors(data) {
-      console.log(data);
       if (typeof data != "object") {
         return;
       }
@@ -260,5 +374,9 @@ export default defineComponent({
 
 .info-text {
   text-align: left;
+}
+
+.p-component:disabled {
+  background-color: rgba(161, 159, 159, 0.39);
 }
 </style>

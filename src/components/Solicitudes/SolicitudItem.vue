@@ -13,16 +13,16 @@
       class="w-8 bg-green-600 hover:bg-green-800 text-white mx-2 rounded"
       @click="aceptarSolicitud"
     >
-      <i class="pi pi-check"></i>
+      <i class="pi pi-check" />
     </button>
     <button
       class="w-8 bg-red-600 hover:bg-red-800 text-white mx-2 rounded"
       @click="rechazarSolicitud"
     >
-      <i class="pi pi-times"></i>
+      <i class="pi pi-times" />
     </button>
     <div
-    v-if="isProcessing"
+      v-if="isProcessing"
       class="
         absolute
         top-0
@@ -94,7 +94,10 @@ export default defineComponent({
           console.log("creando usuario...");
           return crearUsuario(nuevoUsuario);
         })
-        .then(() => emit("itemChanged:approved"))
+        .then(() => {
+          console.log('Creado exitosamente!');
+          emit("itemChanged:approved")
+          })
         .catch((err) => {
           /** Revisamos la cola de acciones para determinar
            * cuantas acciones hay que revertir
@@ -111,8 +114,11 @@ export default defineComponent({
               default:
             }
           }
-          console.log(err.response.data.errors);
-          sendMessage("error", err.response.data.errors);
+          if (err.response.data.errors) {
+            sendMessage("error", err.response.data.errors);
+          } else {
+            sendMessage("error", err.response.data.error);
+          }
         })
         .finally(() => {
           isProcessing.value = false;

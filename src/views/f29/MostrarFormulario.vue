@@ -1,13 +1,13 @@
 <template>
-<div class="container">
-  <Navbar />
-</div>
+  <div class="container">
+    <Navbar />
+  </div>
   <div class="container mx-2 overflow-x-auto h-5/6">
     <Formulario29
       :folio="folio"
       :editable="false"
       :periodo="{ month, year }"
-      :datosEmpresa="empresa"
+      :datos-empresa="empresa"
     />
   </div>
 </template>

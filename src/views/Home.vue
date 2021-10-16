@@ -4,7 +4,9 @@
   </div>
   <div class="container px-2">
     <div>
-      <h1 class="text-2xl text-blue-700 font-semibold">PERFIL EMPRESA</h1>
+      <h1 class="text-2xl text-blue-700 font-semibold">
+        PERFIL EMPRESA
+      </h1>
     </div>
     <InfoBasica />
   </div>

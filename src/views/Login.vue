@@ -33,9 +33,17 @@
     </div>
     <div class="m-4 text-center">
       <span>¿No tiene cuenta? Reg&iacute;strese
-        <router-link to="registro" class="text-blue-600 hover:text-blue-400">aqu&iacute;</router-link></span>
+        <router-link
+          to="registro"
+          class="text-blue-600 hover:text-blue-400"
+        >aqu&iacute;</router-link></span>
     </div>
-    <AlertBase  v-if="hasError" :mensaje="mensaje" v-model:isOpen="hasError" class="container"/>
+    <AlertBase
+      v-if="hasError"
+      v-model:isOpen="hasError"
+      :mensaje="mensaje"
+      class="container"
+    />
   </div>
 </template>
 <script lang="ts">

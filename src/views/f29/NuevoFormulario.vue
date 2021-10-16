@@ -9,7 +9,7 @@
     <div class="f29-wrapper flex-grow">
       <Formulario29
         :folio="folio"
-        :datosEmpresa="empresa"
+        :datos-empresa="empresa"
         :periodo="{ month, year }"
       />
     </div>
@@ -69,15 +69,21 @@
     </div>
     <AlertBase
       v-if="showAlert"
+      v-model:isOpen="showAlert"
       :type="alertType"
       :mensaje="alertMsg"
-      v-model:isOpen="showAlert"
       class="container"
     />
 
-    <div class="popup-bg" v-if="showPopUp">
+    <div
+      v-if="showPopUp"
+      class="popup-bg"
+    >
       <div class="popup-wrapper">
-        <div v-if="showRedirect" class="text-center">
+        <div
+          v-if="showRedirect"
+          class="text-center"
+        >
           <h2 class="text-base sm:text-lg font-bold">
             Formulario enviado exitosamente
           </h2>
@@ -85,8 +91,12 @@
           <LoadingSpinner />
         </div>
         <div v-else>
-          <h2 class="text-center font-bold text-sm sm:text-lg">{{ title }}</h2>
-          <p class="text-center text-xs sm:text-base">{{ msg }}</p>
+          <h2 class="text-center font-bold text-sm sm:text-lg">
+            {{ title }}
+          </h2>
+          <p class="text-center text-xs sm:text-base">
+            {{ msg }}
+          </p>
           <div class="flex justify-center mt-4">
             <button
               class="

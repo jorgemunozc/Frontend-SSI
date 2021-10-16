@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
-      <Navbar />
-    </div>
+  <div class="container">
+    <Navbar />
+  </div>
   <div class="mx-4 max-w-xl">
     <div class="border px-4 my-4 hover:bg-gray-200">
       <router-link 

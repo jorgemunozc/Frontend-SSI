@@ -1,9 +1,11 @@
 <template>
-<div class="container">
-  <Navbar />
-</div>
+  <div class="container">
+    <Navbar />
+  </div>
   <div class="container px-4">
-    <h1 class="text-blue-700 text-2xl font-semibold mb-2">Formularios 29 Declarados</h1>
+    <h1 class="text-blue-700 text-2xl font-semibold mb-2">
+      Formularios 29 Declarados
+    </h1>
     <p class="font-light">
       Aqu&iacute; podr&aacute; revisar todas las declaraciones de impuestos mensuales declarados exitosamente en
       cada per&iacute;odo tributario.
@@ -11,19 +13,50 @@
     <table class="mx-8 mt-4">
       <thead>
         <tr>
-          <td rowspan="2" class="bg-gray-300">Mes</td>
-          <td colspan="10" class="bg-gray-300 text-center">Per&iacute;odos Tributarios</td>
+          <td
+            rowspan="2"
+            class="bg-gray-300"
+          >
+            Mes
+          </td>
+          <td
+            colspan="10"
+            class="bg-gray-300 text-center"
+          >
+            Per&iacute;odos Tributarios
+          </td>
         </tr>
         <tr>
-          <td v-if="isLoading"><Loading-spinner /></td>
-          <td v-for="year in years" :key="year" class="bg-blue-100 text-center">{{ year }}</td>
+          <td v-if="isLoading">
+            <Loading-spinner />
+          </td>
+          <td
+            v-for="year in years"
+            :key="year"
+            class="bg-blue-100 text-center"
+          >
+            {{ year }}
+          </td>
         </tr>
       </thead>
       <tbody v-if="!isLoading">
-        <tr v-for="(month, index) in months" :key="month">
-          <td class="bg-blue-100">{{ month }}</td>
-          <td v-for="year in years" :key="year" class="text-center">
-            <a v-if="hasF29(year, index + 1)" @click="loadF29(year, index + 1)" class="text-blue-700 hover:text-blue-800 cursor-pointer">
+        <tr
+          v-for="(month, index) in months"
+          :key="month"
+        >
+          <td class="bg-blue-100">
+            {{ month }}
+          </td>
+          <td
+            v-for="year in years"
+            :key="year"
+            class="text-center"
+          >
+            <a
+              v-if="hasF29(year, index + 1)"
+              class="text-blue-700 hover:text-blue-800 cursor-pointer"
+              @click="loadF29(year, index + 1)"
+            >
               Ver
             </a>
             <span v-else>-</span>
@@ -36,7 +69,10 @@
             <span class="opacity-0">Septiembre</span>
             <LoadingSpinner />
           </td>
-          <td class="h-80" colspan="99">
+          <td
+            class="h-80"
+            colspan="99"
+          >
             <div>
               <LoadingSpinner />
             </div>

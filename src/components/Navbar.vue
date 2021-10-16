@@ -42,9 +42,9 @@
       to="/f29"
       class="flex items-center px-4 border-b-2 border-black border-opacity-0 hover:border-opacity-100 hover:bg-blue-100"
     >
-    <i class="folder icon"></i>
+      <i class="folder icon" />
       Formulario 29
-      </router-link>
+    </router-link>
     <a
       class="flex items-center px-4 cursor-pointer hover:bg-red-400"
       @click="logOut"

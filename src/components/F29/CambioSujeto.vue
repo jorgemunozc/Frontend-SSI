@@ -283,7 +283,12 @@ import { parseNumber } from "@/utils/numbers";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  props: ['editable'],
+  props: {
+    editable: {
+      type: Boolean,
+      default: false
+    }
+  },
   setup() {
     const datos = store.state;
 

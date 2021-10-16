@@ -19,8 +19,8 @@
           <td>AÑO</td>
         </tr>
         <tr>
-          <td>{{month}}</td>
-          <td>{{year}}</td>
+          <td>{{ month }}</td>
+          <td>{{ year }}</td>
         </tr>
       </table>
     </div>

@@ -9,28 +9,36 @@
       />
     </div>
     <div class="f29__seccion">
-      <info-empresa :razonSocial="datosEmpresa.razonSocial" />
+      <info-empresa :razon-social="datosEmpresa.razonSocial" />
     </div>
     <div class="f29__seccion">
-      <div class="f29__seccion__header">D&Eacute;BITOS Y VENTAS</div>
+      <div class="f29__seccion__header">
+        D&Eacute;BITOS Y VENTAS
+      </div>
       <debitos-y-ventas :editable="editable" />
     </div>
     <div class="f29__seccion">
-      <div class="f29__seccion__header">CR&Eacute;DITOS Y COMPRAS</div>
+      <div class="f29__seccion__header">
+        CR&Eacute;DITOS Y COMPRAS
+      </div>
       <compras-y-creditos :editable="editable" />
     </div>
     <div class="f29__seccion">
       <impuesto-determinado />
     </div>
     <div class="f29__seccion">
-      <div class="f29__seccion__header">IMPUESTO A LA RENTA D.L. 824/74</div>
+      <div class="f29__seccion__header">
+        IMPUESTO A LA RENTA D.L. 824/74
+      </div>
       <impuesto-renta :editable="editable" />
     </div>
     <div class="f29__seccion">
       <subtotal-impuesto-determinado />
     </div>
     <div class="f29__seccion">
-      <div class="f29__seccion__header">TRIBUTACI&Oacute;N SIMPLIFICADA</div>
+      <div class="f29__seccion__header">
+        TRIBUTACI&Oacute;N SIMPLIFICADA
+      </div>
       <tributacion-simplificada :editable="editable" />
     </div>
     <div class="f29__seccion">
@@ -46,11 +54,15 @@
       <impuesto-ad-42 :editable="editable" />
     </div>
     <div class="f29__seccion">
-      <div class="f29__seccion__header">CAMBIO SUJETO D.L. 825</div>
+      <div class="f29__seccion__header">
+        CAMBIO SUJETO D.L. 825
+      </div>
       <cambio-sujeto :editable="editable" />
     </div>
     <div class="f29__seccion">
-      <div class="f29__seccion__header">CR&Eacute;DITOS ESPECIALES</div>
+      <div class="f29__seccion__header">
+        CR&Eacute;DITOS ESPECIALES
+      </div>
       <creditos-especiales :editable="editable" />
     </div>
     <div class="f29__seccion">

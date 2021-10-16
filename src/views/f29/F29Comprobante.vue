@@ -10,12 +10,21 @@
       <span class="text-blue-800 font-semibold mr-4 w-32 inline-block">Folio: </span> {{ folio }}
     </div>
     <div class=" text-base sm:text-lg">
-      <span class="text-blue-800 font-semibold mr-4 w-32 inline-block">Fecha de env&iacute;o:</span
-      >{{ date }}
+      <span class="text-blue-800 font-semibold mr-4 w-32 inline-block">Fecha de env&iacute;o:</span>{{ date }}
     </div>
     <div class="flex w-full text-white justify-around mt-8 text-xs text-center sm:text-md">
-      <router-link to="home" class="h-8 w-24 mx-4 px-2 bg-blue-800  hover:bg-blue-900 rounded flex items-center justify-center">Volver a Inicio</router-link>
-      <router-link :to="{name: 'Seleccion Periodo'}" class="h-8 w-24 mx-4 px-2 bg-blue-800  hover:bg-blue-900 rounded flex items-center justify-center"> Nuevo F29</router-link>
+      <router-link
+        to="home"
+        class="h-8 w-24 mx-4 px-2 bg-blue-800  hover:bg-blue-900 rounded flex items-center justify-center"
+      >
+        Volver a Inicio
+      </router-link>
+      <router-link
+        :to="{name: 'Seleccion Periodo'}"
+        class="h-8 w-24 mx-4 px-2 bg-blue-800  hover:bg-blue-900 rounded flex items-center justify-center"
+      >
+        Nuevo F29
+      </router-link>
     </div>
   </div>
 </template>

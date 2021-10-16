@@ -1,16 +1,22 @@
 <template>
   <table class="border">
     <tr class="h-12">
-      <th class="w-40 sticky top-0 bg-white border-0 border-r border-gray-300 bg-blue-200 z-20">Dominio correo</th>
-      <th class="w-20 sticky top-0 bg-white border-0 border-r border-gray-300 bg-blue-200 z-20"></th>
+      <th class="w-40 sticky top-0 bg-white border-0 border-r border-gray-300 bg-blue-200 z-20">
+        Dominio correo
+      </th>
+      <th class="w-20 sticky top-0 bg-white border-0 border-r border-gray-300 bg-blue-200 z-20" />
     </tr>
     <tr 
-      v-for="dom in dominios" :key="dom.id"
+      v-for="dom in dominios"
+      :key="dom.id"
       class="hover:bg-gray-100"
     >
-      <td class="border-0">{{ dom.dominio }}</td>
+      <td class="border-0">
+        {{ dom.dominio }}
+      </td>
       <td class="border-0 text-center">
-        <i class="
+        <i
+          class="
           pi pi-trash 
           text-red-700 
           cursor-pointer
@@ -18,11 +24,16 @@
           hover:opacity-100
           " 
           @click="eliminarDom(dom.id)"
-        ></i>
+        />
       </td>
     </tr>
     <tr v-if="dominios.length === 0">
-      <td colspan="2" class="border-0 text-center">Sin dominios registrados.</td>
+      <td
+        colspan="2"
+        class="border-0 text-center"
+      >
+        Sin dominios registrados.
+      </td>
     </tr>
   </table>
 </template>

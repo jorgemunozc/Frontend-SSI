@@ -10,6 +10,7 @@ interface postSolicitudForm {
     ciudad: string
     estado: string,
     giro: string,
+    rut?: string | null
 }
 
 
@@ -22,6 +23,9 @@ function listaSolicitudes(): Promise<Solicitud> {
 }
 
 function crearSolicitud(solicitud: postSolicitudForm): Promise<Solicitud> {
+    if (solicitud.rut === null) {
+        delete solicitud.rut
+    }
     return post<Solicitud>(resource, solicitud);
 }
 

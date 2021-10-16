@@ -1,6 +1,8 @@
 <template>
   <div class="flex justify-center content-start flex-wrap bg-gray-100 h-screen p-4">
-    <h1 class="uppercase w-full text-center text-6xl m-4">Ups!</h1>
+    <h1 class="uppercase w-full text-center text-6xl m-4">
+      Ups!
+    </h1>
     <div class="w-40">
       <svg
         enable-background="new 0 0 128 128"
@@ -15,10 +17,22 @@
           gradientTransform="matrix(-1.0287e-13 1 .7598 7.8158e-14 -14.872 -31.125)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FAFAFA" offset=".5926" />
-          <stop stop-color="#E0E0E0" offset="1" />
+          <stop
+            stop-color="#FAFAFA"
+            offset=".5926"
+          />
+          <stop
+            stop-color="#E0E0E0"
+            offset="1"
+          />
         </radialGradient>
-        <ellipse cx="34" cy="64.25" rx="29.62" ry="44" fill="url(#b)" />
+        <ellipse
+          cx="34"
+          cy="64.25"
+          rx="29.62"
+          ry="44"
+          fill="url(#b)"
+        />
         <g opacity=".2">
           <path
             d="m34 23.25c14.68 0 26.62 18.39 26.62 41s-11.94 41-26.62 41-26.62-18.39-26.62-41 11.94-41 26.62-41m0-3c-16.36 0-29.62 19.7-29.62 44s13.26 44 29.62 44 29.62-19.7 29.62-44-13.26-44-29.62-44z"
@@ -43,10 +57,22 @@
           gradientTransform="matrix(-1.0287e-13 1 .7598 7.8158e-14 45.128 28.875)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FAFAFA" offset=".5926" />
-          <stop stop-color="#E0E0E0" offset="1" />
+          <stop
+            stop-color="#FAFAFA"
+            offset=".5926"
+          />
+          <stop
+            stop-color="#E0E0E0"
+            offset="1"
+          />
         </radialGradient>
-        <ellipse cx="94" cy="64.25" rx="29.62" ry="44" fill="url(#a)" />
+        <ellipse
+          cx="94"
+          cy="64.25"
+          rx="29.62"
+          ry="44"
+          fill="url(#a)"
+        />
         <g opacity=".2">
           <path
             d="m94 23.25c14.68 0 26.62 18.39 26.62 41s-11.94 41-26.62 41-26.62-18.39-26.62-41 11.94-41 26.62-41m0-3c-16.36 0-29.62 19.7-29.62 44s13.26 44 29.62 44 29.62-19.7 29.62-44-13.26-44-29.62-44z"
@@ -74,7 +100,8 @@
     <div class="w-full flex justify-center items-center m-8 text-2xl">
       <router-link
         to="/"
-        class="bg-blue-800 hover:bg-blue-900 text-white rounded py-2 px-4">
+        class="bg-blue-800 hover:bg-blue-900 text-white rounded py-2 px-4"
+      >
         Volver a Inicio
       </router-link>
     </div>

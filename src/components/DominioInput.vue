@@ -1,6 +1,5 @@
 <template>
   <form
-    @submit.prevent="submit"
     class="
       flex flex-wrap
       max-w-sm
@@ -9,11 +8,13 @@
       mb-4
       p-2
     "
+    @submit.prevent="submit"
   >
     <!-- <label for="dominio" class="w-full mb-2">Ingrese nuevo dominio</label> -->
     <input
-      type="text"
       id="dominio"
+      v-model="nuevoDominio"
+      type="text"
       name="dominio"
       placeholder="Ingrese dominio de correo"
       class="
@@ -27,8 +28,7 @@
         focus:bg-gray-200
         font-light
       "
-      v-model="nuevoDominio"
-    />
+    >
     <button
       class="bg-blue-800 hover:bg-blue-900 text-white rounded-r w-20 h-8"
     >
@@ -36,7 +36,11 @@
     </button>
     <small class="w-full text-xs ml-2">Ej: gmail.com</small>
   </form>
-  <AlertBase v-if="hasError" v-model:isOpen="hasError" :mensaje="msg" />
+  <AlertBase
+    v-if="hasError"
+    v-model:isOpen="hasError"
+    :mensaje="msg"
+  />
 </template>
 
 <script lang="ts">

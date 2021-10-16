@@ -9,14 +9,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, ref } from "vue";
 import { getDominios } from "@/services/DominioService";
 
 export default defineComponent({
   // emits: ['update:modelValue'],
   // props: ['modelValue'],
   data() {
-    const dominios = ref({});
+    const dominios = ref([] as DominioCorreo[]);
     const getDominiosCorreo = async () => {
       await getDominios()
         .then((res) => (dominios.value = res))

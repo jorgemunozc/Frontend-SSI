@@ -295,7 +295,7 @@
           Base Imponible
         </th>
         <th colspan="2">
-          Tasa
+          Tasa (%)
         </th>
         <th colspan="2">
           Crédito/Tope Suspensión PPM (Arts. 1º bis Leyes 19.420 y 19.606)
@@ -355,7 +355,7 @@
         </td>
         <td>
           <input
-            v-model.lazy="datos.cod115"
+            v-model.lazy="cod115"
             type="text"
             class="f29__input"
             maxlength="12"
@@ -367,7 +367,7 @@
         </td>
         <td>
           <input
-            v-model.lazy="datos.cod68"
+            v-model.lazy="cod68"
             type="text"
             class="f29__input"
             maxlength="12"
@@ -379,11 +379,11 @@
         </td>
         <td>
           <input
-            v-model.lazy="datos.cod62"
+            :value="cod62"
             type="text"
             class="f29__input"
             maxlength="12"
-            :disabled="!editable"
+            disabled
           >
         </td>
         <td class="celda-signo">
@@ -694,6 +694,7 @@
 
 <script lang="ts">
 import store from "@/store/f29.module";
+import { parseNumber } from "@/utils/numbers";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -705,5 +706,35 @@ export default defineComponent({
       store,
     };
   },
+  computed: {
+    cod62(): string {
+      let subTotal = (this.datos.cod563 * this.datos.cod115)
+      if (this.datos.cod68 < subTotal) {
+        subTotal -= this.datos.cod68
+      } else {
+        subTotal = 0
+      }
+      return parseNumber(Math.round(subTotal))
+    },
+    cod115: {
+      get(): string {
+        return (this.datos.cod115 * 100).toString()
+      },
+      set(nuevoValor: string) {
+        const valNormalizado = parseFloat(nuevoValor.split(',').join('.'))/100
+        this.store.setValue('cod115', valNormalizado)
+      }
+    }
+    ,
+    cod68: {
+      get(): number {
+        return this.datos.cod68
+      },
+      set(nuevoValor: string) {
+        this.store.setValue('cod68', Math.round(parseInt(nuevoValor)))
+        console.log(this.datos.cod68)
+      }
+    }
+  }
 });
 </script>
