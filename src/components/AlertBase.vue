@@ -2,10 +2,10 @@
   <div class="alert-footer fixed bottom-0 transition">
     <input
       id="footeralert"
-      :value="isOpen"
       type="checkbox"
+      :checked="isOpen"
       class="hidden"
-      @input="$emit('update:isOpen')"
+      @change="$emit('update:isOpen', $event.target.checked)"
     >
     <div
       class="
@@ -51,7 +51,7 @@ export default defineComponent({
     },
     isOpen: {
       type: Boolean,
-      default: false
+      default: true
     },
     type: {
       type: String,
