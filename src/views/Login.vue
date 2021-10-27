@@ -38,6 +38,14 @@
           class="text-blue-600 hover:text-blue-400"
         >aqu&iacute;</router-link></span>
     </div>
+    <div>
+      <router-link 
+        to="/reset"
+        class="block text-center text-blue-600 hover:text-blue-400"
+      >
+        ¿Olvidó contraseña?
+      </router-link>
+    </div>
     <AlertBase
       v-if="hasError"
       v-model:isOpen="hasError"
