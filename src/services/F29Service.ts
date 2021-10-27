@@ -4,11 +4,17 @@ import { get, post, update } from '@/services/ApiService';
 interface F29Response extends Formulario29 {
   folio: number,
   periodo: string,
+  rut: number
 }
 
 interface Periodo {
   month: number,
   year: number,
+}
+
+export interface F29ShortResponse {
+  folio: number,
+  periodo: string
 }
 
 const resource = 'f29';
@@ -44,10 +50,19 @@ function obtenerFormularios(): Promise<Object> {
   return get('f29');
 }
 
+function resumenF29Empresa(rut: number, year?: number): Promise<F29ShortResponse[]> {
+  let url = `${resource}/${rut}`;
+  if (typeof year != 'undefined') {
+    url += `/${year}`;
+  }
+  return get<F29ShortResponse[]>(url);
+}
+
 export {
   obtenerF29,
   guardarF29,
   actualizarF29,
   buscarF29,
   obtenerFormularios,
+  resumenF29Empresa
 }
