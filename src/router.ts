@@ -11,10 +11,17 @@ import F29Consulta from '@/views/f29/F29Consulta.vue';
 import Dashboard from '@/views/admin/Dashboard.vue';
 import PanelDominios from '@/views/admin/PanelDominios.vue';
 import store from "./store/f29.module";
+import VerCredencial from '@/views/VerCredencial.vue';
+import VerEmpresas from '@/views/admin/VerEmpresas.vue';
+import VerFormulario from '@/views/admin/VerFormulario.vue';
+import ResetPassword from '@/views/ResetPassword.vue';
 
 declare module 'vue-router' {
     interface RouteMeta {
         title?: string,
+        requiresAuth?: boolean,
+        isGuest?: boolean,
+        onlyAdmin?: boolean
     }
 }
 
@@ -24,14 +31,14 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            redirect: 'login'
+            redirect: '/login'
         },
         {
             name: 'test',
             path: '/test',
             component: () => import('@/views/TestView.vue'),
             meta: {
-                requiresAuth: true
+                requiresAuth: false
             }
         },
         {
@@ -47,6 +54,13 @@ const router = createRouter({
             name: 'Login',
             path: '/login',
             component: Login,
+            meta: {
+                isGuest: true,
+            }
+        },
+        {
+            path: '/reset',
+            component: ResetPassword,
             meta: {
                 isGuest: true,
             }
@@ -75,6 +89,7 @@ const router = createRouter({
             component: Dashboard,
             meta: {
                 requiresAuth: true,
+                onlyAdmin: true,
                 title: 'Solicitudes de Acceso'
             }
         },
@@ -118,7 +133,7 @@ const router = createRouter({
             path: '/ver-f29',
             component: () => import('@/views/f29/MostrarFormulario.vue'),
             props: route => ({ month: route.query.month, year: route.query.year}),
-            beforeEnter: (to, from) => {
+            beforeEnter: () => {
                 if (store.state.folio === 0) {
                     return {name: 'Consulta F29'}
                 }
@@ -131,7 +146,7 @@ const router = createRouter({
                 requiresAuth: true,
                 title: 'Comprobante envío F29'
             },
-            beforeEnter: (to, from) => {
+            beforeEnter: () => {
                 if (store.state.folio === 0) {
                     return {name: 'Seleccion Periodo'}
                 }
@@ -143,8 +158,40 @@ const router = createRouter({
             component: PanelDominios,
             meta: {
                 requiresAuth: true,
+                onlyAdmin: true,
                 title: 'Administrar Dominio de Correos'
             }
+        },
+        {
+            name: 'Credencial',
+            path: '/mi-credencial',
+            component: VerCredencial,
+            meta: {
+                requiresAuth: true,
+                title: 'Credencial Tributaria'
+            }
+        },
+        {
+            path: '/ver-empresas',
+            component: VerEmpresas,
+            meta: {
+                requiresAuth: true,
+                onlyAdmin: true,
+                title: 'Ver Empresas'
+            }
+        },
+        {
+            path: '/admin/ver-f29/:folio',
+            component: VerFormulario,
+            meta: {
+                requiresAuth: true,
+                onlyAdmin: true,
+                title: 'Ver Formulario'
+            }
+        },
+        {
+            path: '/not-found',
+            component: NotFound
         },
         {
             path: '/:pathMatch(.*)',
@@ -153,7 +200,7 @@ const router = createRouter({
     ],
 });
 
-router.beforeEach((to, from) => {
+router.beforeEach((to) => {
     document.title = to.meta.title || DEFAULT_TITLE;
     if (to.meta.requiresAuth && !isLoggedIn()) {
         return { name: 'Login' }
@@ -163,6 +210,9 @@ router.beforeEach((to, from) => {
         } else {
             return { name: 'Perfil' }
         }
+    }
+    if (to.meta.onlyAdmin && !isAdmin()) {
+        return { path: '/not-found' }
     }
 })
 
