@@ -101,8 +101,8 @@
     </div>
   </div>
   <AlertBase
-    v-if="errorMsg"
-    v-model:isOpen="errorMsg"
+    v-if="openAlert"
+    v-model:isOpen="openAlert"
     :mensaje="errorMsg"
     class="container"
   />
@@ -134,6 +134,8 @@ export default defineComponent({
     const nuevoF29Path = '/nuevo-f29';
     const errorMsg = ref('');
     let currentPeriod = new Date();
+
+    const openAlert = ref(false);
     currentPeriod.setDate(1);
     //Hack para resetear hora y milisegundos
     // currentPeriod.setHours(0,0,0);
@@ -160,18 +162,20 @@ export default defineComponent({
       selectedPeriod.setHours(0,0,0);
       if (selectedPeriod > currentPeriod) {
         errorMsg.value = 'Período seleccionado no es válido.';
+        openAlert.value = true;
         return;
       }
       const periodoTributario = {
         month: selectedMonth.value,
         year: selectedYear.value,
       }
-      f29Store.resetValues();
+      f29Store.resetValues(false);
       buscarF29(periodoTributario)
       .then((res) => {
         if (res.estado === 'ENVIADO') {
           console.error('Declaración de mes seleccionado ya fue enviada. No se puede modificar');
           errorMsg.value = 'Declaración de mes seleccionado ya fue enviada. No se puede modificar';
+          openAlert.value = true;
           return;
         }
         f29Store.loadData(res);
@@ -207,6 +211,7 @@ export default defineComponent({
       selectedMonth,
       years,
       errorMsg,
+      openAlert,
       mostrarF29,
     }
   },
