@@ -62,14 +62,23 @@
           <small>{{ errores.razon_social }}</small>
         </div>
       </div>
-      <div class="w-full mb-1 flex items-center">
+      <div class="w-full mb-1 flex flex-wrap items-center relative">
         <input 
           id="rutCheckbox"
           :value="poseeRut" 
           type="checkbox"
           @change="mostrarRut($event.target.checked)"
         >
-        <label for="rutCheckbox">Empresa posee RUT?</label>
+        <label 
+          for="rutCheckbox" 
+          class="pr-2"
+        >
+          ¿Empresa posee RUT?
+        </label>
+        <div class="w-full text-xs flex">
+          <i class="pi pi-info-circle text-xs text-yellow-800" />
+          <small class="ml-1">Si no marca esta opción el sistema generará un RUT para su empresa.</small>
+        </div>
       </div>
       <div 
         class="w-full relative mb-9"
@@ -289,10 +298,10 @@ export default defineComponent({
     }
     const mostrarMensaje = async (msg) => {
       message.value = msg;
-      await setTimeout(() => {
-        message.value = "";
-        hasError.value = false;
-      }, 10000);
+      // await setTimeout(() => {
+      //   message.value = "";
+      //   hasError.value = false;
+      // }, 10000);
     };
     return {
       solicitud,
