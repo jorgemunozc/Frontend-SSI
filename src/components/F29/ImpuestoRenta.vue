@@ -708,13 +708,14 @@ export default defineComponent({
   },
   computed: {
     cod62(): string {
-      let subTotal = (this.datos.cod563 * this.datos.cod115)
+      let subTotal = Math.round(this.datos.cod563 * this.datos.cod115)
       if (this.datos.cod68 < subTotal) {
         subTotal -= this.datos.cod68
       } else {
         subTotal = 0
       }
-      return parseNumber(Math.round(subTotal))
+      this.store.setValue('cod62', subTotal);
+      return parseNumber(subTotal)
     },
     cod115: {
       get(): string {
