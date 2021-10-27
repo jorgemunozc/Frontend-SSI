@@ -10,7 +10,7 @@
       <Formulario29
         :folio="folio"
         :datos-empresa="empresa"
-        :periodo="{ month, year }"
+        :periodo="{ month: Number(month), year: Number(year) }"
       />
     </div>
     <div class="f29__botones">
@@ -183,11 +183,6 @@ export default defineComponent({
     if (folio.value === 0 && typeof estadof29 == "undefined") {
       puedeInsertar = true;
     }
-    if (puedeInsertar) {
-      console.log("MODO: GUARDAR");
-    } else {
-      console.log("MODO: ACTUALIZAR");
-    }
 
     const enviarFormulario = function () {
       isLoading.value = true;
@@ -262,7 +257,7 @@ export default defineComponent({
       }
     };
 
-    const limpiarForm = () => f29Store.resetValues();
+    const limpiarForm = () => f29Store.resetValues(true);
 
     const showPopUp = ref(false);
     const title = "¿Está seguro que desea enviar declaración de impuestos?";
@@ -294,6 +289,9 @@ export default defineComponent({
       showAlert.value = true;
     };
 
+    // const addNotNullListener = function () {
+
+    // }
     return {
       limpiarForm,
       // print,

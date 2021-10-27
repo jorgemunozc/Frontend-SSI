@@ -6,7 +6,7 @@
     <Formulario29
       :folio="folio"
       :editable="false"
-      :periodo="{ month, year }"
+      :periodo="periodoTributario"
       :datos-empresa="empresa"
     />
   </div>
@@ -28,9 +28,13 @@ export default defineComponent({
     Navbar,
   },
   props: ["month", "year"],
-  setup() {
+  setup(props) {
     const f29Data = store.state;
     const folio = f29Data.folio;
+    const periodoTributario = {
+      month: Number(props.month),
+      year: Number(props.year)
+    }
     const empresa = reactive({
       razonSocial: "",
       nombre: "",
@@ -42,6 +46,7 @@ export default defineComponent({
     return {
       folio,
       empresa,
+      periodoTributario
     };
   },
 });
