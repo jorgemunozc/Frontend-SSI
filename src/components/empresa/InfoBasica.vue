@@ -1,41 +1,51 @@
 <template>
-  <div class="mr-4 my-4">
-    <div class="flex">
-      <span class="font-bold w-1/2 md:w-40">Raz&oacute;n Social:</span> 
-      <span class="">{{ empresa.razon_social }}</span>
+  <div class="my-4 flex flex-col">
+    <div class="flex mb-2">
+      <div class="font-bold w-32">Razón Social:</div> 
+      <div class="flex-1">{{ empresa.razon_social }}</div>
     </div>
-    <div class="flex">
-      <span class="font-bold w-1/2 md:w-40">Giro:</span> 
-      <span>{{ empresa.giro }}</span>
+    <div class="flex mb-2">
+      <div class="block font-bold w-32">Giro:</div> 
+      <div class="flex-1">{{ empresa.giro }}</div>
     </div>
-    <div class="flex">
-      <span class="font-bold w-1/2 md:w-40">Rut:</span> 
-      <span>{{ empresa.rut }} - {{ empresa.dv }}</span>
+    <div class="flex mb-2">
+      <div class="font-bold w-32">Rut:</div> 
+      <div class="flex-1">{{ empresa.rut }} - {{ empresa.dv }}</div>
     </div>
-    <div class="flex">
-      <span class="font-bold w-1/2 md:w-40">Direcci&oacute;n:</span> 
-      <span>{{ empresa.domicilio }}</span>
+    <div class="flex mb-2">
+      <div class="font-bold w-32">Dirección:</div> 
+      <div class="flex-1">{{ empresa.domicilio }}</div>
     </div>
-    <div class="flex">
-      <span class="font-bold w-1/2 md:w-40">Ciudad:</span> 
-      <span>{{ empresa.ciudad }}</span>
+    <div class="flex mb-2">
+      <div class="font-bold w-32">Ciudad:</div> 
+      <div class="flex-1">{{ empresa.ciudad }}</div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import { obtenerEmpresa } from "@/services/EmpresaService";
 
 export default defineComponent({
   name: "InfoBasica",
-  setup() {
+  props: {
+    rut: {
+      type: Number,
+      default: undefined
+    }
+  },
+  setup(props) {
     const empresa = ref({} as Empresa);
-    const cargarDatos = () => {
-      obtenerEmpresa()
+    const cargarDatos = (rut?: number) => {
+      obtenerEmpresa(rut)
         .then((data) => (empresa.value = data))
     };
-    cargarDatos();
+    cargarDatos(props.rut);
+    watch(
+      () => props.rut,
+      () => cargarDatos(props.rut)
+    )
     return {
       empresa,
     };
