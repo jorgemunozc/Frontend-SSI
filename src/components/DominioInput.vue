@@ -67,7 +67,6 @@ export default defineComponent({
     .catch(err => {
       if (err.response.data.errors) {
         const errores = err.response.data.errors;
-        console.error(errores.dominio[0])
         msg.value = errores.dominio[0];
         hasError.value = true;
       } else {
