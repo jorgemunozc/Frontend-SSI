@@ -249,10 +249,17 @@ const store = {
   },
 
   //Resetea el estado del formulario.
-  resetValues() {
+  resetValues(onlyValues: boolean): void {
+    const specialFields = ['estado', 'folio'];
     for (const prop in this.state) {
       if (prop === 'cod750') {
         this.state[prop] = false;
+        continue;
+      }
+      /**Opcion para cuando solo se desea limpiar los valores ingresados en el formulario
+       * y no el formulario completo
+       **/
+      if (onlyValues && (specialFields.includes(prop))) {
         continue;
       }
       this.state[prop] = 0;
@@ -325,7 +332,6 @@ const store = {
     ];
 
     const propsResta = ['cod723'];
-
     this.calcularTotal(targetProps, propsResta, 'cod595');
   },
 
