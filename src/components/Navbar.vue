@@ -16,6 +16,12 @@
     >
       Gesti&oacute;n dominio correos
     </router-link>
+    <router-link 
+      to="/ver-empresas"
+      class="block py-4 hover:bg-gray-700 text-center text-white"
+    >
+      Empresas
+    </router-link>
     <a
       class="block py-4 hover:bg-red-900 text-center text-white cursor-pointer"
       @click="logOut"
@@ -37,7 +43,12 @@
       <i class="user icon" />
       Mis Datos
     </router-link>
-    <!-- <a class="item">Ver Formulario 19</a> -->
+    <router-link
+      class="flex items-center px-4 border-b-2 border-black border-opacity-0 hover:border-opacity-100 hover:bg-blue-100"
+      to="/mi-credencial"
+    >
+      Mi Credencial
+    </router-link>
     <router-link 
       to="/f29"
       class="flex items-center px-4 border-b-2 border-black border-opacity-0 hover:border-opacity-100 hover:bg-blue-100"
@@ -56,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import { logout } from "@/services/LoginService";
 import { useRouter } from "vue-router";
 import isLoggedIn from '@/auth/isLoggedIn';
