@@ -1,8 +1,7 @@
 import { API_HOST } from '../config';
 import axios from 'axios';
-
-import { removeAdmin, removeLoggedIn } from '@/auth/unsetAuth';
 import router from '@/router';
+import { unsetCookies } from '@/auth/cookies';
 
 function init(): void {
     axios.defaults.withCredentials = true;
@@ -11,8 +10,7 @@ function init(): void {
     axios.interceptors.response.use((response) => response, function (error) {
         const errorCode = error.response.status;
         if (errorCode === 401 || errorCode === 419) {
-            removeLoggedIn();
-            removeAdmin();
+            unsetCookies();
             router.push({ name: 'Login' });
         }
         return Promise.reject(error);

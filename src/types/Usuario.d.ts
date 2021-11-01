@@ -1,10 +1,11 @@
 declare interface Usuario {
     id: number,
-    correo: String,
+    correo: string,
     rol: rol,
-    rutEmpresa: String,
-    createdAt: date,
-    updatedAt: date,
+    empresa__rut?: number,
+    created_at?: date,
+    updated_at?: date,
+    permisos?: Permisos
 }
 
 enum rol {

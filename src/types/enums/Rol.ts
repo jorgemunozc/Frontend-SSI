@@ -1,6 +1,7 @@
 enum Rol {
     EMPRESA = "EMPRESA",
-    ADMIN = "ADMIN"
+    ADMIN = "ADMIN",
+    AUDITOR = "AUDITOR"
 }
 
 export {Rol};
