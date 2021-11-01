@@ -1,21 +1,21 @@
-import { RouteRecordRaw } from "vue-router";
+import { RouteParams, RouteRecordRaw } from "vue-router";
 
 import Dashboard from '@/views/admin/Dashboard.vue';
 import PanelDominios from '@/views/admin/PanelDominios.vue';
-import VerEmpresas from '@/views/admin/VerEmpresas.vue';
-import VerFormulario from '@/views/admin/VerFormulario.vue';
+import VerAuditores from '@/views/admin/VerAuditores.vue';
+import CrearAuditor from '@/views/admin/CrearAuditor.vue';
+// import AuditoresList from '@/components/auditor/AuditoresList.vue';
+import EditarAuditor from '@/views/admin/EditarAuditor.vue';
+import VerAuditor from '@/views/admin/VerAuditor.vue';
 
+
+function getId(params: RouteParams): number {
+  const auditorId = Array.isArray(params.id)? params.id[0] : params.id;
+  const id = parseInt(auditorId, 10) || 0;
+  return id;
+}
 
 const routes: Array<RouteRecordRaw> = [
-  {
-    name: 'Dashboard',
-    path: '/dashboard',
-    component: Dashboard,
-    meta: {
-      requiresAuth: true,
-      title: "Panel Principal"
-    }
-  },
   {
     name: 'Solicitudes',
     path: '/ver-solicitudes',
@@ -24,24 +24,6 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true,
       onlyAdmin: true,
       title: 'Solicitudes de Acceso'
-    }
-  },
-  {
-    path: '/ver-empresas',
-    component: VerEmpresas,
-    meta: {
-      requiresAuth: true,
-      onlyAdmin: true,
-      title: 'Ver Empresas'
-    }
-  },
-  {
-    path: '/admin/ver-f29/:folio',
-    component: VerFormulario,
-    meta: {
-      requiresAuth: true,
-      onlyAdmin: true,
-      title: 'Ver Formulario'
     }
   },
   {
@@ -54,6 +36,35 @@ const routes: Array<RouteRecordRaw> = [
       title: 'Administrar Dominio de Correos'
     }
   },
+  {
+    path: '/auditores',
+    component: VerAuditores,
+    meta: {
+      requiresAuth: true,
+      onlyAdmin: true,
+      title: "Ver Auditores"
+    },
+    children: [
+      // {
+      //   path: '',
+      //   component: AuditoresList
+      // },
+      {
+        path: 'nuevo',
+        component: CrearAuditor
+      },
+      {
+        path: 'editar/:id',
+        component: EditarAuditor,
+        props: ({params}) => ({id: getId(params)} )
+      },
+      {
+        path: 'ver/:id',
+        component: VerAuditor,
+        props: ({params}) => ({id: getId(params)})
+      }
+    ]
+  }
 ];
 
 function getAdminRoutes(): Array<RouteRecordRaw> {
