@@ -125,9 +125,13 @@ export default defineComponent({
         });
     };
     const rechazarSolicitud = () => {
-      modificarSolicitud(props.solicitud.id, "RECHAZADO").then(() => {
+      isProcessing.value = true;
+      modificarSolicitud(props.solicitud.id, "RECHAZADO")
+      .then(() => {
         emit("itemChanged:rejected");
-      });
+      })
+      .catch(() => console.log('ocurrio error'))
+      .finally(() => isProcessing.value = false);
     };
 
     const sendMessage = function (type: string, msg: string) {
