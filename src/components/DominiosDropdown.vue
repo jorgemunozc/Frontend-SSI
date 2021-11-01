@@ -9,14 +9,13 @@
 </template>
 
 <script lang="ts">
+//TODO: CARGAR CORREOS AL ABRIR DROPDOWN
 import { defineComponent, ref } from "vue";
 import { getDominios } from "@/services/DominioService";
 
 export default defineComponent({
-  // emits: ['update:modelValue'],
-  // props: ['modelValue'],
   data() {
-    const dominios = ref([] as DominioCorreo[]);
+    const dominios = ref<DominioCorreo[]>([]);
     const getDominiosCorreo = async () => {
       await getDominios()
         .then((res) => (dominios.value = res))
