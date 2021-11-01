@@ -15,6 +15,7 @@
       </span>
     </div>
     <div 
+      v-if="hasAdminPrivileges"
       class="relative w-16 rounded-full border-2 z-0 flex items-center transition-colors"
       :class="switchBgColorClass"
     >
@@ -32,6 +33,7 @@
   </div>
 </template>
 <script lang="ts">
+import isAdmin from '@/auth/isAdmin';
 import { activarEmpresa, desactivarEmpresa, estadoEmpresa } from '@/services/EmpresaService';
 import { computed, defineComponent, ref, watch } from 'vue';
 import LoadingSpinner from '../LoadingSpinner.vue';
@@ -48,6 +50,7 @@ export default defineComponent({
     const isActive = ref(false);
     const isReady = ref(false);
     const isPending = ref(true);
+    const hasAdminPrivileges = isAdmin();
     const estado = computed(() => {
       return isActive.value? 'ACTIVA': 'INACTIVA';
     });
@@ -117,6 +120,7 @@ export default defineComponent({
       toggledClass,
       switchBgColorClass,
       estado,
+      hasAdminPrivileges,
       modificarEstado,
     }
   },
