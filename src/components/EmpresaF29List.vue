@@ -1,10 +1,10 @@
 <template>
-  <table class="w-52 min-w-max">
+  <table class="w-52">
     <thead>
       <tr class="bg-gray-300">
         <th>Mes</th>
         <th>Folio</th>
-        <th></th>
+        <th v-if="showButton" />
       </tr>
     </thead>
     <tbody v-if="isLoading">
@@ -21,9 +21,9 @@
       >
         <td class="bg-blue-100">{{ meses[form.mes] }}</td>
         <td>{{ form.folio }}</td>
-        <th>
+        <th v-if="showButton">
           <router-link 
-            :to="`/admin/ver-f29/${form.folio}`"
+            :to="`/control/ver-f29/${form.folio}`"
             class="text-blue-700 hover:text-blue-800 cursor-pointer font-normal"
           >
             Ver
@@ -49,6 +49,10 @@ export default defineComponent({
     year: {
       type: Number,
       default: 2021
+    },
+    showButton: {
+      type: Boolean,
+      default: true
     }
   },
   setup(props) {
