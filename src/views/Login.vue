@@ -38,7 +38,7 @@
           class="text-blue-600 hover:text-blue-400"
         >aqu&iacute;</router-link></span>
     </div>
-    <div>
+    <div class="self-center">
       <router-link 
         to="/reset"
         class="block text-center text-blue-600 hover:text-blue-400"
@@ -57,7 +57,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import auth from "@/services/LoginService";
-import { setLoggedIn, setAdminSession } from "@/auth/setAuth";
 import AlertBase from '@/components/AlertBase.vue';
 
 export default defineComponent({
@@ -84,15 +83,7 @@ export default defineComponent({
 
       const credenciales = this.crearCredenciales();
       auth(credenciales)
-        .then((rol) => {
-          let redirect = "home";
-          setLoggedIn();
-          if (rol === "ADMIN") {
-            redirect = "dashboard";
-            setAdminSession();
-          }
-          this.$router.push(redirect);
-        })
+        .then((redirect) => this.$router.push(redirect))
         .catch(() => {
             this.displayError('Credenciales incorrectas. Inténtelo nuevamente.');
         });
@@ -128,15 +119,3 @@ export default defineComponent({
   },
 });
 </script>
-<style >
-  .alert-footer {
-		-webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-		animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;	
-	}
-
-	/*Footer close animation*/
-	.alert-footer input:checked ~ * {
-		-webkit-animation: slide-out-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-		animation: slide-out-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-	}
-</style>

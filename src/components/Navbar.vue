@@ -1,22 +1,30 @@
 <template>
   <nav
-    v-if="isLoggedIn() && isAdmin()"
+    v-if="isLoggedIn() && isSuperUser()"
     class="flex flex-col items-stretch bg-gray-800 md:fixed md:w-48"
   >
+    <template v-if="isAdmin()">
+      <router-link
+        class="block py-4 hover:bg-gray-700 text-center text-white"
+        to="/ver-solicitudes"
+      >
+        <i class="file icon" />
+        Gestionar Solicitudes
+      </router-link>
+      <router-link
+        to="/dominios-correo"
+        class="block py-4 hover:bg-gray-700 text-center text-white"
+      >
+        Gestión dominio correos
+      </router-link>
+      <router-link
+        to="/auditores"
+        class="block py-4 hover:bg-gray-700 text-center text-white"
+      >
+        Auditores
+      </router-link>
+    </template>
     <router-link
-      class="block py-4 hover:bg-gray-700 text-center text-white"
-      to="/ver-solicitudes"
-    >
-      <i class="file icon" />
-      Gestionar Solicitudes
-    </router-link>
-    <router-link 
-      to="dominios-correo"
-      class="block py-4 hover:bg-gray-700 text-center text-white"
-    >
-      Gesti&oacute;n dominio correos
-    </router-link>
-    <router-link 
       to="/ver-empresas"
       class="block py-4 hover:bg-gray-700 text-center text-white"
     >
@@ -27,10 +35,8 @@
       @click="logOut"
     >
       <i class="power off icon" />
-      Cerrar Sesi&oacute;n
+      Cerrar Sesión
     </a>
-    
-    <!-- <li>Gestionar Dominios</li> -->
   </nav>
   <nav
     v-else-if="isLoggedIn()"
@@ -60,9 +66,8 @@
       class="flex items-center px-4 cursor-pointer hover:bg-red-400"
       @click="logOut"
     >
-      Cerrar Sesi&oacute;n
+      Cerrar Sesión
     </a>
-    <!-- <div class="item" /> -->
   </nav>
 </template>
 
@@ -72,6 +77,7 @@ import { logout } from "@/services/LoginService";
 import { useRouter } from "vue-router";
 import isLoggedIn from '@/auth/isLoggedIn';
 import isAdmin from '@/auth/isAdmin';
+import isSuperUser from '@/auth/checkPermissions';
 
 export default defineComponent({
   name: "Navbar",
@@ -86,6 +92,7 @@ export default defineComponent({
       logOut,
       isLoggedIn,
       isAdmin,
+      isSuperUser
     };
   },
 });

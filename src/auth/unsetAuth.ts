@@ -1,12 +1,23 @@
-function removeLoggedIn() {
+function unsetLoggedIn(): void {
     localStorage.removeItem('isLoggedIn');
 }
 
-function removeAdmin() {
+function unsetAdminSession(): void {
     localStorage.removeItem('isAdmin');
 }
 
+function unsetSuperUserSession(): void {
+    localStorage.removeItem('isSU');
+}
+
+function unsetSession(): void {
+    unsetLoggedIn();
+    unsetAdminSession();
+    unsetSuperUserSession();
+}
+
 export {
-    removeAdmin,
-    removeLoggedIn,
+    unsetAdminSession,
+    unsetSuperUserSession,
+    unsetSession
 }
