@@ -11,7 +11,6 @@
         <tr>
           <th>Empresa</th>
           <template v-if="editable">
-            <th />
             <th>
               <input 
                 v-model="checkAll"
@@ -30,13 +29,6 @@
           <template v-if="editable">
             <td class="text-center">
               <input
-                v-model="selectedEmpresa"
-                type="radio"
-                :value="empresa.rut"
-              >
-            </td>
-            <td class="text-center">
-              <input
                 v-model="selectedEmpresas"
                 type="checkbox"
                 :value="empresa.rut"
@@ -47,7 +39,9 @@
       </tbody>
       <tbody v-else>
         <tr class="h-7">
-          <td colspan="3" />
+          <td colspan="3">
+            No puede ver ninguna empresa
+          </td>
         </tr>
       </tbody>
     </table>
@@ -64,18 +58,17 @@ export default defineComponent({
     },
     empresasSeleccionadas: {
       type: Array as PropType<Array<number>>,
-      default: []
+      default: () => new Array<number>()
     },
     editable: {
       type: Boolean,
       default: true
     }
   },
-  emits: ['seleccionCambiada', 'empresaSeleccionada'],
+  emits: ['seleccion-cambiada'],
   setup(props, { emit }) {
     const { empresas } = toRefs(props);
     const selectedEmpresas = ref(props.empresasSeleccionadas);
-    const selectedEmpresa = ref(0);
     const checkAll = computed({
       get: () => {
         return empresas.value.length? 
@@ -97,18 +90,12 @@ export default defineComponent({
     */
     watch(
       () => selectedEmpresas.value,
-      () => emit('seleccionCambiada', selectedEmpresas.value)
+      () => emit('seleccion-cambiada', selectedEmpresas.value)
     );
-
-    watch(
-      () => selectedEmpresa.value,
-      () => emit('empresaSeleccionada', selectedEmpresa.value)
-    )
 
     return {
       checkAll,
-      selectedEmpresas,
-      selectedEmpresa
+      selectedEmpresas
     }
   },
 })

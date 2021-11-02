@@ -87,7 +87,7 @@ export default defineComponent({
         if (auditor.value.permisos?.ver_empresas) {
           empresasVisibles.value = auditor.value.permisos.ver_empresas;
         }
-      }).catch(err => 
+      }).catch(() => 
         console.error('No se pudo cargar info')
       ).finally(()=> {
         isLoading.value = false;

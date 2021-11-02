@@ -1,20 +1,40 @@
 <template>
-  <table class="max-w-sm">
+  <table class="w-full table-fixed">
     <thead>
       <tr class="bg-blue-100">
-        <th>Id</th>
+        <th class="w-14">Id</th>
         <th>Correo</th>
-        <th>Acciones</th>
+        <th class="w-24">Acciones</th>
       </tr>
     </thead>
-    <tbody v-if="hayAuditores">
+    <tbody 
+      v-if="hayAuditores" 
+      class="relative"
+    >
+      <div
+        v-show="isProcessing"
+        class="
+          absolute
+          inset-0
+          bg-gray-200
+          z-10
+          flex
+          items-center
+          justify-center
+          bg-opacity-60
+        "
+      >
+        <LoadingSpinner />
+      </div>
       <tr 
         v-for="auditor in auditores" 
         :key="auditor.id"
-        class="hover:bg-gray-100 h-10"
+        class="hover:bg-gray-100 hover:bg-opacity-50 h-10 relative"
       >
         <td>{{ auditor.id }}</td>
-        <td>{{ auditor.correo }}</td>
+        <td class="truncate">
+          {{ auditor.correo }}
+        </td>
         <td class="text-center">
           <div class="flex justify-around">
             <router-link 
@@ -47,23 +67,43 @@
       </tr>
     </tbody>
   </table>
+  <AlertBase 
+    v-show="isAlertOpen"
+    v-model:isOpen="isAlertOpen"
+    :mensaje="message"
+  />
 </template>
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent,ref } from 'vue'
 import { eliminarUsuario, obtenerAuditores } from '@/services/UsuarioService';
 import store from '@/store/auditores.module';
+import AlertBase from '@/components/AlertBase.vue';
+import LoadingSpinner from '@/components/LoadingSpinner.vue';
 
 export default defineComponent({
+  components: { 
+    AlertBase,
+    LoadingSpinner
+  },
   setup() {
+    const message = ref('');
+    const isAlertOpen = ref(false);
+    const isProcessing = ref(false);
     const auditoresStore = store;
     const auditores = auditoresStore.state.auditores;
     const hayAuditores = computed(() => auditores.length > 0);
 
     const eliminarAuditorDeBD = function (id: number) {
+      isProcessing.value = true;
       eliminarUsuario(id)
       .then(() => {
         auditoresStore.removerAuditor(id);
       })
+      .catch(err => {
+        message.value = err.response.data.error;
+        isAlertOpen.value = true;
+      })
+      .finally(() => isProcessing.value = false);
     };
 
     obtenerAuditores().then((data) => {
@@ -73,6 +113,9 @@ export default defineComponent({
     return {
       auditores,
       hayAuditores,
+      message,
+      isAlertOpen,
+      isProcessing,
       eliminarAuditorDeBD
     }
   },

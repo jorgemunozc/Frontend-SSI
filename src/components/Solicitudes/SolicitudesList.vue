@@ -21,7 +21,8 @@
           colspan="4" 
           class="text-center border-0 h-16"
         >
-          Sin solicitudes pendientes por procesar.
+          <span v-show="!isLoading">Sin solicitudes pendientes por procesar.</span>
+          <LoadingSpinner v-show="isLoading" />
         </td>
       </tr>
       <tr
@@ -53,11 +54,13 @@ import { defineComponent, ref } from "vue";
 import SolicitudItem from "@/components/solicitudes/SolicitudItem.vue";
 import AlertBase from '@/components/AlertBase.vue';
 import { listaSolicitudes } from "@/services/SolicitudService";
+import LoadingSpinner from "../LoadingSpinner.vue";
 
 export default defineComponent({
   components: {
     SolicitudItem,
     AlertBase,
+    LoadingSpinner,
   },
   setup() {
     const solicitudes = ref();
@@ -66,10 +69,13 @@ export default defineComponent({
     const hasMessage = ref(false);
     const selectedRows = ref([]);
     // const isChecked = ref();
-
+    const isLoading = ref(false);
     const obtenerSolicitudes = async () => {
+      isLoading.value = true;
       solicitudes.value = await listaSolicitudes();
+      isLoading.value = false;
     };
+
     const removeItem = (index) => {
       solicitudes.value.splice(index, 1);
     };
@@ -107,6 +113,7 @@ export default defineComponent({
       hasMessage,
       selectedRows,
       // isChecked,
+      isLoading,
       obtenerSolicitudes,
       removeItem,
       displayMessage,

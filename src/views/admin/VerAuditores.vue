@@ -8,10 +8,16 @@
       <h1 class="text-blue-700 font-semibold text-2xl mb-4 w-full">
         Auditores
       </h1>
-      <div>
+      <div class="flex flex-col max-w-sm">
         <router-link
           to="/auditores/nuevo"
-          class="bg-blue-800 hover:bg-blue-900 text-white rounded-t h-8 w-32 text-center flex items-center justify-center"
+          class="
+            bg-blue-800 hover:bg-blue-900 
+            text-white text-center
+            h-8 w-32 rounded-t
+            flex items-center justify-center
+            self-end
+          "
         >
           Agregar Auditor
         </router-link>
