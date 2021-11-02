@@ -18,18 +18,16 @@
         <AuditoresList />
       </div>
       <router-view />
-      <!-- <ListaEmpresasVisibles :empresas="[]">
-        
-      </ListaEmpresasVisibles> -->
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Navbar from '@/components/Navbar.vue'
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, watch } from 'vue'
 import AuditoresList from '@/components/auditor/AuditoresList.vue'
 import store from '@/store/auditores.module';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   components: { 
@@ -38,30 +36,16 @@ export default defineComponent({
     // ListaEmpresasVisibles 
   },
   setup() {
-    const componente = ref('');
-    const posiblesComponentes = ['VerAuditor', 'CrearAuditor', 'EditarAuditor'];
+    const router = useRouter();
     const auditores = store.state.auditores;
-    const mostrarComponente = function (nombreComponente: string) {
-      const existeComp = posiblesComponentes.indexOf(nombreComponente) !== -1;
-      if (existeComp) {
-        componente.value = nombreComponente;
-      } else {
-        componente.value = '';
-      }
-    };
+    
     watch(
       () => auditores,
-      (valor, previo) => {
-        console.log('Nuevo auditor agregado!');
-        console.log(valor)
-        console.log(previo)
+      async () => {
+        await router.push('/auditores')
       },
       {deep: true}
     );
-    return {
-      componente,
-      mostrarComponente
-    }
   }
 })
 </script>

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1 class="text-xl">Editar Auditor</h1>
+    <h1 class="text-xl">
+      Editar Auditor
+    </h1>
     <!-- <router-link to="/auditores">Volver</router-link> -->
     <div class="flex gap-3">
       <span><em class="not-italic font-semibold">Auditor:</em> {{ infoAuditor }}</span>
@@ -11,11 +13,12 @@
     >
       <LoadingSpinner />
       <ListaEmpresasVisibles
-        :empresas="[]" />
+        :empresas="[]" 
+      />
     </template>
     <template v-else>
       <form
-        class="flex justify-end"
+        class="flex justify-end max-w-md"
         @submit.prevent="editarPermisos"
       >
         <button
