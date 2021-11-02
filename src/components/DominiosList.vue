@@ -1,10 +1,19 @@
 <template>
-  <table class="border">
+  <table class="border relative">
     <tr class="h-12">
       <th class="w-40 sticky top-0 bg-white border-0 border-r border-gray-300 bg-blue-200 z-20">
         Dominio correo
       </th>
       <th class="w-20 sticky top-0 bg-white border-0 border-r border-gray-300 bg-blue-200 z-20" />
+      <div 
+        v-show="isLoading"
+        class="absolute inset-0 z-20 
+          flex items-center
+          bg-gray-200 bg-opacity-50
+        "
+      >
+        <LoadingSpinner />
+      </div>
     </tr>
     <tr 
       v-for="dom in dominios"
@@ -42,31 +51,36 @@
 import { eliminarDominio, getDominios } from '@/services/DominioService'
 import { defineComponent, ref } from 'vue';
 import store from '@/store/dominios.module';
+import LoadingSpinner from '@/components/LoadingSpinner.vue';
 
 export default defineComponent({
+  components: { LoadingSpinner },
   setup() {
     const dominiosStore = store;
     const dominios = ref(dominiosStore.state.dominios);
+    const isLoading = ref(false);
     const eliminarDom = function (id: number) {
+      isLoading.value = true;
       eliminarDominio(id)
       .then(() => {
         dominiosStore.eliminarDominio(id);
       })
       .catch(err => {
         console.error(err.response.data);
-      })
+      }).finally(() => isLoading.value = false);
     }
-
+    isLoading.value = true;
     getDominios()
     .then(res => {
-      console.log('cargando dominios...');
       dominiosStore.vaciarLista();
       for (let dominio of res) {
         dominios.value.push(dominio);
       }
-    });
+    })
+    .finally(() => isLoading.value = false);
     return {
       dominios,
+      isLoading,
       eliminarDom
     }
   },
