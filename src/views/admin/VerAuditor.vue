@@ -1,10 +1,12 @@
 <template>
   <div>
-    <h1 class="text-xl">Información Auditor</h1>
+    <h1 class="text-xl">
+      Información Auditor
+    </h1>
     <div>
       <div class="flex gap-3">
         <span>
-          <em class="not-italic font-semibold">Auditor:</em> {{ infoAuditor }}
+          <em class="not-italic font-semibold">Auditor:</em> {{ identificacionAuditor }}
         </span>
         <span>
           <em class="not-italic font-semibold">Correo:</em> {{ correo }}
@@ -37,7 +39,7 @@
 import ListaEmpresasVisibles from '@/components/auditor/ListaEmpresasVisibles.vue';
 import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import { obtenerEmpresasVisibles, obtenerUsuario } from '@/services/UsuarioService';
-import { computed, defineComponent, ref, toRefs, watch } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 
 export default defineComponent({
   components: { 
@@ -54,9 +56,10 @@ export default defineComponent({
     const auditor = ref<Usuario>();
     const empresas = ref<Empresa[]>([]);
     const correo = computed(() => auditor.value? auditor.value.correo : '');
-    const infoAuditor = computed(() => auditor.value? auditor.value.id : '');
+    const identificacionAuditor = computed(() => auditor.value? auditor.value.id : '');
     const isLoading = ref(true);
-    const cargarDatos = function (id: number) {
+
+    const cargarDatosAuditor = function (id: number) {
       isLoading.value = true;
       Promise.all([obtenerUsuario(id), obtenerEmpresasVisibles(id)])
       .then((result) => {
@@ -65,19 +68,18 @@ export default defineComponent({
       })
       .catch((err) => console.log(err))
       .finally(() => isLoading.value = false);
-    }
-    cargarDatos(props.id)
-
+    };
+    cargarDatosAuditor(props.id);
     watch(
       () => props.id,
       (newId) => {
-        cargarDatos(newId);
+        cargarDatosAuditor(newId);
       }
     );
     return {
       auditor,
       empresas,
-      infoAuditor,
+      identificacionAuditor,
       correo,
       isLoading
     }
