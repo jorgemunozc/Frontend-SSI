@@ -235,7 +235,7 @@ const store = {
     cod94: 0,
   }),
 
-  setValue(property: string, newValue: number) {
+  setValue(property: string, newValue: number): void {
     if (this.state.hasOwnProperty(property)) {
       this.state[property] = newValue;
     }
@@ -290,7 +290,7 @@ const store = {
     return total;
   },
 
-  calcularDebito() {
+  calcularDebito(): void {
     const targetProps = [
       'cod502', 'cod764', 'cod717', 'cod111', 'cod759',
       'cod513', 'cod510', 'cod709', 'cod734', 'cod517',
@@ -302,7 +302,7 @@ const store = {
     this.calcularTotal(targetProps, propsResta, 'cod538');
   },
 
-  calcularCreditoBasico() {
+  calcularCreditoBasico(): void {
     const targetProps = [
       'cod520', 'cod762', 'cod766', 'cod525', 'cod528',
       'cod532', 'cod535', 'cod553', 'cod504', 'cod593',
@@ -318,12 +318,12 @@ const store = {
   },
 
   //Diferencia Total Débitos (línea 22, código 538) menos Total Créditos (línea 47, código 537); trasládelo a la línea 48
-  calcularImpuestoParcial() {
+  calcularImpuestoParcial(): number {
     return (this.state.cod538) - (this.state.cod537);
   },
 
   //Calcula subtotal de impuesto para el codigo 595 y lo actualiza en la store
-  calcularSubImpDeterm() {
+  calcularSubImpDeterm(): void {
     const targetProps = [
       'cod89', 'cod760', 'cod50', 'cod48', 'cod151',
       'cod153', 'cod54', 'cod56', 'cod588', 'cod589',

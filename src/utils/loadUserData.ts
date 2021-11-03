@@ -8,7 +8,7 @@ interface targetEmpresaObject {
   razonSocial: string,
   rut: string
 }
-export const obtenerDatosEmpresa = function (empresa: targetEmpresaObject) {
+export const obtenerDatosEmpresa = function (empresa: targetEmpresaObject): void {
   obtenerEmpresa().then((res) => {
     empresa.razonSocial = res.razon_social;
     empresa.rut = `${res.rut}-${res.dv}`;

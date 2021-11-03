@@ -13,7 +13,7 @@ const store = {
     }
     return true;
   },
-  eliminarDominio(id: number) {
+  eliminarDominio(id: number): void {
     for (let i = 0; i < this.state.dominios.length; i++) {
       const currId = this.state.dominios[i].id;
       if (currId === id) {
@@ -21,7 +21,7 @@ const store = {
       }
     }
   },
-  vaciarLista() {
+  vaciarLista(): void {
     this.state.dominios.length = 0;
   }
 }
