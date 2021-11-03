@@ -1,5 +1,7 @@
+import { SERVER_HOST } from '@/config';
 import { get, post, update } from '@/services/ApiService';
 import Estado from '@/types/enums/Estado';
+import axios from 'axios';
 
 const resource = 'solicitudes';
 
@@ -26,7 +28,9 @@ function crearSolicitud(solicitud: postSolicitudForm): Promise<Solicitud> {
     if (solicitud.rut === null) {
         delete solicitud.rut
     }
-    return post<Solicitud>(resource, solicitud);
+    return axios.get(`${SERVER_HOST}/sanctum/csrf-cookie`).then(() => {
+        return post<Solicitud>(resource, solicitud);
+    });
 }
 
 function modificarSolicitud(id: number, nuevoEstado: string): Promise<any> {
