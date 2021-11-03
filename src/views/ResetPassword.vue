@@ -1,6 +1,8 @@
 <template>
   <div class="max-w-md mx-auto flex-grow mt-4 px-4">
-    <h1 class="text-2xl text-blue-700 font-semibold">Recuperación Cuenta</h1>
+    <h1 class="text-2xl text-blue-700 font-semibold">
+      Recuperación Cuenta
+    </h1>
     <div 
       class="my-6 p-2 bg-blue-50 border border-blue-100 text-sm"
       :class="{'opacity-0': !displayInfoMsg }"
