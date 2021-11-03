@@ -10,7 +10,7 @@
       <p class="mb-2">
         Mediante esta opción podrás realizar tu declaración de Formulario 29 (F29)
       </p>
-      <p class="mb-2">
+      <p class="mb-2 font-semibold">
         Te recomendamos revisar con detención la información antes de enviar tu
         declaración.
       </p>
@@ -26,50 +26,10 @@
             <label
               for="month"
               class="mx-2"
-            >Mes</label>
-            <select
-              id="month"
-              v-model="selectedMonth"
-              name="month"
-              class="border h-8 px-2"
             >
-              <option value="1">
-                Enero
-              </option>
-              <option value="2">
-                Febrero
-              </option>
-              <option value="3">
-                Marzo
-              </option>
-              <option value="4">
-                Abril
-              </option>
-              <option value="5">
-                Mayo
-              </option>
-              <option value="6">
-                Junio
-              </option>
-              <option value="7">
-                Julio
-              </option>
-              <option value="8">
-                Agosto
-              </option>
-              <option value="9">
-                Septiembre
-              </option>
-              <option value="10">
-                Octubre
-              </option>
-              <option value="11">
-                Noviembre
-              </option>
-              <option value="12">
-                Diciembre
-              </option>
-            </select>
+              Mes
+            </label>
+            <MonthsDropdown v-model="selectedMonth" />
           </div>
           <div class="mx-2">
             <label
@@ -83,7 +43,7 @@
               class="border h-8 px-2"
             >
               <option
-                v-for="year in years"
+                v-for="year in yearsForDropdown"
                 :key="year.id"
                 :value="year"
               >
@@ -92,8 +52,9 @@
             </select>
           </div>
           <div class=" self-end xs:self-auto mx-2">
-            <button class="bg-blue-800 px-4 text-white h-8">
-              Aceptar
+            <button class="bg-blue-800 px-4 text-white h-8 w-20">
+              <span v-show="!isProcessing">Aceptar</span>
+              <LoadingSpinner v-show="isProcessing" />
             </button>
           </div>
         </form>
@@ -108,21 +69,21 @@
   />
 </template>
 <script lang="ts">
-/**
- * TODO: - Verificar que no se ingrese declaracion de mes mayor al correspondiente
- *       - Mostrar mensaje cuando ya se ha enviado una declaracion para el mes seleccionado
- */
 import { defineComponent, ref } from 'vue'
 import { buscarF29 } from '@/services/F29Service';
 import store from '@/store/f29.module';
 import { useRouter } from 'vue-router';
 import Navbar from '@/components/Navbar.vue';
 import AlertBase from '@/components/AlertBase.vue';
+import MonthsDropdown from '@/components/MonthsDropdown.vue';
+import LoadingSpinner from '@/components/LoadingSpinner.vue';
 
 export default defineComponent({
   components: {
     Navbar,
-    AlertBase
+    AlertBase,
+    MonthsDropdown,
+    LoadingSpinner
   },
   setup() {
     const f29Store = store;
@@ -130,39 +91,62 @@ export default defineComponent({
     const selectedMonth = ref(0);
     const selectedYear = ref(2021);
     const currDate = new Date();
-    const years: number[] = [];
-    const nuevoF29Path = '/nuevo-f29';
+    const yearsForDropdown: number[] = [];
+    let currentTaxPeriod = new Date();
+    const newF29UrlPath = '/nuevo-f29';
     const errorMsg = ref('');
-    let currentPeriod = new Date();
-
+    const isProcessing = ref(false);
     const openAlert = ref(false);
-    currentPeriod.setDate(1);
-    //Hack para resetear hora y milisegundos
-    // currentPeriod.setHours(0,0,0);
-    // currentPeriod.setMilliseconds(0);
-    const setCurrPeriod = () => {
-      if (currDate.getMonth() === 0) {
-          selectedMonth.value = 12;
-          selectedYear.value = currDate.getFullYear() - 1;
-          currentPeriod.setMonth(11);
-          currentPeriod.setFullYear(currDate.getFullYear() - 1)
+
+    const setCurrTaxPeriod = function(): void {
+      currentTaxPeriod = getCurrTaxPeriod();
+    }
+
+    const getCurrTaxPeriod = function() : Date {
+      const taxPeriod = new Date();
+      taxPeriod.setDate(1);
+      if (isCurrMonthJanuary()) {
+        taxPeriod.setMonth(11);
+        taxPeriod.setFullYear(currDate.getFullYear() - 1)
+      } else {
+        taxPeriod.setMonth(currDate.getMonth() - 1);
+      }
+      //Hack para resetear hora y milisegundos
+      taxPeriod.setHours(0,0,0);
+      taxPeriod.setMilliseconds(0);
+      return taxPeriod;
+    }
+
+    const setDefaultPeriodInForm = function (): void {
+      if (isCurrMonthJanuary()) {
+        selectedMonth.value = 12;
+        selectedYear.value = currDate.getFullYear() - 1;
       } else {
         selectedMonth.value = currDate.getMonth();
-        currentPeriod.setMonth(currDate.getMonth() - 1);
       }
+    } 
+    const isCurrMonthJanuary = function() : boolean {
+      return currDate.getMonth() === 0;
     }
-    const fillYearDropdown = () => {
+
+    const fillYearsDropdown = () => {
       for (let i = 2021; i <= currDate.getFullYear(); i++) {
-        years.push(i);
+        yearsForDropdown.push(i);
       }
     }
 
-    const mostrarF29 = () => {
+    const getSelectedPeriod = function() : Date {
       const selectedPeriod = new Date(selectedYear.value, selectedMonth.value - 1);
       selectedPeriod.setHours(0,0,0);
-      if (selectedPeriod > currentPeriod) {
+      return selectedPeriod;
+    }
+    const mostrarF29 = () => {
+      isProcessing.value = true;
+      const selectedPeriod = getSelectedPeriod();
+      if (selectedPeriod > currentTaxPeriod) {
         errorMsg.value = 'Período seleccionado no es válido.';
         openAlert.value = true;
+        isProcessing.value = false;
         return;
       }
       const periodoTributario = {
@@ -176,11 +160,11 @@ export default defineComponent({
           console.error('Declaración de mes seleccionado ya fue enviada. No se puede modificar');
           errorMsg.value = 'Declaración de mes seleccionado ya fue enviada. No se puede modificar';
           openAlert.value = true;
-          return;
+          throw new Error('Ya fue enviado');
         }
         f29Store.loadData(res);
         router.push({ 
-          path: nuevoF29Path, 
+          path: newF29UrlPath, 
           query: {
             'month': periodoTributario.month,
             'year': periodoTributario.year,
@@ -188,10 +172,14 @@ export default defineComponent({
         })
       })
       .catch(err => {
+        //Si es un throw enviado por nosotros lo ignoramos
         const errCode = err.response.status;
+        if (!errCode) {
+          return
+        }
         if (errCode === 404) {
           router.push({
-            path: nuevoF29Path,
+            path: newF29UrlPath,
             query: {
             'month': periodoTributario.month,
             'year': periodoTributario.year,
@@ -201,17 +189,18 @@ export default defineComponent({
           console.error(err.response.data.error);
         }
       })
+      .finally(() => isProcessing.value = false);
     };
-
-
-    setCurrPeriod();
-    fillYearDropdown();
+    setCurrTaxPeriod();
+    setDefaultPeriodInForm();
+    fillYearsDropdown();
     return {
       selectedYear,
       selectedMonth,
-      years,
+      yearsForDropdown,
       errorMsg,
       openAlert,
+      isProcessing,
       mostrarF29,
     }
   },
