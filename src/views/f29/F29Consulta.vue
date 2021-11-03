@@ -10,18 +10,18 @@
       Aqu&iacute; podr&aacute; revisar todas las declaraciones de impuestos mensuales declarados exitosamente en
       cada per&iacute;odo tributario.
     </p>
-    <table class="mx-8 mt-4">
+    <table class="mx-8 mt-4 border border-gray-400 border-collapse">
       <thead>
         <tr>
           <td
             rowspan="2"
-            class="bg-gray-300"
+            class="bg-gray-300 border border-gray-400"
           >
             Mes
           </td>
           <td
             colspan="10"
-            class="bg-gray-300 text-center"
+            class="bg-gray-300 text-center border border-gray-400"
           >
             Per&iacute;odos Tributarios
           </td>
@@ -33,7 +33,7 @@
           <td
             v-for="year in years"
             :key="year"
-            class="bg-blue-100 text-center"
+            class="bg-blue-100 text-center border border-gray-400"
           >
             {{ year }}
           </td>
@@ -44,13 +44,13 @@
           v-for="(month, index) in months"
           :key="month"
         >
-          <td class="bg-blue-100">
+          <td class="bg-blue-100 border border-gray-400">
             {{ month }}
           </td>
           <td
             v-for="year in years"
             :key="year"
-            class="text-center"
+            class="text-center border border-gray-400"
           >
             <a
               v-if="hasF29(year, index + 1)"
