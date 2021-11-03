@@ -80,9 +80,8 @@ export default defineComponent({
     const auditoresStore = store;
     const router = useRouter();
     const empresas = ref<Empresa[]>([]);
-    const selectedEmpresas = ref<number[]>([]);
+    const empresasSeleccionadas = ref<number[]>([]);
     const correo = ref('');
-    const yearF29Report = ref(getCurrentYear());
     const isProcessing = ref(false);
     const isLoading = ref(false);
     const hasError = ref(false);
@@ -102,7 +101,7 @@ export default defineComponent({
 
     const agregarAuditor = function () {
       isProcessing.value = true;
-      const permisos: Permisos = { puedeVerEmpresas: selectedEmpresas.value };
+      const permisos: Permisos = { puedeVerEmpresas: empresasSeleccionadas.value };
       agregarUsuario(Rol.AUDITOR, correo.value, permisos)
       .then((usuario) => {
         auditoresStore.agregarAuditor(usuario);
@@ -116,13 +115,9 @@ export default defineComponent({
     };
 
     const actualizarSeleccion = function (nuevaSelec: number[]) {
-      selectedEmpresas.value = nuevaSelec;
+      empresasSeleccionadas.value = nuevaSelec;
     };
-
-    function getCurrentYear(): number {
-      const currDate = new Date();
-      return currDate.getUTCFullYear();
-    }
+    //Carga de datos en componente
     isLoading.value = true;
     listaEmpresas().then((data) => {
       empresas.value = data;
@@ -133,10 +128,8 @@ export default defineComponent({
     .finally(() => isLoading.value = false);
     
     return {
-      selectedEmpresas,
       empresas,
       correo,
-      yearF29Report,
       isProcessing,
       isDisabled,
       isLoading,
