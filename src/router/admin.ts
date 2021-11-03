@@ -1,12 +1,11 @@
 import { RouteParams, RouteRecordRaw } from "vue-router";
 
-import Dashboard from '@/views/admin/Dashboard.vue';
-import PanelDominios from '@/views/admin/PanelDominios.vue';
-import VerAuditores from '@/views/admin/VerAuditores.vue';
-import CrearAuditor from '@/views/admin/CrearAuditor.vue';
-// import AuditoresList from '@/components/auditor/AuditoresList.vue';
-import EditarAuditor from '@/views/admin/EditarAuditor.vue';
-import VerAuditor from '@/views/admin/VerAuditor.vue';
+const Dashboard = () => import('@/views/admin/Dashboard.vue');
+const PanelDominios = () => import('@/views/admin/PanelDominios.vue');
+const VerAuditores = () => import('@/views/admin/VerAuditores.vue');
+const CrearAuditor = () => import('@/views/admin/CrearAuditor.vue');
+const EditarAuditor = () => import('@/views/admin/EditarAuditor.vue');
+const VerAuditor = () => import('@/views/admin/VerAuditor.vue');
 
 
 function getId(params: RouteParams): number {

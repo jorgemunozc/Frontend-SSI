@@ -1,11 +1,12 @@
 import { RouteRecordRaw } from "vue-router";
-import F29Acciones from '@/views/f29/F29Acciones.vue';
-
-import NuevoFormulario from '@/views/f29/NuevoFormulario.vue';
-import F29Comprobante from '@/views/f29/F29Comprobante.vue';
-import F29Consulta from '@/views/f29/F29Consulta.vue';
 import store from "../store/f29.module";
-import VerCredencial from '@/views/VerCredencial.vue';
+
+const F29Acciones = () => import('@/views/f29/F29Acciones.vue');
+const NuevoFormulario = () => import('@/views/f29/NuevoFormulario.vue');
+const F29Comprobante = () => import('@/views/f29/F29Comprobante.vue');
+const F29Consulta = () => import('@/views/f29/F29Consulta.vue');
+const VerCredencial = () => import('@/views/VerCredencial.vue');
+const SeleccionarPeriodo = () => import('@/views/f29/SeleccionarPeriodo.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -28,7 +29,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     name: 'Seleccion Periodo',
     path: '/f29-declarar-seleccion',
-    component: () => import('@/views/f29/SeleccionarPeriodo.vue'),
+    component: SeleccionarPeriodo,
     meta: {
       requiresAuth: true,
       title: 'Declarar IVA'

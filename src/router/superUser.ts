@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from "vue-router";
-import VerEmpresas from '@/views/admin/VerEmpresas.vue';
-import Dashboard from '@/views/admin/Dashboard.vue';
-import VerFormulario from '@/views/admin/VerFormulario.vue';
+const VerEmpresas = () => import('@/views/admin/VerEmpresas.vue');
+const Dashboard = () => import('@/views/admin/Dashboard.vue');
+const VerFormulario = () => import('@/views/admin/VerFormulario.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {

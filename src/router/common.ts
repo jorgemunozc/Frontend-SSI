@@ -1,7 +1,8 @@
 import { RouteRecordRaw } from "vue-router";
-import Login from '@/views/Login.vue';
-import NotFound from '@/views/errors/NotFound.vue';
-import ResetPassword from '@/views/ResetPassword.vue';
+const Login = () => import('@/views/Login.vue');
+const NotFound = () => import('@/views/errors/NotFound.vue');
+const ResetPassword = () => import('@/views/ResetPassword.vue');
+const FormularioRegistro = () => import('@/views/FormularioRegistro.vue');
 
 const common: Array<RouteRecordRaw> = [
   {
@@ -19,7 +20,7 @@ const common: Array<RouteRecordRaw> = [
   {
     name: 'Registro',
     path: '/registro',
-    component: () => import('@/views/FormularioRegistro.vue'),
+    component: FormularioRegistro,
     meta: {
       isGuest: true,
       title: 'Registro',
