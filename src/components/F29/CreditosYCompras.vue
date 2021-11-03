@@ -927,7 +927,12 @@ import store from "@/store/f29.module";
 import { parseNumber } from "@/utils/numbers";
 
 export default defineComponent({
-  props: ['editable'],
+  props: {
+    editable: {
+      type: Boolean,
+      default: false
+    }
+  },
   setup() {
     const datos = store.state;
     return {

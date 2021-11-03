@@ -118,9 +118,18 @@ export default defineComponent({
     TotalesFormulario,
   },
   props: {
-    folio: Number,
-    datosEmpresa: Object,
-    periodo: Object,
+    folio: {
+      type: Number,
+      default: 0
+    },
+    datosEmpresa: {
+      type: Object,
+      required: true
+    },
+    periodo: {
+      type: Object,
+      required: true
+    },
     editable: {
       type: Boolean,
       default: true,

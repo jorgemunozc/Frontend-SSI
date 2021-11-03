@@ -153,7 +153,16 @@ export default defineComponent({
     LoadingSpinner,
     AlertBase,
   },
-  props: ["month", "year"],
+  props: {
+    month: {
+      type: Number,
+      required: true
+    },
+    year: {
+      type: Number,
+      required: true
+    }
+  },
   setup(props) {
     const f29Store = store;
     const f29Data = store.state;

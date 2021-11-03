@@ -794,7 +794,12 @@ import { defineComponent } from "vue";
 import store from "@/store/f29.module";
 
 export default defineComponent({
-  props: ['editable'],
+  props: {
+    editable: {
+      type: Boolean,
+      default: false
+    }
+  },
   setup() {
     const datos = store.state;
     return {

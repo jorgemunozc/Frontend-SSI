@@ -27,7 +27,16 @@ export default defineComponent({
     Formulario29,
     Navbar,
   },
-  props: ["month", "year"],
+  props: {
+    month: {
+      type: Number,
+      required: true
+    },
+    year: {
+      type: Number,
+      required: true
+    }
+  },
   setup(props) {
     const f29Data = store.state;
     const folio = f29Data.folio;
