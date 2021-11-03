@@ -1,8 +1,8 @@
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
 
 const store = {
   state: reactive({
-    auditores: ref<Usuario[]>([])
+    auditores: [] as Usuario[]
   }),
 
   agregarAuditor: function (nuevoAuditor: Usuario): void {
