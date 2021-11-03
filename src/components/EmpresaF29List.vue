@@ -1,10 +1,17 @@
 <template>
-  <table class="w-52">
+  <table class="w-52 border border-gray-400">
     <thead>
       <tr class="bg-gray-300">
-        <th>Mes</th>
-        <th>Folio</th>
-        <th v-if="showButton" />
+        <th class="border border-gray-400">
+          Mes
+        </th>
+        <th class="border border-gray-400">
+          Folio
+        </th>
+        <th 
+          v-if="showButton" 
+          class="border border-gray-400"
+        />
       </tr>
     </thead>
     <tbody v-if="isLoading">
@@ -19,9 +26,14 @@
         v-for="(form, index) in formularios" 
         :key="index"
       >
-        <td class="bg-blue-100">{{ meses[form.mes] }}</td>
-        <td>{{ form.folio }}</td>
-        <th v-if="showButton">
+        <td class="bg-blue-100 border border-gray-400">
+          {{ meses[form.mes] }}
+        </td>
+        <td class="border border-gray-400">{{ form.folio }}</td>
+        <th 
+          v-if="showButton"
+          class="border border-gray-400"
+        >
           <router-link 
             :to="`/control/ver-f29/${form.folio}`"
             class="text-blue-700 hover:text-blue-800 cursor-pointer font-normal"
@@ -30,7 +42,11 @@
           </router-link>
         </th>
       </tr>
-      <tr v-if="nadaEncontrado"><td colspan="3">Sin impuestos declarados.</td></tr>
+      <tr v-if="nadaEncontrado">
+        <td colspan="3">
+          Sin impuestos declarados.
+        </td>
+      </tr>
     </tbody>
   </table>
 </template>

@@ -1,10 +1,14 @@
 <template>
-  <table class="w-full table-fixed">
+  <table class="w-full table-fixed border border-gray-400">
     <thead>
       <tr class="bg-blue-100">
-        <th class="w-14">Id</th>
+        <th class="w-14">
+          Id
+        </th>
         <th>Correo</th>
-        <th class="w-24">Acciones</th>
+        <th class="w-24">
+          Acciones
+        </th>
       </tr>
     </thead>
     <tbody 
@@ -29,7 +33,10 @@
       <tr 
         v-for="auditor in auditores" 
         :key="auditor.id"
-        class="hover:bg-gray-100 hover:bg-opacity-50 h-10 relative"
+        class="
+          hover:bg-gray-100 hover:bg-opacity-50 h-10 relative
+          border border-gray-400
+        "
       >
         <td>{{ auditor.id }}</td>
         <td class="truncate">
@@ -61,8 +68,18 @@
     </tbody>
     <tbody v-else>
       <tr class="text-center">
-        <td colspan="3">
+        <td 
+          v-show="!isLoading"
+          colspan="3" 
+        >
           Sin Auditores
+        </td>
+        <td 
+          v-show="isLoading"
+          class="h-10"
+          colspan="3" 
+        >
+          <LoadingSpinner />
         </td>
       </tr>
     </tbody>
@@ -92,6 +109,7 @@ export default defineComponent({
     const auditoresStore = store;
     const auditores = auditoresStore.state.auditores;
     const hayAuditores = computed(() => auditores.length > 0);
+    const isLoading = ref(false);
 
     const eliminarAuditorDeBD = function (id: number) {
       isProcessing.value = true;
@@ -106,9 +124,14 @@ export default defineComponent({
       .finally(() => isProcessing.value = false);
     };
 
-    obtenerAuditores().then((data) => {
+    isLoading.value = true;
+    obtenerAuditores()
+    .then((data) => {
       auditoresStore.cargarAuditores(data);
-    });
+    })
+    .catch((err) => console.log(err.response.data))
+    .finally(() => isLoading.value = false);
+    
     
     return {
       auditores,
@@ -116,8 +139,9 @@ export default defineComponent({
       message,
       isAlertOpen,
       isProcessing,
+      isLoading,
       eliminarAuditorDeBD
     }
-  },
+  }
 })
 </script>

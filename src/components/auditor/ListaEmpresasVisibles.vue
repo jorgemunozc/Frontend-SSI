@@ -6,12 +6,12 @@
       Empresas que puede ver
       <slot />
     </h2>
-    <table class="w-full">
+    <table class="w-full border border-gray-400 table-fxed">
       <thead class="bg-gray-200">
         <tr>
-          <th>Empresa</th>
+          <th class="border border-gray-400">Empresa</th>
           <template v-if="editable">
-            <th>
+            <th class="border border-gray-400 w-8">
               <input 
                 v-model="checkAll"
                 type="checkbox" 
@@ -24,10 +24,11 @@
         <tr
           v-for="empresa in empresas"
           :key="empresa.rut"
+          class="h-10"
         >
-          <td>{{ empresa.razon_social }}</td>
+          <td class="border border-gray-400">{{ empresa.razon_social }}</td>
           <template v-if="editable">
-            <td class="text-center">
+            <td class="text-center border border-gray-400">
               <input
                 v-model="selectedEmpresas"
                 type="checkbox"
