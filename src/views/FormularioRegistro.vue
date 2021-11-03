@@ -371,6 +371,8 @@ export default defineComponent({
       for (const field in this.errores) {
         this.errores[field] = null;
       }
+      this.hasError = false;
+      this.message = '';
     },
   },
 });
